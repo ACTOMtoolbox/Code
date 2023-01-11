@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>data_processing module &mdash; Advection-Diffusion Module 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/my_theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="post_processing module" href="post_processing.html" />
+    <link rel="prev" title="coord_transform module" href="coord_transform.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Advection-Diffusion Module
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About AdvDiff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup.ini</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">Boundary conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolator.html">Interpolation with meshA_to_meshB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_types.html">Different mesh-types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates.html">Coordinate transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="synthetic_translation.html">Synthetic translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Code API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tools.html">Tools API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="coord_transform.html">coord_transform module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">data_processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="post_processing.html">post_processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_loader.html">file_loader module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesh_generator.html">mesh_generator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpolator_module.html">interpolator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risk_to_positions.html">risk_to_positions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_variable_treatment.html">local_variable_treatment module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parser_tools.html">parser_tools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directory_tools.html">directory_tools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualizer_tools.html">visualizer_tools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scenario_creator.html">scenario_creator module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining_documentation.html">Maintaining the documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">Todo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Advection-Diffusion Module</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="tools.html">Tools API</a> &raquo;</li>
+      <li>data_processing module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/data_processing.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="module-data_processing">
+<span id="data-processing-module"></span><h1>data_processing module<a class="headerlink" href="#module-data_processing" title="Permalink to this headline"></a></h1>
+<p>Created on Thu Feb 10 09:56:47 2022</p>
+<p>This module includes some data processing methods.</p>
+<p>&#64;author: Ketil</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="data_processing.concat_dict">
+<span class="sig-prename descclassname"><span class="pre">data_processing.</span></span><span class="sig-name descname"><span class="pre">concat_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attrs_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">liststostr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#data_processing.concat_dict" title="Permalink to this definition"></a></dt>
+<dd><p>Concatenate values from similar dictionaries with different variables.
+Equal variables will be ignored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>attrs_list</strong> (<em>list</em>) – List of dictionaries with the same keys.</p></li>
+<li><p><strong>liststostr</strong> (<em>bool</em>) – If one value becomes a list, turn it into a string. Netcdf files cannot store multidimensional lists as attributes,
+so this is a compromise.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dictionary containing the concatenated values.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_processing.from_unstructured_to_structured">
+<span class="sig-prename descclassname"><span class="pre">data_processing.</span></span><span class="sig-name descname"><span class="pre">from_unstructured_to_structured</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structured_mesh</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#data_processing.from_unstructured_to_structured" title="Permalink to this definition"></a></dt>
+<dd><p>Transform an unstructured dataset in the form f(…,’num’) to a structured dataset of the form f(…,’x’,’y’)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> (<em>xarray dataset</em>) – A xarray dataset in unstructured form.</p></li>
+<li><p><strong>structured_mesh</strong> (<em>fp.Grid2D</em>) – A structured mesh</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A xarray dataset in structured form.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>xarray dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_processing.get_global_attributes">
+<span class="sig-prename descclassname"><span class="pre">data_processing.</span></span><span class="sig-name descname"><span class="pre">get_global_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sources_attrs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">velocity_attrs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">probes_attrs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#data_processing.get_global_attributes" title="Permalink to this definition"></a></dt>
+<dd><p>Generates the global attributes which are in common for all output. It is a combination of source attributes, probe attributes and velocity attributes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> (<em>config file</em>) – A config file containing relevant attributes.</p></li>
+<li><p><strong>sources_attrs</strong> (<em>dict</em>) – Source attributes.</p></li>
+<li><p><strong>velocity_attrs</strong> (<em>dict</em>) – Veocity attributes.</p></li>
+<li><p><strong>probes_attrs</strong> (<em>dict</em>) – Probe attributes.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dictionary containing global attributes.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_processing.get_mean_dt">
+<span class="sig-prename descclassname"><span class="pre">data_processing.</span></span><span class="sig-name descname"><span class="pre">get_mean_dt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#data_processing.get_mean_dt" title="Permalink to this definition"></a></dt>
+<dd><p>Generates the mean time-step length (dt) of a dataset in seconds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataset</strong> (<em>xarray dataset</em>) – An xarray dataset containing a time dimension.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>mean_dt</strong> – A float describing the mean time-step length (dt) in seconds.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_processing.get_probe_attributes">
+<span class="sig-prename descclassname"><span class="pre">data_processing.</span></span><span class="sig-name descname"><span class="pre">get_probe_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">probes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#data_processing.get_probe_attributes" title="Permalink to this definition"></a></dt>
+<dd><p>Extract the attributes from the probe xarray file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>probes</strong> (<em>xarray dataset</em>) – A xarray dataset.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Tuple containing a dictionary of probe attributes, probe type and number of probes</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_processing.get_source_attributes">
+<span class="sig-prename descclassname"><span class="pre">data_processing.</span></span><span class="sig-name descname"><span class="pre">get_source_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sources</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#data_processing.get_source_attributes" title="Permalink to this definition"></a></dt>
+<dd><p>Extract the attributes from the source xarray file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sources</strong> (<em>xarray dataset</em>) – A xarray dataset.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Tuple containing a dictionary of source attributes and number of sources.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_processing.get_source_location_and_probability">
+<span class="sig-prename descclassname"><span class="pre">data_processing.</span></span><span class="sig-name descname"><span class="pre">get_source_location_and_probability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#data_processing.get_source_location_and_probability" title="Permalink to this definition"></a></dt>
+<dd><p>Extract source location and corresponding location_probability from a source xarray object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>source</strong> (<em>xarray dataset</em>) – An xarray dataset containing a source</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A tuple containing location and location_probability</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_processing.get_sweeps">
+<span class="sig-prename descclassname"><span class="pre">data_processing.</span></span><span class="sig-name descname"><span class="pre">get_sweeps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean_dt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#data_processing.get_sweeps" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the number of sweeps to perform per time-step dt.
+If the config file defines the number of sweeps as ‘Dynamic’, then information about mean_dt and max_dt
+will be used to compute the number of required sweeps.</p>
+<p>config file requires:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>(int/str) : config[‘setup’][‘sweeps’]</p></li>
+<li><p>(float)   : config[‘setup’][‘max_dt’]</p></li>
+<li><p>(str)     : config[‘setup’][‘max_dt_unit’]</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> (<em>setup.ini</em>) – Config file with relevant variables and setup configurations.</p></li>
+<li><p><strong>mean_dt</strong> (<em>float</em>) – Float describing the mean dt length of the velocity dataset.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>sweeps</strong> – An integer describing how many swipes to perform per dt.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_processing.get_velocity_attributes">
+<span class="sig-prename descclassname"><span class="pre">data_processing.</span></span><span class="sig-name descname"><span class="pre">get_velocity_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">velocity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#data_processing.get_velocity_attributes" title="Permalink to this definition"></a></dt>
+<dd><p>Extract the attributes from the velocity xarray file.
+Only extracts the filename and path as some velocity files contain too many unimportant attributes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>velocity</strong> (<em>xarray dataset</em>) – A xarray dataset.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dictionary containing velocity file name.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_processing.weighted_sum">
+<span class="sig-prename descclassname"><span class="pre">data_processing.</span></span><span class="sig-name descname"><span class="pre">weighted_sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sum_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'source'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#data_processing.weighted_sum" title="Permalink to this definition"></a></dt>
+<dd><p>Weight a xarray variable with respect to a set of weights and sum over a specific dimension. If weights are None, do not weigh, only sum</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>field</strong> (<em>xarray dataset</em>) – An xarray data array.</p></li>
+<li><p><strong>weights</strong> (<em>array</em><em>, </em><em>optional</em>) – Array of weights, by default None</p></li>
+<li><p><strong>sum_dim</strong> (<em>str</em><em>, </em><em>optional</em>) – dimension to sum over, by default ‘source’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A xarray data array.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>xarray dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="coord_transform.html" class="btn btn-neutral float-left" title="coord_transform module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="post_processing.html" class="btn btn-neutral float-right" title="post_processing module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, ACTOM.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

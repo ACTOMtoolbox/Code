@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mesh_generator module &mdash; Advection-Diffusion Module 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/my_theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="interpolator module" href="interpolator_module.html" />
+    <link rel="prev" title="file_loader module" href="file_loader.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Advection-Diffusion Module
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About AdvDiff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup.ini</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">Boundary conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolator.html">Interpolation with meshA_to_meshB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_types.html">Different mesh-types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates.html">Coordinate transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="synthetic_translation.html">Synthetic translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Code API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tools.html">Tools API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="coord_transform.html">coord_transform module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_processing.html">data_processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="post_processing.html">post_processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_loader.html">file_loader module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">mesh_generator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpolator_module.html">interpolator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risk_to_positions.html">risk_to_positions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_variable_treatment.html">local_variable_treatment module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parser_tools.html">parser_tools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directory_tools.html">directory_tools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualizer_tools.html">visualizer_tools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scenario_creator.html">scenario_creator module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining_documentation.html">Maintaining the documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">Todo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Advection-Diffusion Module</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="tools.html">Tools API</a> &raquo;</li>
+      <li>mesh_generator module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/mesh_generator.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="module-mesh_generator">
+<span id="mesh-generator-module"></span><h1>mesh_generator module<a class="headerlink" href="#module-mesh_generator" title="Permalink to this headline"></a></h1>
+<p>Created on Thu Feb 10 09:49:18 2022</p>
+<p>This module includes all mesh generating functions and mesh quality functions.</p>
+<p>&#64;author: Ketil</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="mesh_generator.NSR">
+<span class="sig-prename descclassname"><span class="pre">mesh_generator.</span></span><span class="sig-name descname"><span class="pre">NSR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertices</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh_generator.NSR" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the Normalized Shape Ratio for a single cell given coordinates for each vertex.
+This will work for any triangle and rectangular cells, but not general quadrilateral cells.
+The NSR is a float in the range [0,1] where 0 is a very poor value and 1 is an optimal value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>vertices</strong> (<em>array</em><em> (</em><em>[</em><em>n_vertices</em><em>, </em><em>2</em><em>]</em><em>)</em>) – Vertice points (x,y) of a single gridcell. n_vertices = 3 for triangular cells, n_vertices = 4 for rectangular cells.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>rho</strong> – The NSR value</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mesh_generator.create_mesh">
+<span class="sig-prename descclassname"><span class="pre">mesh_generator.</span></span><span class="sig-name descname"><span class="pre">create_mesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Lx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ly</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ny</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxvol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minvol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">250</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduction_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.96</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">power</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'equi'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">0)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh_generator.create_mesh" title="Permalink to this definition"></a></dt>
+<dd><p>Constructs a rectangular mesh with the origin at the center at location given by origin=[x,y].
+The grid can be constructed in one of four ways:</p>
+<ul class="simple">
+<li><p>grid_type=’equi’:
+The distance between gridpoints is equidistant.</p></li>
+<li><p>grid_type=’segmented’:
+The distance between gridpoints is hard coded, for which the distance
+between gridpoints are larger near the edges and small around the origin.</p></li>
+<li><p>grid_type=’exp’:
+The distance between gridpoints reduces exponentially from the edges to the origin.
+The coefficient of change is determined by the reduce factor.</p></li>
+<li><p>grid_type=’tri’:
+The domain is divided into a mesh of triangles for which the density increases towards the origin.
+The minimum volume of the smallest cells is set by minvol, while the maximum of the largest cells volume is set by maxvol.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>grid_type</strong> (<em>str</em>) – Type of mesh to generate (Allowable: ‘equi’, ‘exp’, ‘segmented’, ‘tri’)</p></li>
+<li><p><strong>Lx</strong> (<em>float</em>) – Length of domain along x-axis.</p></li>
+<li><p><strong>Ly</strong> (<em>float</em>) – Length of domain along y-axis.</p></li>
+<li><p><strong>nx</strong> (<em>int</em>) – Number of meshpoints along x-axis (Only relevant for ‘equi’, ‘segmented’ and ‘exp’).</p></li>
+<li><p><strong>ny</strong> (<em>int</em>) – Number of meshpoints along y-axis (Only relevant for ‘equi’, ‘segmented’ and ‘exp’).</p></li>
+<li><p><strong>origin</strong> (<em>array</em><em> (</em><em>[</em><em>x</em><em>,</em><em>y</em><em>]</em><em>)</em>) – Where to set the origin (the middle of the mesh) of domain.</p></li>
+<li><p><strong>maxvol</strong> (<em>float</em>) – Maximum volume of largest  gridcell in triangle mesh (Approximate) (Only relevant for ‘tri’)</p></li>
+<li><p><strong>minvol</strong> (<em>float</em>) – Minimum volume of smallest gridcell in triangle mesh (Approximate) (Only relevant for ‘tri’)</p></li>
+<li><p><strong>reduction_factor</strong> (<em>float</em>) – How much strong the exponential reduction of gridcell size is when using expnential grid.</p></li>
+<li><p><strong>power</strong> (<em>float</em>) – A float greater or equal to zero. Higher power means more gridcells. By default 1.0.
+Power = 0.0 –&gt; cell volumes are constant = maxvol.
+Power = 0.5 –&gt; cell volumes increase proportionally to the square root of the distance from the center from minvol to maxvol.
+Power = 1.0 –&gt; cell volumes increase linearily by the distance from the center from minvol to maxvol.
+Power = 2.0 –&gt; cell volumes increase proportionally to the square of the distance from the center from minvol to maxvol.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>fipy.Grid2D object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mesh_generator.get_NSR">
+<span class="sig-prename descclassname"><span class="pre">mesh_generator.</span></span><span class="sig-name descname"><span class="pre">get_NSR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesh</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh_generator.get_NSR" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the Normalized Shape Ratio for each cell in a mesh.
+The NSR is a float in the range [0,1] where 0 is a very poor value and 1 is an optimal value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mesh</strong> (<em>fipy.Grid2D</em>) – A fipy Grid2D object. It can either be a rectilinear or triangular mesh.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>rho</strong> – The NSR value for each cell</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array ([n_cells])</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mesh_generator.initialize_meshes">
+<span class="sig-prename descclassname"><span class="pre">mesh_generator.</span></span><span class="sig-name descname"><span class="pre">initialize_meshes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'equi'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_type_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'equi'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ly</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ny</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minvol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxvol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduction_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.96</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">power</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([0.,</span> <span class="pre">0.])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh_generator.initialize_meshes" title="Permalink to this definition"></a></dt>
+<dd><p>Initializes the computational and output meshes for use in FiPy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>grid_type</strong> (<em>str</em>) – Type of computational grid.</p></li>
+<li><p><strong>grid_type_out</strong> (<em>str</em>) – Type of output grid.</p></li>
+<li><p><strong>Lx/Ly</strong> (<em>float</em>) – Length of the domain in the x/y direction.</p></li>
+<li><p><strong>nx/ny</strong> (<em>int</em>) – Number of discretizations in x/y direction in a rectilinear mesh.</p></li>
+<li><p><strong>maxvol</strong> (<em>float</em>) – The maximum volume for the largest gridcell in a triangular mesh.</p></li>
+<li><p><strong>minvol</strong> (<em>float</em>) – The minimum volume for the smallest gridcell in a triangular mesh.</p></li>
+<li><p><strong>reduction_factor</strong> (<em>float</em>) – How much strong the exponential reduction of gridcell size is when using expnential grid.</p></li>
+<li><p><strong>power</strong> (<em>float</em>) – A float greater or equal to zero. Only relevant for triangular meshes. Higher power means more gridcells. By default 1.0.
+Power = 0.0 –&gt; cell volumes are constant = maxvol.
+Power = 0.5 –&gt; cell volumes increase proportionally to the square root of the distance from the center from minvol to maxvol.
+Power = 1.0 –&gt; cell volumes increase linearily by the distance from the center from minvol to maxvol.
+Power = 2.0 –&gt; cell volumes increase proportionally to the square of the distance from the center from minvol to maxvol.</p></li>
+<li><p><strong>origin</strong> (<em>array</em><em> (</em><em>[</em><em>x</em><em>,</em><em>y</em><em>]</em><em>)</em>) – Where to set the origin (the middle of the mesh) in the global domain.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – If True, print mesh information.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>meshdict</strong> (<em>dict</em>) – Dictionary containing two fipy Grid2D objects and two boolean variables</p></li>
+<li><p><strong>mesh</strong> (<em>fipy.Grid2D</em>) – computational mesh</p></li>
+<li><p><strong>mesh_out</strong> (<em>fipy.Grid2D</em>) – output mesh</p></li>
+<li><p><strong>is_onemesh</strong> (<em>bool</em>) – True if mesh == mesh_out else False</p></li>
+<li><p><strong>is_unstructured</strong> (<em>bool</em>) – True if mesh is unstructured</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mesh_generator.tri_mesh">
+<span class="sig-prename descclassname"><span class="pre">mesh_generator.</span></span><span class="sig-name descname"><span class="pre">tri_mesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Lx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ly</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxvol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minvol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">250</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">power</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh_generator.tri_mesh" title="Permalink to this definition"></a></dt>
+<dd><p>Custom triangle mesh using Gmsh.
+Generates a fipy.Grid2D object containing a triangle mesh constructed using GMSH.
+The mesh has high density in the middle and low density along the boundaries.</p>
+<p>See <a class="reference external" href="https://www.ctcms.nist.gov/fipy/download/fipy-3.1.3.pdf">https://www.ctcms.nist.gov/fipy/download/fipy-3.1.3.pdf</a> on page 204 and below for more info.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Lx</strong> (<em>float</em>) – Length of domain along x-axis.</p></li>
+<li><p><strong>Ly</strong> (<em>float</em>) – Length of domain along y-axis.</p></li>
+<li><p><strong>maxvol</strong> (<em>float</em>) – Maximum volume of largest  gridcell in triangle mesh (Approximate)</p></li>
+<li><p><strong>minvol</strong> (<em>float</em>) – Minimum volume of smallest gridcell in triangle mesh (Approximate)</p></li>
+<li><p><strong>origin</strong> (<em>array</em><em> (</em><em>[</em><em>x</em><em>,</em><em>y</em><em>]</em><em>)</em>) – Where to set the origin (the middle of the mesh) of domain.</p></li>
+<li><p><strong>iterations</strong> (<em>int</em>) – Number of refinement iterations to spend refining the mesh. (3-4 is enough.)</p></li>
+<li><p><strong>power</strong> (<em>float</em>) – A float greater or equal to zero. Higher power means more gridcells. By default 1.0.
+Power = 0.0 –&gt; cell volumes are constant = maxvol.
+Power = 0.5 –&gt; cell volumes increase proportionally to the square root of the distance from the center from minvol to maxvol.
+Power = 1.0 –&gt; cell volumes increase linearily by the distance from the center from minvol to maxvol.
+Power = 2.0 –&gt; cell volumes increase proportionally to the square of the distance from the center from minvol to maxvol.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>mesh</strong> – A fipy.Grid2D object containing a refined triangle mesh.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>fipy.Grid2D</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="file_loader.html" class="btn btn-neutral float-left" title="file_loader module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="interpolator_module.html" class="btn btn-neutral float-right" title="interpolator module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, ACTOM.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

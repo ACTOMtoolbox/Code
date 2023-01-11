@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>visualizer_tools module &mdash; Advection-Diffusion Module 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/my_theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="scenario_creator module" href="scenario_creator.html" />
+    <link rel="prev" title="directory_tools module" href="directory_tools.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Advection-Diffusion Module
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About AdvDiff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup.ini</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">Boundary conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolator.html">Interpolation with meshA_to_meshB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_types.html">Different mesh-types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates.html">Coordinate transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="synthetic_translation.html">Synthetic translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Code API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tools.html">Tools API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="coord_transform.html">coord_transform module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_processing.html">data_processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="post_processing.html">post_processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_loader.html">file_loader module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesh_generator.html">mesh_generator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpolator_module.html">interpolator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risk_to_positions.html">risk_to_positions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_variable_treatment.html">local_variable_treatment module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parser_tools.html">parser_tools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directory_tools.html">directory_tools module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">visualizer_tools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scenario_creator.html">scenario_creator module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining_documentation.html">Maintaining the documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">Todo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Advection-Diffusion Module</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="tools.html">Tools API</a> &raquo;</li>
+      <li>visualizer_tools module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/visualizer_tools.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="module-visualizer_tools">
+<span id="visualizer-tools-module"></span><h1>visualizer_tools module<a class="headerlink" href="#module-visualizer_tools" title="Permalink to this headline"></a></h1>
+<p>This module includes all visualizer tools used in the visualizer module.</p>
+<p>&#64;author: Ketil</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="visualizer_tools.get_vbounds">
+<span class="sig-prename descclassname"><span class="pre">visualizer_tools.</span></span><span class="sig-name descname"><span class="pre">get_vbounds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">robust</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_quantile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_quantile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.98</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualizer_tools.get_vbounds" title="Permalink to this definition"></a></dt>
+<dd><p>Get colorbar bounds given a field of data and the minimum and maximum quantile to cap the bounds at.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>field</strong> (<em>xarray dataset</em>) – An xarray dataset containing some data.</p></li>
+<li><p><strong>robust</strong> (<em>bool</em><em>, </em><em>optional</em>) – Wether or not to use the given quantiles, by default True</p></li>
+<li><p><strong>min_quantile</strong> (<em>float</em><em>, </em><em>optional</em>) – Quantile of data to set the min bound at, by default 0.00</p></li>
+<li><p><strong>max_quantile</strong> (<em>float</em><em>, </em><em>optional</em>) – Quantile of data to set the max bound at, by default 0.98</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(vmin, vmax)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="visualizer_tools.make_movie">
+<span class="sig-prename descclassname"><span class="pre">visualizer_tools.</span></span><span class="sig-name descname"><span class="pre">make_movie</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filetype</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualizer_tools.make_movie" title="Permalink to this definition"></a></dt>
+<dd><p>Make a movie (.gif) out of the images in a certain directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_name</strong> (<em>str</em>) – Directory name. Where to look for images.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of images to find.</p></li>
+<li><p><strong>duration</strong> (<em>float</em>) – Duration of each frame on screen.</p></li>
+<li><p><strong>filetype</strong> (<em>str</em>) – Filetype of images to find.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="visualizer_tools.plot_field">
+<span class="sig-prename descclassname"><span class="pre">visualizer_tools.</span></span><span class="sig-name descname"><span class="pre">plot_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xcoord</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'x'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ycoord</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'y'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">robust</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">levels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualizer_tools.plot_field" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="visualizer_tools.plot_global_velocity_location">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">visualizer_tools.</span></span><span class="sig-name descname"><span class="pre">plot_global_velocity_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualizer_tools.plot_global_velocity_location" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="visualizer_tools.plot_global_velocity_location.in_hull">
+<span class="sig-name descname"><span class="pre">in_hull</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hull</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_points</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualizer_tools.plot_global_velocity_location.in_hull" title="Permalink to this definition"></a></dt>
+<dd><p>Check if query points are inside the convex hull defined by a set of points.
+Thanks to the helpful people at <a class="reference external" href="https://stackoverflow.com/questions/16750618/whats-an-efficient-way-to-find-if-a-point-lies-in-the-convex-hull-of-a-point-cl">https://stackoverflow.com/questions/16750618/whats-an-efficient-way-to-find-if-a-point-lies-in-the-convex-hull-of-a-point-cl</a>
+for the algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hull</strong> (<em>array</em><em> or </em><em>Delaunay object</em>) – An MxK array of M points in K dimensions of points defining a convex hull or a scipy.spatial.Delaunay object.</p></li>
+<li><p><strong>query_points</strong> (<em>array</em>) – A set of points to query. Should be an NxK array coordinates of N points in K dimensions.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Boolean array.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualizer_tools.plot_global_velocity_location.noneplot">
+<span class="sig-name descname"><span class="pre">noneplot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#visualizer_tools.plot_global_velocity_location.noneplot" title="Permalink to this definition"></a></dt>
+<dd><p>Do not plot anything.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualizer_tools.plot_global_velocity_location.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">linestyle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'-'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linewidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualizer_tools.plot_global_velocity_location.plot" title="Permalink to this definition"></a></dt>
+<dd><p>Plot the convex hull of the velocity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>linestyle</strong> (<em>str</em><em>, </em><em>optional</em>) – Linestyle, by default ‘-‘</p></li>
+<li><p><strong>linewidth</strong> (<em>int</em><em>, </em><em>optional</em>) – Linewidth, by default 2</p></li>
+<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – Color, by default ‘r’</p></li>
+<li><p><strong>ax</strong> (<em>object</em><em>, </em><em>optional</em>) – What axes object to plot to, by default None</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="visualizer_tools.plot_probe_locations">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">visualizer_tools.</span></span><span class="sig-name descname"><span class="pre">plot_probe_locations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">markersize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualizer_tools.plot_probe_locations" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="visualizer_tools.plot_probe_locations.noneplot">
+<span class="sig-name descname"><span class="pre">noneplot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#visualizer_tools.plot_probe_locations.noneplot" title="Permalink to this definition"></a></dt>
+<dd><p>Do not plot anything.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualizer_tools.plot_probe_locations.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#visualizer_tools.plot_probe_locations.plot" title="Permalink to this definition"></a></dt>
+<dd><p>Plot the probes.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="visualizer_tools.plot_quiver">
+<span class="sig-prename descclassname"><span class="pre">visualizer_tools.</span></span><span class="sig-name descname"><span class="pre">plot_quiver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xcoord</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'x'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ycoord</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'y'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uvar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'u'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vvar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'v'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorvariable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualizer_tools.plot_quiver" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="visualizer_tools.plot_source_locations">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">visualizer_tools.</span></span><span class="sig-name descname"><span class="pre">plot_source_locations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_locations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location_probability</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lxy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[None,</span> <span class="pre">None]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">markersize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linewidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualizer_tools.plot_source_locations" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="visualizer_tools.plot_source_locations.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#visualizer_tools.plot_source_locations.plot" title="Permalink to this definition"></a></dt>
+<dd><p>Plot the sources.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="directory_tools.html" class="btn btn-neutral float-left" title="directory_tools module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="scenario_creator.html" class="btn btn-neutral float-right" title="scenario_creator module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, ACTOM.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

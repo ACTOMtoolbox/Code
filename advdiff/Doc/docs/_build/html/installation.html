@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation &mdash; Advection-Diffusion Module 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/my_theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Usage" href="usage.html" />
+    <link rel="prev" title="About AdvDiff" href="about.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Advection-Diffusion Module
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About AdvDiff</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pre-requisite-packages">Pre-requisite packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#manual-installation-of-packages-with-anaconda">Manual installation of packages with Anaconda:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-of-packages-using-environment-yml-with-anaconda">Installation of packages using environment.yml with Anaconda:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup.ini</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">Boundary conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolator.html">Interpolation with meshA_to_meshB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_types.html">Different mesh-types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates.html">Coordinate transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="synthetic_translation.html">Synthetic translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Code API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining_documentation.html">Maintaining the documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">Todo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Advection-Diffusion Module</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Installation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/installation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="installation">
+<span id="id1"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h1>
+<p>To install AdvDiff, simply clone the repository from the <a class="reference external" href="https://github.com/KetilFIversen/AdvDiff">AdvDiff repository</a>.</p>
+<p>To clone the repository, open up Git Bash and change the current working directory in Git Bash to the location where you want the cloned directory.
+Then type the following:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(your-dir)</span> <span class="gp">$ </span>git clone https://github.com/KetilFIversen/AdvDiff.git
+</pre></div>
+</div>
+<p>Alternatively, you can use <a class="reference external" href="https://desktop.github.com/">GitHub Desktop</a> and clone using the GUI.</p>
+<div class="figure align-center" id="id2">
+<a class="reference internal image-reference" href="_images/Clone_repo.png"><img alt="_images/Clone_repo.png" src="_images/Clone_repo.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-text">How to clone a repository using GitHub Desktop.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</div>
+<p>The directory should now contain the necessary files to run the AdvDiff module.</p>
+<div class="section" id="pre-requisite-packages">
+<h2>Pre-requisite packages<a class="headerlink" href="#pre-requisite-packages" title="Permalink to this headline"></a></h2>
+<p>The AdvDiff module requires several python packages to be installed for it to run correctly.
+It is recommended to create a virtual environment for which the packages can be installed
+in isolation without affecting other modules (see <a class="reference external" href="https://www.anaconda.com/">Anaconda</a>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The AdvDiff module will attempt to use the <a class="reference external" href="https://scitools.org.uk/cartopy/docs/latest/">Cartopy module</a> for plotting maps, if it is installed.
+However Cartopy is not listed in either the <a class="reference download internal" download="" href="_downloads/40a1675351dec3db54c12d5180eee484/environment.yml"><code class="xref download docutils literal notranslate"><span class="pre">requirements.txt</span> <span class="pre">file</span></code></a>,
+as it is not essential.
+This is because I could not get an install of Cartopy to work in docker. Cartopy is not essential for the module to run, only for making a map.
+If Cartopy is not installed, it will simply give a warning that Cartopy cannot be imported
+and move on…</p>
+</div>
+</div>
+<div class="section" id="manual-installation-of-packages-with-anaconda">
+<h2>Manual installation of packages with Anaconda:<a class="headerlink" href="#manual-installation-of-packages-with-anaconda" title="Permalink to this headline"></a></h2>
+<p>The required packages
+are listed in the <a class="reference download internal" download="" href="_downloads/0c266fb11e0c307794b7ea07d54b3bcd/requirements.txt"><code class="xref download docutils literal notranslate"><span class="pre">requirements.txt</span> <span class="pre">file</span></code></a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tqdm</span><span class="o">==</span><span class="mf">4.63.0</span>
+<span class="n">numpy</span><span class="o">==</span><span class="mf">1.22.0</span>
+<span class="n">pandas</span><span class="o">==</span><span class="mf">1.3.5</span>
+<span class="n">scipy</span><span class="o">==</span><span class="mf">1.7.3</span>
+<span class="n">future</span><span class="o">==</span><span class="mf">0.18.2</span> 
+<span class="n">matplotlib</span><span class="o">==</span><span class="mf">3.3.1</span>
+<span class="n">imageio</span><span class="o">==</span><span class="mf">2.13.5</span>
+<span class="n">netCDF4</span><span class="o">==</span><span class="mf">1.5.7</span>
+<span class="n">scikit</span><span class="o">-</span><span class="n">learn</span><span class="o">==</span><span class="mf">1.0.2</span>
+<span class="n">xarray</span><span class="o">==</span><span class="mf">0.20.2</span>
+<span class="n">Bottleneck</span><span class="o">==</span><span class="mf">1.3.2</span>
+<span class="n">gmsh</span><span class="o">==</span><span class="mf">4.8.4</span>
+<span class="n">FiPy</span><span class="o">==</span><span class="mf">3.4.2.1</span>
+<span class="n">pyproj</span><span class="o">==</span><span class="mf">3.1.0</span>
+<span class="n">sphinx</span><span class="o">==</span><span class="mf">4.2.0</span>
+<span class="n">sphinx</span><span class="o">-</span><span class="n">rtd</span><span class="o">-</span><span class="n">theme</span><span class="o">==</span><span class="mf">1.0.0</span>
+</pre></div>
+</div>
+<p>To manually install the packages, open up an instance of the Anaconda Prompt, and create a conda environment with python version 3.8 (IMPORTANT).</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(conda)</span> <span class="gp">$ </span>conda create -n myenvname <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8.12
+</pre></div>
+</div>
+<p>Then activate the conda environment</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(conda)</span> <span class="gp">$ </span>conda activate myenvname
+</pre></div>
+</div>
+<p>Then install the packages as listed in requirements.txt with the specific version numbers given.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(myenvname)</span> <span class="gp">$ </span>conda -c conda-forge install <span class="nv">package</span><span class="o">=</span>x.xx.x
+</pre></div>
+</div>
+<p>Once all packages are installed, you should now have a virtual environment ready to run AdvDiff.</p>
+</div>
+<div class="section" id="installation-of-packages-using-environment-yml-with-anaconda">
+<h2>Installation of packages using environment.yml with Anaconda:<a class="headerlink" href="#installation-of-packages-using-environment-yml-with-anaconda" title="Permalink to this headline"></a></h2>
+<p>Alternatively, you can install the entire required environment from a .yml file. The <a class="reference download internal" download="" href="_downloads/40a1675351dec3db54c12d5180eee484/environment.yml"><code class="xref download docutils literal notranslate"><span class="pre">environment.yml</span> <span class="pre">file</span></code></a> file contains the following.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name</span><span class="p">:</span> <span class="n">ACTOM</span><span class="o">-</span><span class="n">Advection</span>
+<span class="n">channels</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">anaconda</span>
+  <span class="o">-</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+  <span class="o">-</span> <span class="n">defaults</span>
+<span class="n">dependencies</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">python</span><span class="o">==</span><span class="mf">3.8</span>
+  <span class="o">-</span> <span class="n">tqdm</span><span class="o">==</span><span class="mf">4.63.0</span>
+  <span class="o">-</span> <span class="n">numpy</span><span class="o">==</span><span class="mf">1.22.0</span>
+  <span class="o">-</span> <span class="n">pandas</span><span class="o">==</span><span class="mf">1.3.5</span>
+  <span class="o">-</span> <span class="n">scipy</span><span class="o">==</span><span class="mf">1.7.3</span>
+  <span class="o">-</span> <span class="n">future</span><span class="o">==</span><span class="mf">0.18.2</span> 
+  <span class="o">-</span> <span class="n">matplotlib</span><span class="o">==</span><span class="mf">3.3.1</span>
+  <span class="o">-</span> <span class="n">imageio</span><span class="o">==</span><span class="mf">2.13.5</span>
+  <span class="o">-</span> <span class="n">netCDF4</span><span class="o">==</span><span class="mf">1.5.7</span>
+  <span class="o">-</span> <span class="n">scikit</span><span class="o">-</span><span class="n">learn</span><span class="o">==</span><span class="mf">1.0.2</span>
+  <span class="o">-</span> <span class="n">xarray</span><span class="o">==</span><span class="mf">0.20.2</span>
+  <span class="o">-</span> <span class="n">Bottleneck</span><span class="o">==</span><span class="mf">1.3.2</span>
+  <span class="o">-</span> <span class="n">gmsh</span><span class="o">==</span><span class="mf">4.8.4</span>
+  <span class="o">-</span> <span class="n">FiPy</span><span class="o">==</span><span class="mf">3.4.2.1</span>
+  <span class="o">-</span> <span class="n">pyproj</span><span class="o">==</span><span class="mf">3.1.0</span>
+  <span class="o">-</span> <span class="n">sphinx</span><span class="o">==</span><span class="mf">4.2.0</span>
+  <span class="o">-</span> <span class="n">sphinx</span><span class="o">-</span><span class="n">rtd</span><span class="o">-</span><span class="n">theme</span><span class="o">==</span><span class="mf">1.0.0</span>
+</pre></div>
+</div>
+<p>To install the packages, open up an instance of the Anaconda Prompt, naviage to the relevant directory where environment.yml is located, then type the following:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(conda)</span> <span class="gp">$ </span>conda env create -f environment.yml
+</pre></div>
+</div>
+<p>This should create a Conda environment with the name ACTOM-Advection which contain all the necessary pre-requisite packages.
+If this does not work, try the manual installation instead.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The python version number is important. I have tried other versions but FiPY and/or gmsh have given me a lot of trouble.</p>
+<p>However, not all packages need to be installed with the exact version number given above. The version numbers are there to show a configuration that is known to work.
+The only packages that are important to get the correct version number for are FiPY and gmsh. This is because FiPy seems to be very picky with what version
+of gmsh it likes to cooperate with. Without the proper version of gmsh, you will not be able to generate unstructured triangle meshes, and there will be an
+error if you try to do so.</p>
+<p>Packages such as tqdm, numpy, scipy, sklearn and so on may be more flexible but this has not been tested.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="about.html" class="btn btn-neutral float-left" title="About AdvDiff" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, ACTOM.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

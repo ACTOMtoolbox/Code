@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tracer_transport module &mdash; Advection-Diffusion Module 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/my_theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="visualize module" href="visualize.html" />
+    <link rel="prev" title="ensemble module" href="ensemble.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Advection-Diffusion Module
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About AdvDiff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup.ini</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">Boundary conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolator.html">Interpolation with meshA_to_meshB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_types.html">Different mesh-types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates.html">Coordinate transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="synthetic_translation.html">Synthetic translation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="code.html">Code API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble.html">ensemble module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">tracer_transport module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualize.html">visualize module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining_documentation.html">Maintaining the documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">Todo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Advection-Diffusion Module</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="code.html">Code API</a> &raquo;</li>
+      <li>tracer_transport module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/tracer_transport.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="module-tracer_transport">
+<span id="tracer-transport-module"></span><h1>tracer_transport module<a class="headerlink" href="#module-tracer_transport" title="Permalink to this headline"></a></h1>
+<p>Created on Wed Apr 22 16:49:28 2020</p>
+<p>&#64;author: Guttorm &amp; Ketil</p>
+<p>This module defines the tracer_transport class, with a couple of methods.</p>
+<p>The module is built on the FiPy package, <a class="reference external" href="https://www.ctcms.nist.gov/fipy/index.html">https://www.ctcms.nist.gov/fipy/index.html</a>
+It also uses numpy, scipy, pandas, math and random.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tracer_transport.</span></span><span class="sig-name descname"><span class="pre">tracer_transport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'equi'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_type_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'equi'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conv_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'PowerLaw'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diff_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Implicit'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BC_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Robin'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ly</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ny</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduction_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.96</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxvol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minvol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">250</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_N_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_N_fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">probes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meshdict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extrap_nans</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_structured</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class that contains all information needed and methods for
+simulating tracer transport.</p>
+<p>The class uses the fipy package for solving the PDE.</p>
+<p>Velocity fields and source location and fluxes are input to the class.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.closest_node">
+<span class="sig-name descname"><span class="pre">closest_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesh_points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_point</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.closest_node" title="Permalink to this definition"></a></dt>
+<dd><p>Finds the index of the nearest node from a set of nodes ([n_nodes,2]) to the point ([x,y]).
+This is used to find the nearest cell to the source.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query_point</strong> (<em>array</em><em> (</em><em>[</em><em>x</em><em>,</em><em>y</em><em>]</em><em>)</em>) – Array containing a point (x,y).</p></li>
+<li><p><strong>mesh_points</strong> (<em>array</em><em> (</em><em>[</em><em>n_nodes</em><em>,</em><em>2</em><em>]</em><em>)</em>) – Set of points to query.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>closest_index</strong> – index of the nearest node in nodes to the point (x,y).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.delta_max_abs_as_xr">
+<span class="sig-name descname"><span class="pre">delta_max_abs_as_xr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.delta_max_abs_as_xr" title="Permalink to this definition"></a></dt>
+<dd><p>Construct xarray dataset containing the max value of abs(dC) with different time-step sizes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>xarray dataset</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>xarray dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.delta_max_as_xr">
+<span class="sig-name descname"><span class="pre">delta_max_as_xr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.delta_max_as_xr" title="Permalink to this definition"></a></dt>
+<dd><p>Construct xarray dataset containing the max value of dC with different time-step sizes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>xarray dataset</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>xarray dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.delta_mean_abs_as_xr">
+<span class="sig-name descname"><span class="pre">delta_mean_abs_as_xr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.delta_mean_abs_as_xr" title="Permalink to this definition"></a></dt>
+<dd><p>Construct xarray dataset containing the mean value of abs(dC) with different time-step sizes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>xarray dataset</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>xarray dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.delta_mean_as_xr">
+<span class="sig-name descname"><span class="pre">delta_mean_as_xr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.delta_mean_as_xr" title="Permalink to this definition"></a></dt>
+<dd><p>Construct xarray dataset containing the mean value of dC with different time-step sizes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>xarray dataset</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>xarray dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.delta_min_as_xr">
+<span class="sig-name descname"><span class="pre">delta_min_as_xr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.delta_min_as_xr" title="Permalink to this definition"></a></dt>
+<dd><p>Construct xarray dataset containing the min value of dC with different time-step sizes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>xarray dataset</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>xarray dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.delta_var_as_xr">
+<span class="sig-name descname"><span class="pre">delta_var_as_xr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.delta_var_as_xr" title="Permalink to this definition"></a></dt>
+<dd><p>Construct xarray dataset containing the variance of dC with different time-step sizes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>xarray dataset</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>xarray dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.fields_to_xarray">
+<span class="sig-name descname"><span class="pre">fields_to_xarray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store_uv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.fields_to_xarray" title="Permalink to this definition"></a></dt>
+<dd><p>Get the solution variables C (and u,v if store_uv == True) at the current time-step and store
+the solution into a xarray dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timestamp</strong> (<em>np.datetime64</em>) – Timestamp of current timestep. If None, get stored timestamp. The default is None.</p></li>
+<li><p><strong>store_uv</strong> (<em>bool</em>) – If True, store the local velocities u and v in addition to C. The default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>out</strong> – An xarray dataset containing C (and u,v if store_uv == True).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>xarray dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.format_data">
+<span class="sig-name descname"><span class="pre">format_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.format_data" title="Permalink to this definition"></a></dt>
+<dd><p>Format data defined on computational mesh onto output mesh.
+Return the raw input data if no interpolation is needed between the computational and output meshes.
+Return interpolated input data if interpolation IS needed between the computational and output meshes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>array</em>) – A numpy 1xN_cells data array.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A numpy data array.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.get_convection_term">
+<span class="sig-name descname"><span class="pre">get_convection_term</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.get_convection_term" title="Permalink to this definition"></a></dt>
+<dd><p>Get a fipy.ConvectionTerm() object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Convection term for use in defining the differential equation.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>fipy.ConvectionTerm()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.get_diffusion_term">
+<span class="sig-name descname"><span class="pre">get_diffusion_term</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.get_diffusion_term" title="Permalink to this definition"></a></dt>
+<dd><p>Get a fipy.DiffusionTerm() object or scalar.
+If the diffusion rate (self.D) == 0.0, then return a scalar == 0.0.
+Then no diffusion term is used in the differential equation. This may not be preferable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Diffusion term for use in defining the differential equation.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>fipy.DiffusionTerm()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.get_stat">
+<span class="sig-name descname"><span class="pre">get_stat</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.get_stat" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieves the statistics of the solution and merge all statistics into one xarray dataset object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>stat</strong> – An xarray dataset containing mean, variance, max, dmean, dvariance, dmax and dmin as variables</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>xarray dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.get_transient_term">
+<span class="sig-name descname"><span class="pre">get_transient_term</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.get_transient_term" title="Permalink to this definition"></a></dt>
+<dd><p>Get a fipy.TransientTerm() object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Transient term for use in defining the differential equation.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>fipy.TransientTerm()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.in_hull">
+<span class="sig-name descname"><span class="pre">in_hull</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hull</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_points</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.in_hull" title="Permalink to this definition"></a></dt>
+<dd><p>Check if query points are inside the convex hull defined by a set of points.
+Thanks to the helpful people at <a class="reference external" href="https://stackoverflow.com/questions/16750618/whats-an-efficient-way-to-find-if-a-point-lies-in-the-convex-hull-of-a-point-cl">https://stackoverflow.com/questions/16750618/whats-an-efficient-way-to-find-if-a-point-lies-in-the-convex-hull-of-a-point-cl</a>
+for the algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hull</strong> (<em>array</em><em> or </em><em>Delaunay object</em>) – An MxK array of M points in K dimensions of points defining a convex hull or a scipy.spatial.Delaunay object.</p></li>
+<li><p><strong>query_points</strong> (<em>array</em>) – A set of points to query. Should be an NxK array coordinates of N points in K dimensions.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Boolean array.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.interpolate">
+<span class="sig-name descname"><span class="pre">interpolate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.interpolate" title="Permalink to this definition"></a></dt>
+<dd><p>Interpolate data defined on computational mesh onto the output mesh.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>array</em>) – A numpy 1xN_cells data array.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A numpy data array.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.mass_to_xarray">
+<span class="sig-name descname"><span class="pre">mass_to_xarray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.mass_to_xarray" title="Permalink to this definition"></a></dt>
+<dd><p>Get the total mass and theoretical mass at the current timestep.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>timestamp</strong> (<em>np.datetime64</em>) – Timestamp of current timestep. If none, get stored timestamp. The default is None.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>out</strong> – xarray containing the mass and theoretical mass of the system at the current timestep.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>xarray dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.max_as_xr">
+<span class="sig-name descname"><span class="pre">max_as_xr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.max_as_xr" title="Permalink to this definition"></a></dt>
+<dd><p>Construct xarray dataset containing the max value of C</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>xarray dataset</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>xarray dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.mean_as_xr">
+<span class="sig-name descname"><span class="pre">mean_as_xr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.mean_as_xr" title="Permalink to this definition"></a></dt>
+<dd><p>Construct xarray dataset containing the mean value of C</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>xarray dataset</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>xarray dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.probes_to_xarray">
+<span class="sig-name descname"><span class="pre">probes_to_xarray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.probes_to_xarray" title="Permalink to this definition"></a></dt>
+<dd><p>Probe the solution C at the nearest meshpoint to the measurement probes.
+If a probe lies outside the local mesh, then the probe will only output NANs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>timestamp</strong> (<em>np.datetime64</em>) – Timestamp of current timestep. If none, get stored timestamp. The default is None.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>out</strong> – An xarray dataset containing C and dC at the measurement probes at the current timestep.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>xarray dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">velocity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sweeps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store_fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store_uv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store_probes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store_mass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_pbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desc_pbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Progress:</span> <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_pbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.run" title="Permalink to this definition"></a></dt>
+<dd><p>Run a AdvDiff simulation.
+It steps through every time in the velocity data and generates a solution for the tracer variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>velocity</strong> (<em>xarray dataset</em>) – An xarray dataset containing u and v velocity data for every gridcell at every time.</p></li>
+<li><p><strong>sweeps</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of sweeps to perform per time-step, by default 1.</p></li>
+<li><p><strong>store_stats</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not to solve for and store the statistics, by default True.</p></li>
+<li><p><strong>store_fields</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not to solve and store for the field variables for every time, by default False.</p></li>
+<li><p><strong>store_uv</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not to include the velocities in the field variables (if relevant), by default False.</p></li>
+<li><p><strong>store_probes</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not to solve for and store the probe data for every time, by default False.</p></li>
+<li><p><strong>store_mass</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not to solve for and store the total mass in the system for every time, by default False.</p></li>
+<li><p><strong>enable_pbar</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not to enable the progress bar, by default True.</p></li>
+<li><p><strong>desc_pbar</strong> (<em>str</em><em>, </em><em>optional</em>) – What prefix to assign progress bar, by default Progress:</p></li>
+<li><p><strong>position_pbar</strong> (<em>int</em><em>, </em><em>optional</em>) – Position of the progress bar (Allowable: Int &gt;= 0), by default 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A tuple containing an outdata dictionary which stores the statistics, fields, probes and mass and the average process time for each time-step dt.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.set_boundary_conditions">
+<span class="sig-name descname"><span class="pre">set_boundary_conditions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.set_boundary_conditions" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the boundary conditions for the tracer variable. Also sets an artifical boundary source term self._BC_SourceTerm().
+The artifical source is == 0.0 for every BC type except Robin.</p>
+<p>The Robin condition seems to be the best overall boundary condition, but I do not yet fully understand how it works.
+I have been copying ideas and methods from:
+<a class="reference external" href="https://www.ctcms.nist.gov/fipy/documentation/USAGE.html">https://www.ctcms.nist.gov/fipy/documentation/USAGE.html</a>,
+<a class="reference external" href="https://www.ctcms.nist.gov/fipy/examples/convection/generated/examples.convection.robin.html">https://www.ctcms.nist.gov/fipy/examples/convection/generated/examples.convection.robin.html</a>,
+<a class="reference external" href="https://www.ctcms.nist.gov/fipy/documentation/USAGE.html#applying-robin-boundary-conditions">https://www.ctcms.nist.gov/fipy/documentation/USAGE.html#applying-robin-boundary-conditions</a>,
+<a class="reference external" href="https://www.mail-archive.com/fipy&#64;nist.gov/msg04328.html">https://www.mail-archive.com/fipy&#64;nist.gov/msg04328.html</a>,
+<a class="reference external" href="https://stackoverflow.com/questions/61632193/1d-coupled-transient-diffusion-in-fipy-with-reactive-boundary-condition">https://stackoverflow.com/questions/61632193/1d-coupled-transient-diffusion-in-fipy-with-reactive-boundary-condition</a>,
+<a class="reference external" href="https://github.com/usnistgov/fipy/issues/426">https://github.com/usnistgov/fipy/issues/426</a>,
+<a class="reference external" href="https://stackoverflow.com/questions/42769749/general-boundary-conditions">https://stackoverflow.com/questions/42769749/general-boundary-conditions</a>,
+<a class="reference external" href="https://github.com/usnistgov/fipy/issues/788">https://github.com/usnistgov/fipy/issues/788</a>,
+<a class="reference external" href="https://github.com/usnistgov/fipy/blob/8efb4378648c339a710ce021fb5e0c25a1899b4e/examples/convection/robin.py">https://github.com/usnistgov/fipy/blob/8efb4378648c339a710ce021fb5e0c25a1899b4e/examples/convection/robin.py</a>,
+<a class="reference external" href="https://charlesreid1.com/wiki/Fipy_Verification">https://charlesreid1.com/wiki/Fipy_Verification</a>,
+<a class="reference external" href="https://stackoverflow.com/questions/57754060/diffusion-reaction-pde-with-nonlinear-source-term-potential-term">https://stackoverflow.com/questions/57754060/diffusion-reaction-pde-with-nonlinear-source-term-potential-term</a>,</p>
+<p>Note: The Dirichlet condition behaves quite strangely and I do not know why. Might be a bug!</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.set_probes">
+<span class="sig-name descname"><span class="pre">set_probes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">probes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.set_probes" title="Permalink to this definition"></a></dt>
+<dd><p>Assigns a probe to the nearest meshpoint to the position given in probes.
+Each probe retrieves the solution at the gridcell nearest the probe coordinate.
+Any probe outside the global grid will only probe NaNs. Variables stored in self.probes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>probes</strong> (<em>xarray dataset</em>) – xarray containing (x,y) coordinates for probes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.set_sources">
+<span class="sig-name descname"><span class="pre">set_sources</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.set_sources" title="Permalink to this definition"></a></dt>
+<dd><p>Set sources in relation to the computational mesh.
+This is done by setting self._SourceTerm to non-zero at the gridcell nearest to the source coordinate.
+The flux assigned to the cell is 1/Cell_volume.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<em>array</em><em> (</em><em>[</em><em>x</em><em>,</em><em>y</em><em>]</em><em>)</em>) – Array containing the (x,y) coordinate for the source.</p></li>
+<li><p><strong>view</strong> (<em>bool</em>) – Optional viewer, lets the user see where the source is placed for debugging. The default is None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.set_stat_variables">
+<span class="sig-name descname"><span class="pre">set_stat_variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variables</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.set_stat_variables" title="Permalink to this definition"></a></dt>
+<dd><p>Used to modify what statistics to store during the simulation.
+By default: [‘mean’, ‘max’, ‘var’, ‘delta_mean’, ‘delta_max’, ‘delta_var’, ‘delta_mean_abs’,’delta_max_abs’, ‘delta_min’]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>variables</strong> (<em>list of str</em>) – List of variablenames to store.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.set_stats">
+<span class="sig-name descname"><span class="pre">set_stats</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.set_stats" title="Permalink to this definition"></a></dt>
+<dd><p>Set and update the statistics variables. This function is called for every timestep.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.set_time">
+<span class="sig-name descname"><span class="pre">set_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.set_time" title="Permalink to this definition"></a></dt>
+<dd><p>Set current time value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>time</strong> (<em>time</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.set_tracer_old">
+<span class="sig-name descname"><span class="pre">set_tracer_old</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.set_tracer_old" title="Permalink to this definition"></a></dt>
+<dd><p>Update self.tracer_old for several steps back in time.
+The shape of each row of self.tracer_old is the same as self.tracer_output.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.set_tracer_output">
+<span class="sig-name descname"><span class="pre">set_tracer_output</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.set_tracer_output" title="Permalink to this definition"></a></dt>
+<dd><p>Update self.tracer_output with current self.tracer value.
+If no interpolation is needed between the computational and output meshes, then self.tracer_output == self.tracer.value.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.set_velocity">
+<span class="sig-name descname"><span class="pre">set_velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.set_velocity" title="Permalink to this definition"></a></dt>
+<dd><p>Set the velocity for the solver.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>u</strong> (<em>array</em><em> (</em><em>[</em><em>n_cells</em><em>]</em><em>)</em>) – Array of East-West velocity for every cell. The default is 1., i.e homogeneous.</p></li>
+<li><p><strong>v</strong> (<em>array</em><em>(</em><em>[</em><em>n_cells</em><em>]</em><em>)</em>) – Array of North-South velocity for every cell. The default is 1., i.e. homogeneous.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.stats_to_xarray">
+<span class="sig-name descname"><span class="pre">stats_to_xarray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Anon'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.stats_to_xarray" title="Permalink to this definition"></a></dt>
+<dd><p>Takes a data-array and constructs an xarray dataset from it.
+If the computational mesh and the output meshes are dissimilar, an interpolation is performed first.
+The output is indexed by x,y coordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>array</em><em> (</em><em>[</em><em>n_cells</em><em>]</em><em>)</em>) – Array containing the cell-variables for each cell in the computational mesh.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name to give to dataset.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>dataset</strong> – An xarray dataset containing the data from the array, indexed by x,y coordinates.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>xarray dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.step">
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sweeps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.step" title="Permalink to this definition"></a></dt>
+<dd><p>Step the solver forward in time with step size dt and a given number of sweeps per dt.
+Updates self.tracer, self.tracer_old, self.tracer_output, self.velocity, self.xVelocity, self.zVelocity and the statistics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dt</strong> (<em>float</em>) – Size of timestep.</p></li>
+<li><p><strong>sweeps</strong> (<em>int</em>) – Number of sweeps per timestep.</p></li>
+<li><p><strong>u</strong> (<em>array</em><em> (</em><em>[</em><em>n_cells</em><em>]</em><em>)</em>) – Array of East-West velocity for every cell.</p></li>
+<li><p><strong>v</strong> (<em>array</em><em> (</em><em>[</em><em>n_cells</em><em>]</em><em>)</em>) – Array of North-South velocity for every cell.</p></li>
+<li><p><strong>view</strong> (<em>bool</em>) – Optional viewer. The default is None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.sweep">
+<span class="sig-name descname"><span class="pre">sweep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.sweep" title="Permalink to this definition"></a></dt>
+<dd><p>Sweep the solution forward in time by some dt. This function is called once for each sweep by the self.step() function.
+Only updates self.tracer, self.velocity, self.xVelocity and self.yVelocity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dt</strong> (<em>float</em>) – Size of timestep. The default is 1.</p></li>
+<li><p><strong>u</strong> (<em>array</em><em> (</em><em>[</em><em>n_cells</em><em>]</em><em>)</em>) – East-West velocity. If None, use the stored velocity.</p></li>
+<li><p><strong>v</strong> (<em>array</em><em> (</em><em>[</em><em>n_cells</em><em>]</em><em>)</em>) – North-South velocity. If None, use the stored velocity.</p></li>
+<li><p><strong>clip</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, clip self.tracer to contain only positive values. The default is False.</p></li>
+<li><p><strong>view</strong> (<em>bool</em><em>, </em><em>optional</em>) – If not None, plot the tracer field. The default is None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tracer_transport.tracer_transport.var_as_xr">
+<span class="sig-name descname"><span class="pre">var_as_xr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tracer_transport.tracer_transport.var_as_xr" title="Permalink to this definition"></a></dt>
+<dd><p>Construct xarray dataset containing the variance of C</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>xarray dataset</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>xarray dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ensemble.html" class="btn btn-neutral float-left" title="ensemble module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="visualize.html" class="btn btn-neutral float-right" title="visualize module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, ACTOM.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Different mesh-types &mdash; Advection-Diffusion Module 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/my_theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Coordinate transformations" href="coordinates.html" />
+    <link rel="prev" title="Interpolation with meshA_to_meshB" href="interpolator.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Advection-Diffusion Module
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About AdvDiff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup.ini</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">Boundary conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolator.html">Interpolation with meshA_to_meshB</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Different mesh-types</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#normalized-shape-ratio">Normalized Shape Ratio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#unstructured-meshes">Unstructured meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#structured-meshes">Structured meshes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates.html">Coordinate transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="synthetic_translation.html">Synthetic translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Code API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining_documentation.html">Maintaining the documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">Todo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Advection-Diffusion Module</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Different mesh-types</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/mesh_types.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="different-mesh-types">
+<h1>Different mesh-types<a class="headerlink" href="#different-mesh-types" title="Permalink to this headline"></a></h1>
+<p>There are two main mesh-types used in AdvDiff; structured meshes and unstructured meshes.
+Supported unstructured meshes include <strong>triangular meshes</strong> while structured meshes include <strong>equidistant meshes</strong>, <strong>exponential meshes</strong> and <strong>segmented meshes</strong>.</p>
+<p>To score the mesh quality for the different available meshes, we have used the Normalized Shape Ratio (NSR).
+We chose this measure as it is easy to generalize the score for both rectangular and triangular gridcells.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The user has the option to set a <strong>grid_type</strong> and a <strong>grid_type_out</strong> in <a class="reference internal" href="setup.html"><span class="doc">setup.ini</span></a>.
+FiPy will use whatever grid set with <strong>grid_type</strong> as the computational grid, while the results will be interpolated onto the grid set with <strong>grid_type_out</strong>.
+This means you have the option to set what mesh to use compute the solution, and a seperate grid to store the results on.
+This is done as xarray is not very flexible with unstructured datasets. As such, it is best to always set <strong>grid_type_out</strong> to any of the rectilinear meshes only.
+Otherwise, you will not be able to plot the results as easily, and any of the post-processing modules may not give the correct output.</p>
+</div>
+<div class="section" id="normalized-shape-ratio">
+<h2>Normalized Shape Ratio<a class="headerlink" href="#normalized-shape-ratio" title="Permalink to this headline"></a></h2>
+<p>The Normalized Shape Ratio (more typically referred to as aspect ratio) is a measure to determine mesh quality,
+in other words how poor or how good a mesh is for use with numerical methods such as finite elements or finite volumes.
+In short, when utilizing rectangular gridcells you typically want the gridcells to be as square as possible.
+Similarly, when utilizing triangular meshes, it is preferred that each triangle is as equilateral as possible.
+Keeping a consistent gridcell shape helps alleviate discretization errors.</p>
+<p>The NSR computes how similar a rectangle is to a perfect square and how similar a triangle is to a perfect equilateral triangle. This is done by computing the
+ratio between the inscribed circle and the excircle of the respective shapes.
+For perfect squares and perfect equilateral triangles, the NSR is equal to 1.0,
+for any other rectangle or triangle, the NSR will lie somewhere in the range [0, 1], for which a value near 0 signifies a significantly squashed shape.</p>
+<p>You can read more about the NSR and other mesh quality metrics here:
+<a class="reference external" href="https://www.pygimli.org/_tutorials_auto/1_basics/plot_6-mesh-quality-inspection.html">link 1</a>,
+<a class="reference external" href="https://cfdisrael.blog/2019/02/01/know-thy-mesh-mesh-quality-part-i/">link 2</a>,
+<a class="reference external" href="https://help.solidworks.com/2021/English/SolidWorks/cworks/c_Mesh_Quality_Checks.htm">link 3</a>,
+<a class="reference external" href="https://abaqus-docs.mit.edu/2017/English/SIMACAECAERefMap/simacae-c-mgnconcpartitionverify.htm">link 4</a>,
+<a class="reference external" href="https://en.wikipedia.org/wiki/Types_of_mesh#Aspect_ratio">link 5</a>.</p>
+</div>
+<div class="section" id="unstructured-meshes">
+<h2>Unstructured meshes<a class="headerlink" href="#unstructured-meshes" title="Permalink to this headline"></a></h2>
+<p><strong>Triangular mesh</strong>:</p>
+<p>The triangular mesh is the only unstructured mesh supported in AdvDiff. Delaunay triangularization is used to generate a mesh with high density in the center
+and low density along the borders. The average sidelengths of each triangle decreases radially while approaching the center.
+This is done to keep accuracy near the source high while also being able to increase the size of local grids.
+To set the width and height of the mesh, set <strong>Lx</strong> and <strong>Ly</strong> respectively in <a class="reference internal" href="setup.html"><span class="doc">setup.ini</span></a>.
+To set the maximum size of the largest triangle and the minimum size of the smallest triangle, set <strong>maxvol</strong> and <strong>minvol</strong> respectively in <a class="reference internal" href="setup.html"><span class="doc">setup.ini</span></a>.</p>
+<p>The main benefits of the Triangular mesh are:</p>
+<ul class="simple">
+<li><p>The triangular mesh allows high refinement near the source and low refinement far away from the source,
+for which the degree of refinement decreases uniformly and radially away from the source.</p></li>
+<li><p>Almost all triangles in the mesh have a ‘good’ NSR score. In other words, the triangles are nearly all perfectly equilateral.
+And this lowers the amount of discretization errors.</p></li>
+<li><p>To get a similar mesh refinement near the source as with an exponential grid, a lesser number of gridcells are required.</p></li>
+</ul>
+<p>The main downsides of the Triangular mesh are:</p>
+<ul class="simple">
+<li><p>Currently, you do not have the option to store the results on triangular meshes as triangular meshes are inherently unstructured.</p></li>
+<li><p>The triangular mesh takes much longer to initialize than the rectilinear meshes,
+but overall the triangular mesh typically requires less gridcells for the same refinement of an equivalent rectilinear mesh.</p></li>
+</ul>
+<blockquote>
+<div><div class="figure align-center">
+<a class="reference internal image-reference" href="_images/Triangular_mesh.jpg"><img alt="_images/Triangular_mesh.jpg" src="_images/Triangular_mesh.jpg" style="width: 90%;" /></a>
+</div>
+</div></blockquote>
+<p>The uppermost figure shows the distribution of gridcell volumes (areas). We see that most gridcells are small, while the rest of the space is filled with a smaller number
+of large gridcells. The middle figure shows the distribution of NSR scores. Most gridcells score a 1.0, while a very small amount of gridcells score below a 0.9.
+The lower-left figure shows the structure of the mesh. The gridcells are coloured randomly such they are more easily distinguished. The lower-right figure
+shows the corresponding NSR score for each gridcell.</p>
+</div>
+<div class="section" id="structured-meshes">
+<h2>Structured meshes<a class="headerlink" href="#structured-meshes" title="Permalink to this headline"></a></h2>
+<p><strong>Equidistant mesh</strong>:</p>
+<p>As the name suggests, the equidistant mesh is a regular rectilinear mesh with equidistant grid spacing.
+To set the width and height of the mesh, set <strong>Lx</strong> and <strong>Ly</strong> respectively in <a class="reference internal" href="setup.html"><span class="doc">setup.ini</span></a>.
+To set the number or discretizations along each axis, set <strong>nx</strong> and <strong>ny</strong> respectively in <a class="reference internal" href="setup.html"><span class="doc">setup.ini</span></a>.</p>
+<p>The main benefits of the equidistant mesh are:</p>
+<ul class="simple">
+<li><p>Easy to interpret and understand.</p></li>
+<li><p>It is structured, so data can be stored in an intuitive way using xarray datasets in the form of f(t,x,y).</p></li>
+<li><p>Equidistant grids are usually preferred to avoid computational artefacts such as artifical diffusion or dispersion.</p></li>
+<li><p>As long as you properly scale such that <strong>Lx</strong> / <strong>Ly</strong> = <strong>nx</strong> / <strong>ny</strong>, then the NSR will be 1.0 everywhere.
+This is because every gridcell will be a perfect square. This is preferred to avoid artefacts.</p></li>
+</ul>
+<p>The main downsides of the equidistant mesh are:</p>
+<ul class="simple">
+<li><p>If you want a highly refined mesh around the source, you are forced to have a higly refined mesh everywhere else also.
+As such, you may waste a lot of computational energy on performing high density computation far away from the source.</p></li>
+</ul>
+<blockquote>
+<div><div class="figure align-center">
+<a class="reference internal image-reference" href="_images/Equidistant_mesh.jpg"><img alt="_images/Equidistant_mesh.jpg" src="_images/Equidistant_mesh.jpg" style="width: 90%;" /></a>
+</div>
+</div></blockquote>
+<p>Here we see that every gridcell has the same size, and the NSR is equal to 1.0 everywhere.</p>
+<p><strong>Exponential mesh</strong>:</p>
+<p>The exponential mesh is a rectilinear mesh for which the grid spacing decreases exponentially towards the center of the mesh where the source lies.
+This is done to keep accuracy near the source high while also being able to increase the size of local grids.
+To set the width and height of the mesh, set <strong>Lx</strong> and <strong>Ly</strong> respectively in <a class="reference internal" href="setup.html"><span class="doc">setup.ini</span></a>.
+To set the number or discretizations along each axis, set <strong>nx</strong> and <strong>ny</strong> respectively in <a class="reference internal" href="setup.html"><span class="doc">setup.ini</span></a>.
+To set the degree of which grid spacing decreases, set <strong>reduction_factor</strong> in <a class="reference internal" href="setup.html"><span class="doc">setup.ini</span></a>.</p>
+<p>The main benefits of the exponantial mesh are:</p>
+<ul class="simple">
+<li><p>It is structured, so data can be stored in an intuitive way using xarray datasets in the form of f(t,x,y).</p></li>
+<li><p>You are able to have high refinement at the source and low refinement far away from the source. As such, you can increase the size of the meshes, while
+Still retaining accuracy near the source, while also not wasting computational resources on locations far away from the source.</p></li>
+</ul>
+<p>The main downsides to the exponential mesh are:</p>
+<ul class="simple">
+<li><p>Due to how the fact that the exponential mesh is structured, you cannot avoid also having high refinement along the coordinate axes, as such wasting some computational resources.</p></li>
+<li><p>The mesh will have a poor NSR score. This is due to the problem above. The cells along the diagonals will be square, while all other cells will be squashed rectangles.</p></li>
+</ul>
+<blockquote>
+<div><div class="figure align-center">
+<a class="reference internal image-reference" href="_images/Exponential_mesh.jpg"><img alt="_images/Exponential_mesh.jpg" src="_images/Exponential_mesh.jpg" style="width: 90%;" /></a>
+</div>
+</div></blockquote>
+<p>Here we see that the gridcells do indeed become smaller towards the center, however they become squashed along the coordinate axes. This leads to a poor NSR score
+along the axes and a good NSR score only along the diagonals. This problem becomes a lot worse if <strong>Lx / Ly =/= 1</strong>.</p>
+<p><strong>Segmented mesh</strong></p>
+<p>The segmented mesh is a rectilinear mesh for which the grid spacing is refined in the middle, then abruptly changes outside some distance away from the source.
+This mesh is not recommended as the gridcells in the four corners will be very large.</p>
+<blockquote>
+<div><div class="figure align-center">
+<a class="reference internal image-reference" href="_images/Segmented_mesh.jpg"><img alt="_images/Segmented_mesh.jpg" src="_images/Segmented_mesh.jpg" style="width: 90%;" /></a>
+</div>
+</div></blockquote>
+<p>Here we see that there are two main regions, one with high density and one with low density. Here we also run into the problem of squashed gridcells along the axes,
+leading to four regions of very poor NSR score.
+As such this mesh type is not recommended.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="interpolator.html" class="btn btn-neutral float-left" title="Interpolation with meshA_to_meshB" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="coordinates.html" class="btn btn-neutral float-right" title="Coordinate transformations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, ACTOM.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

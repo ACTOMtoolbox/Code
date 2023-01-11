@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setup.ini &mdash; Advection-Diffusion Module 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/my_theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Boundary conditions" href="boundary_conditions.html" />
+    <link rel="prev" title="Usage" href="usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Advection-Diffusion Module
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About AdvDiff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Setup.ini</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#default">[DEFAULT]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">[setup]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output">[output]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#paths">[paths]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#coordinates">[coordinates]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sources">[sources]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#riskmaps">[riskmaps]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wells">[wells]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#velocity">[velocity]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#probes">[probes]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#grid">[grid]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#visualizer">[visualizer]</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">Boundary conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolator.html">Interpolation with meshA_to_meshB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_types.html">Different mesh-types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates.html">Coordinate transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="synthetic_translation.html">Synthetic translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Code API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining_documentation.html">Maintaining the documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">Todo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Advection-Diffusion Module</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Setup.ini</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/setup.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="setup-ini">
+<span id="setup"></span><h1>Setup.ini<a class="headerlink" href="#setup-ini" title="Permalink to this headline"></a></h1>
+<p>The config file contains all the options and parameters describing how to run the module on the given data.
+The config file is divided into sections which specify what parts of the module are affected.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#</span>
+<span class="c1"># setup.ini read through configparser</span>
+<span class="c1">#</span>
+<span class="p">[</span><span class="n">DEFAULT</span><span class="p">]</span>
+<span class="c1">#Number of CPUs to request, If smaller than 1, request all available. (Default: -1)</span>
+<span class="n">max_cpus</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="c1">#How much information to write to stdout and log file (Allowable: DEBUG, INFO, WARNING, CRITICAL)</span>
+<span class="n">verbose</span> <span class="o">=</span> <span class="n">INFO</span>
+<span class="c1">#Display progress bars?</span>
+<span class="n">progress_bar</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+
+<span class="p">[</span><span class="n">setup</span><span class="p">]</span>
+<span class="c1">#Simulation setup. </span>
+<span class="c1">#Where to get source locations from.</span>
+<span class="c1">#Default get_source_from Riskmap (Allowable: Sources, Riskmap, Wells, Riskmap and Wells, Riskmap and Sources)</span>
+<span class="n">get_source_from</span> <span class="o">=</span> <span class="n">Riskmap</span> <span class="ow">and</span> <span class="n">Sources</span>
+
+<span class="c1">#Default use_custom_timer   True  (Allowable: True, False)</span>
+<span class="c1">#Default time_start         Start (Allowable: Start, date-time, Random)</span>
+<span class="c1">#Default time_delta         120   (Allowable: float, End)</span>
+<span class="c1">#Default time_delta_unit    h     (Allowable: s, m, h, D)</span>
+<span class="c1">#Default time_seed          100   (Allowable: int)</span>
+<span class="n">use_custom_timer</span>   <span class="o">=</span> <span class="kc">True</span>
+<span class="n">time_start</span>         <span class="o">=</span> <span class="n">Start</span>
+<span class="n">time_delta</span>         <span class="o">=</span> <span class="mi">48</span>
+<span class="n">time_delta_unit</span>    <span class="o">=</span> <span class="n">h</span>
+<span class="n">time_seed</span>          <span class="o">=</span> <span class="mi">111</span>
+
+<span class="c1">#Time integration step size (Also interpolates velocity)</span>
+<span class="c1">#Default dt_size 15 (Allowable: float)</span>
+<span class="c1">#Default dt_unit m  (Allowable: S, min, H)</span>
+<span class="n">dt_size</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">dt_unit</span> <span class="o">=</span> <span class="nb">min</span>
+
+<span class="c1">#Default sweeps 1 (Allowable: int, Dynamic)</span>
+<span class="n">sweeps</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1">#If sweeps == Dynamic</span>
+<span class="c1">#Default max_dt      15 (Allowable: float)</span>
+<span class="c1">#Default max_dt_unit m  (Allowable: s, m, h, D)</span>
+<span class="n">max_dt</span>      <span class="o">=</span> <span class="mi">15</span>
+<span class="n">max_dt_unit</span> <span class="o">=</span> <span class="n">m</span>
+
+<span class="c1">#dC and field stepping sizes (1 = dt_size, 2 = 2*dt_size, 4 = 4*dt_size, ...) (Allowable: int &gt; 0)</span>
+<span class="c1">#Default delta_N [1,2,4] (set to only one integer if only one delta timestep is wanted.)</span>
+<span class="c1">#Default step_N_fields 1</span>
+<span class="n">step_N_stats</span>  <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">step_N_fields</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1">#Boundary condition types (Allowable: Neumann, No_flux, Dirichlet, Robin, Robin_experimental)</span>
+<span class="c1">#Default BC_type Robin</span>
+<span class="n">BC_type</span> <span class="o">=</span> <span class="n">Robin</span>
+
+<span class="c1">#Convection (Allowable: PowerLaw, CentralDiff, Exponential, Hybrid, Upwind, ExplicitUpwind, VanLeer)</span>
+<span class="c1">#Warning CentralDiff and ExplicitUpwind are not well behaved. VanLeer does not work</span>
+<span class="c1">#Default convection_type PowerLaw</span>
+<span class="n">convection_type</span> <span class="o">=</span> <span class="n">PowerLaw</span>
+
+<span class="c1">#Diffusion (Allowable: Implicit, Explicit)</span>
+<span class="c1">#Default diffusion_type Implicit</span>
+<span class="n">diffusion_type</span> <span class="o">=</span> <span class="n">Implicit</span>
+
+<span class="c1">#Diffusivity (Default: 0.0 [m^2/s])</span>
+<span class="n">D</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="c1">#To return the statistics and fields in structured form aka f(t,x,y) instead of f(t,num).</span>
+<span class="c1">#If false, then global stats and fields will not work correctly and you will not be able to plot the output easily. </span>
+<span class="c1">#This is mostly here for future proofing incase unstructured data is wanted.</span>
+<span class="c1">#Default return_structured True</span>
+<span class="n">return_structured</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+
+<span class="p">[</span><span class="n">output</span><span class="p">]</span>
+<span class="c1">#Store output in Outdata\?</span>
+<span class="n">store_stats</span>   <span class="o">=</span> <span class="kc">True</span>
+<span class="n">store_fields</span>  <span class="o">=</span> <span class="kc">False</span>
+<span class="n">store_probes</span>  <span class="o">=</span> <span class="kc">True</span>
+<span class="n">store_mass</span>    <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1">#What statistics to solve for and store in statistics file.</span>
+<span class="c1">#Allowable: [&#39;mean&#39;, &#39;max&#39;, &#39;var&#39;, &#39;delta_var&#39;, &#39;delta_mean&#39;, &#39;delta_mean_abs&#39;, &#39;delta_max&#39;, &#39;delta_max_abs&#39;, &#39;delta_min&#39;]</span>
+<span class="n">stat_variables</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span> <span class="s1">&#39;var&#39;</span><span class="p">,</span> <span class="s1">&#39;delta_var&#39;</span><span class="p">,</span> <span class="s1">&#39;delta_mean&#39;</span><span class="p">,</span> <span class="s1">&#39;delta_mean_abs&#39;</span><span class="p">,</span> <span class="s1">&#39;delta_max&#39;</span><span class="p">,</span> <span class="s1">&#39;delta_max_abs&#39;</span><span class="p">,</span> <span class="s1">&#39;delta_min&#39;</span><span class="p">]</span>
+
+<span class="c1">#Store local velocities together with fields in Outdata\? (Requires more storage)</span>
+<span class="n">store_uv</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1">#Downsampling for reduction in memory usage for fields</span>
+<span class="n">downsample</span>          <span class="o">=</span> <span class="kc">False</span>
+<span class="n">downsampling_factor</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="c1">#Generate global output from local output?s</span>
+<span class="n">global_stats</span>      <span class="o">=</span> <span class="kc">True</span>
+<span class="n">global_fields</span>     <span class="o">=</span> <span class="kc">True</span>
+<span class="n">cumulate_probes</span>   <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># Reduce the number of point tags to fit on global grid-cells (Requires global_stats == True)</span>
+<span class="n">reduce_point_tags</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># Resolution along x,y-axis for global system</span>
+<span class="n">glob_nx</span> <span class="o">=</span> <span class="mi">250</span> 
+<span class="n">glob_ny</span> <span class="o">=</span> <span class="mi">250</span> 
+
+<span class="c1"># Weight the output w.r.t location_probabilities?</span>
+<span class="n">weight_source</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+
+<span class="p">[</span><span class="n">paths</span><span class="p">]</span>
+<span class="c1">#Directories for input, outdata and figures.</span>
+<span class="n">indata_path</span>  <span class="o">=</span> <span class="n">Indata</span><span class="o">/</span>
+<span class="n">outdata_path</span> <span class="o">=</span> <span class="n">Outdata</span><span class="o">/</span>
+<span class="n">figures_path</span> <span class="o">=</span> <span class="n">Figures</span><span class="o">/</span>
+
+<span class="c1">#Subdirectories for file locations in indata</span>
+<span class="n">sources_path</span>  <span class="o">=</span> <span class="n">Sources</span><span class="o">/</span>
+<span class="n">probes_path</span>   <span class="o">=</span> <span class="n">Probes</span><span class="o">/</span>
+<span class="n">riskmap_path</span>  <span class="o">=</span> <span class="n">Riskmaps</span><span class="o">/</span>
+<span class="n">velocity_path</span> <span class="o">=</span> <span class="n">Velocities</span><span class="o">/</span>
+<span class="n">well_path</span>     <span class="o">=</span> <span class="n">Wells</span><span class="o">/</span>
+<span class="n">coord_path</span>    <span class="o">=</span> <span class="n">Coordinates</span><span class="o">/</span>
+
+<span class="c1">#Start of filenames for statistics, fields, time series and mass.</span>
+<span class="n">statistics</span>      <span class="o">=</span> <span class="n">statistics_</span>
+<span class="n">time_series_out</span> <span class="o">=</span> <span class="n">probe_</span>
+<span class="n">fields</span>          <span class="o">=</span> <span class="n">fields_</span>
+<span class="n">mass</span>            <span class="o">=</span> <span class="n">mass_</span>
+<span class="n">point_tags</span>      <span class="o">=</span> <span class="n">point_tags</span>
+
+
+
+<span class="p">[</span><span class="n">coordinates</span><span class="p">]</span>
+<span class="c1">#Datum of coordinate system</span>
+<span class="n">datum</span> <span class="o">=</span> <span class="n">WGS84</span>
+
+
+
+<span class="p">[</span><span class="n">sources</span><span class="p">]</span>
+<span class="c1">#The source file to read</span>
+<span class="n">source_file</span> <span class="o">=</span> <span class="n">Your_Source_File_Here</span><span class="o">.</span><span class="n">nc</span>
+
+
+
+<span class="p">[</span><span class="n">riskmaps</span><span class="p">]</span>
+<span class="c1">#This section is being used by Tools/risk_to_positions.py</span>
+<span class="c1">#riskfile to read</span>
+<span class="n">risk_file</span> <span class="o">=</span> <span class="n">Your_Risk_File_Here</span><span class="o">.</span><span class="n">nc</span>
+
+<span class="c1">#Where to put the resulting source files.  </span>
+<span class="n">out_path</span> <span class="o">=</span> <span class="n">Indata</span><span class="o">/</span><span class="n">Sources</span> <span class="n">Database</span><span class="o">/</span>
+
+<span class="c1">#What threshold to use</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+<span class="c1">#What clustering method to use. </span>
+<span class="c1">#Default dbscan (Allowable: dbscan, kmeans)</span>
+<span class="n">cluster</span> <span class="o">=</span> <span class="n">dbscan</span>
+
+<span class="c1">#If dbscan is used...</span>
+<span class="n">eps</span>         <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">min_samples</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1">#If kmeans is used...</span>
+<span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">4</span>
+
+
+
+<span class="p">[</span><span class="n">wells</span><span class="p">]</span>
+<span class="c1">#File for wells. (Allowable .nc and .csv files)</span>
+<span class="n">well_file</span> <span class="o">=</span> <span class="n">Your_Wells_File_Here</span><span class="o">.</span><span class="n">nc</span>
+
+
+
+<span class="p">[</span><span class="n">velocity</span><span class="p">]</span>
+<span class="c1">#File for velocity. Using DEFAULT directory. </span>
+<span class="n">velocity_file</span> <span class="o">=</span> <span class="n">Your_Velocity_File_Here</span><span class="o">.</span><span class="n">nc</span>
+
+<span class="c1">#If file contains depth (Allowable values: int or &#39;average&#39; for average)</span>
+<span class="n">depth</span> <span class="o">=</span> <span class="n">average</span>
+
+<span class="c1">#How to deal with interpolation of NAN values in velocity-fields</span>
+<span class="c1">#Default fill_type zeroes (Allowable types: zeroes, average, nearest extrapolation, fill extrapolation, ignore) WARNING: zeroes may exhibit unintended behaviour with triangular mesh</span>
+<span class="n">fill_type</span> <span class="o">=</span> <span class="n">nearest</span> <span class="n">extrapolation</span>
+
+<span class="c1">#If velocity coordinates do not overlap with source coordinates, should we allow for synthetic translation and scaling to fit the velocities to sources?</span>
+<span class="c1">#NOTE: if velocities overlap with sources, then the options below will not have any effect.</span>
+<span class="n">allow_synthetic_translation</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">allow_synthetic_scaling</span>     <span class="o">=</span> <span class="kc">False</span>
+
+
+<span class="p">[</span><span class="n">probes</span><span class="p">]</span>
+<span class="c1">#Files for the probes. At the moment relative to the individual sources. (None is allowed). </span>
+<span class="n">probes_file</span> <span class="o">=</span> <span class="n">Your_Probe_File_Here</span><span class="o">.</span><span class="n">nc</span>
+
+
+
+<span class="p">[</span><span class="n">grid</span><span class="p">]</span>
+<span class="c1">#Parameters for the local grids created for each source,</span>
+<span class="c1">#Default type exp     (Allowable types: equi, exp, segmented, tri)</span>
+<span class="c1">#Default type_out exp (Allowable types: equi, exp, segmented)</span>
+<span class="c1">#Default extrap_nans True (Recommended this is set to True)</span>
+<span class="c1">#Default Lx 12600 [m]</span>
+<span class="c1">#Default Ly 12600 [m]</span>
+<span class="c1">#Default nx 100</span>
+<span class="c1">#Default ny 100</span>
+<span class="c1">#Default reduction_factor 0.96 (How much the gridcell volumes decrease towards the center in exp mesh)</span>
+<span class="c1">#Default maxvol 70000 (Approximate max area [m^2] of largest triangle in triangle mesh)</span>
+<span class="c1">#Default minvol 230   (Approximate min area [m^2] of smallest triangle in triangle mesh)</span>
+
+<span class="nb">type</span>        <span class="o">=</span> <span class="n">tri</span>
+<span class="n">type_out</span>    <span class="o">=</span> <span class="n">exp</span>
+<span class="n">extrap_nans</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">Lx</span> <span class="o">=</span> <span class="mi">12600</span>
+<span class="n">Ly</span> <span class="o">=</span> <span class="mi">12600</span>
+
+<span class="c1">#When equi, exp, segmented is used...</span>
+<span class="n">nx</span> <span class="o">=</span> <span class="mi">100</span>  
+<span class="n">ny</span> <span class="o">=</span> <span class="mi">100</span> 
+
+<span class="c1">#When exp is used...</span>
+<span class="n">reduction_factor</span> <span class="o">=</span> <span class="mf">0.96</span>
+
+<span class="c1">#When tri grid is used...</span>
+<span class="n">maxvol</span> <span class="o">=</span> <span class="mi">70000</span>
+<span class="n">minvol</span> <span class="o">=</span> <span class="mi">230</span>
+<span class="n">power</span>  <span class="o">=</span> <span class="mf">1.0</span>
+
+
+<span class="p">[</span><span class="n">visualizer</span><span class="p">]</span>
+<span class="c1">#Run visualizer.py on completion of main.py</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1">#Robust colorbar limits (Sets the minimum limit at the 0th quantile and tha maximum limit at the 98th quantile) </span>
+<span class="n">robust</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1">#Number of levels in colorbar</span>
+<span class="n">levels</span> <span class="o">=</span> <span class="mi">25</span>
+
+<span class="c1">#Logscale (May not work properly yet, will not run for variables with negative values)</span>
+<span class="n">logscale</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1">#Whether or not to weight the results w.r.t location_probability in plots</span>
+<span class="n">weight_source</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1">#Whether or not to plot source locations with location_probability as circles </span>
+<span class="n">plot_source_loc</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1">#Whether or not to plot probe locations as crosses</span>
+<span class="n">plot_probe_loc</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1">#Font and markersizes for source and probe locations</span>
+<span class="n">fontsize</span>   <span class="o">=</span> <span class="mi">4</span>
+<span class="n">markersize</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="c1">#Filetype for static images</span>
+<span class="n">filetype</span> <span class="o">=</span> <span class="n">png</span>
+
+<span class="c1">#What to visualize with visualizer.py</span>
+<span class="n">plot_stats</span>          <span class="o">=</span> <span class="kc">True</span>
+<span class="n">plot_global_fields</span>  <span class="o">=</span> <span class="kc">False</span>
+<span class="n">plot_local_fields</span>   <span class="o">=</span> <span class="kc">False</span>
+<span class="n">plot_probes</span>         <span class="o">=</span> <span class="kc">True</span>
+<span class="n">plot_probe_contrib</span>  <span class="o">=</span> <span class="kc">False</span>
+<span class="n">plot_mass</span>           <span class="o">=</span> <span class="kc">True</span>
+<span class="n">plot_mass_contrib</span>   <span class="o">=</span> <span class="kc">False</span>
+<span class="n">plot_meshes</span>         <span class="o">=</span> <span class="kc">False</span>
+<span class="n">plot_local_grids</span>    <span class="o">=</span> <span class="kc">True</span>
+<span class="n">plot_map</span>            <span class="o">=</span> <span class="kc">True</span>
+<span class="n">plot_global_stream</span>  <span class="o">=</span> <span class="kc">False</span>
+<span class="n">plot_local_stream</span>   <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1">#Visualize riskmaps in Riskmaps\ to Figures\?</span>
+<span class="n">plot_riskmaps</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1">#Visualize sources in Indata\Sources\ to Figures\?</span>
+<span class="n">plot_sources</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<div class="section" id="default">
+<h2>[DEFAULT]<a class="headerlink" href="#default" title="Permalink to this headline"></a></h2>
+<p>Here we can specify how many CPU cores to use in parallel. When running the module, each CPU core works on one source at a time.
+We can also specify verbosity of the module and how much information and feedback to write to stdout and the log file as the module is running.
+In addition, we can enable or disable the progress bar for each CPU core.</p>
+<ul class="simple">
+<li><p><strong>max_cpus</strong>: Number of CPU threads to run in parallel. Set to -1 to run all.</p></li>
+<li><p><strong>verbose</strong>: Level of verbosity of module. Allowable levels: DEBUG, INFO, WARNING, CRITICAL.</p></li>
+<li><p><strong>progress_bar</strong>: If True, enable progression bar for each individual source. If False, no progression bars will be shown during runtime.</p></li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h2>[setup]<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h2>
+<p>Here we can set where we get the sources from, the start time for the simulation, and for how long to run the simulation for.
+In addition we can set the numerical schemes to be used by our solver, and the diffusion rate.</p>
+<ul class="simple">
+<li><p><strong>get_source_from</strong>: Where to get sources from. You can set the module to generate sources from sources, riskmaps, wells, riskmaps and wells or riskmap and sources.
+The file formats for each type of file is shown in the <a class="reference internal" href="about.html#input"><span class="std std-ref">inputs section</span></a>.</p></li>
+<li><p><strong>use_vel_timer / time_delta / time_delta_unit / time_seed</strong>: If <strong>use_vel_timer</strong> is set to <strong>True</strong>, then the module uses the timer in the given velocity data.
+In other words, the start time begins at the first time in the velocity data while the end time is at the last time in the velocity data.
+BEWARE setting this to true if the velocity file spans a very long time-scale.
+If <strong>use_vel_timer</strong> is set to <strong>False</strong>, then we can specify the start time of the simulation using <strong>time_start</strong>,
+and the duration using <strong>time_delta</strong> together with <strong>time_delta_unit</strong>.
+The <strong>time_seed</strong> parameter is only relevant when our start time is set to <strong>Random</strong>.</p></li>
+<li><p><strong>dt_size / dt_unit</strong>: <strong>dt_size</strong> sets what time-step size to integrate the solution with, this can be set to any positive integer.
+The <strong>dt_unit</strong> variable sets the corresponding temporal unit (allowbale:  S, min, H).
+Effectively, this will also interpolate the provided velocity file with the same time-step increments.
+For example, if the velocity file steps in time with 1 hour increments,
+we can interpolate it over 15 minute increments by setting <strong>dt_size = 15</strong> and <strong>dt_unit = min</strong>.
+The opposite case can also be achieved, if the velocity file steps in time with 15 minute increments,
+you can set <strong>dt_size = 1</strong> and <strong>dt_unit = H</strong> to force time-stepping in 1 hour increments.
+The main purpose behind this is to unify the time-step lengths when using different velocity datasets.
+To maintain order of accuracy between different datasets, it is best to keep time-steps the same length.</p></li>
+<li><p><strong>Sweeps / max_dt / max_dt_unit</strong>: <strong>Sweeps</strong> specifies how many sweeps the module performs between each time step <strong>dt</strong>.
+The time step length <strong>dt</strong> is determined by the time step length between each instance of time in the velocity file. By default <strong>sweeps = 1</strong>,
+but it can be set to any positive integer, or to <strong>Dynamic</strong>.
+If it set to <strong>Dynamic</strong>, then the module will compute how many sweeps are required to meet a maximum time step <strong>max_dt</strong> with unit <strong>max_dt_unit</strong>.
+So for instance, if the velocity file increments in time by dt=1h, but we require that the module maximally steps forward in time by 15m,
+then we can either set sweeps = 4 or we can set sweeps = Dynamic, and then <strong>max_dt = 15</strong>, <strong>max_dt_unit = m</strong>.
+The module will in either scenario sweep 4 times per step in time.</p></li>
+<li><p><strong>step_N_stats</strong>: The number of time-step increments to store delta variables for. Can be set to a single integer or a list of integers.
+For example if <strong>step_N_stats = [1,2,4]</strong>, and if <strong>dt_size = 15</strong> and <strong>dt_unit = min</strong>,
+then the delta variables will be computed for <strong>1*dt_size = 15</strong>, <strong>2*dt_size = 30</strong> and <strong>4*dt_size = 60</strong> minute increments.</p></li>
+<li><p><strong>step_N_fields</strong>: The number of time-step increments to store the fields for. Can be set to a single integer.
+For example if <strong>step_N_fields = 4</strong>, and if <strong>dt_size = 15</strong> and <strong>dt_unit = min</strong>,
+then the fields will be stored for <strong>4*dt_size = 60</strong> minute increments. This can help to reduce the memory requirement for storing large fields.</p></li>
+<li><p><strong>BC_type</strong>: The <strong>BC_type</strong> variable sets the boundary condition to apply. The allowable types are Robin, Neumann, Dirichlet, No flux and Robin experimental.
+See more about how the different boundary conditions behave <a class="reference internal" href="boundary_conditions.html"><span class="doc">here</span></a>.</p></li>
+<li><p><strong>convection_type / diffusion_type</strong>: The numerical schemes can be set by the variables <strong>convection_type</strong> and <strong>diffusion_type</strong>.
+The allowable types are listed in the config file.
+For more information about what each scheme does numerically, see the <a class="reference external" href="https://www.ctcms.nist.gov/fipy/documentation/numerical/index.html">FiPy documentation</a>.</p></li>
+<li><p><strong>D</strong>: The diffusion rate can simply be set by letting <strong>D</strong> be a non-negative float.
+As of now, if D == 0.0, then the diffusion term will not be added to the numerical scheme.
+This increases computation speed slightly. But I am not sure if it alters the solution.</p></li>
+<li><p><strong>return_structured</strong>: Keep this to <strong>True</strong> by default. It tells the module to structurize the outdata. If false, the outdata will stay in unstructured form, and
+any plots and post-processing modules may stop working correctly. This is mostly here to future-proof the module in case you want to keep the output in unstructured form.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <strong>dt_size</strong> variable differs from the <strong>max_dt</strong> variable in the sweeps solution!
+The <strong>dt_size</strong> variables tells for what time-step intervals the AdvDiff solver should solve and store the solution.
+However, AdvDiff does not store the solution for every sweep.
+So, sweeps are mostly used to maintain the accuracy of solutions whenever storing the solution for refined time-steps is not desirable or necessary.</p>
+</div>
+</div>
+<div class="section" id="output">
+<h2>[output]<a class="headerlink" href="#output" title="Permalink to this headline"></a></h2>
+<p>Here we can specify what sorts of outputs we want when the simulation terminates.</p>
+<ul class="simple">
+<li><p><strong>store_stats</strong>: Do we want to store the maximum and mean values and the statistics for each simulation?</p></li>
+<li><p><strong>store_fields</strong>: Do we want to store the field variables for every time step of the simulation?
+This may require a lot of data if you run high fidelity simulations with many sources and long time series. The field variables are mostly useful for creating movies.</p></li>
+<li><p><strong>store_probes</strong>: Do we want to store the time series data from the measurement probes?
+This does not require as much data, as we will only look at the field variables at a set of positions for each time.</p></li>
+<li><p><strong>store_mass</strong>: Do we want to store the total mass generated around each source with respect to time?
+This is useful if you want to see the effect the boundaries have on the simulation.</p></li>
+<li><p><strong>store_uv</strong>: Do we want to store the x- and y-components of velocity together with our field variables.
+This will only take effect if store_fields is also True.</p></li>
+<li><p><strong>stat_variables</strong>: This is a list of types of statistics to store.</p></li>
+<li><p><strong>reduce_point_tags</strong>: If set to true, a netcdf file called point_tags_reduced.nc will be computed.
+It includes the point tags for every pixel in the global grid.</p></li>
+<li><p><strong>downsample / downsampling_factor</strong>: Storing field variables requires a lot of storage,
+especially when running long timescale simulations utilizing meshes with many gridcells.
+To help with memory management, we have an option to <strong>downsample</strong> the data. Downsample allows us to reduce the memory usage whenever store_fields = True.
+The fields will be downsampled by a factor given by the <strong>downsampling_factor</strong> parameter.</p></li>
+<li><p><strong>global_stats</strong>: If True, then stitch each of the local statistics into one global statistics file.</p></li>
+<li><p><strong>global_fields</strong>: If True, then stitch each of the local fields into one global fields file.</p></li>
+<li><p><strong>cumulate_probes</strong>: If True, take the cumulative sum of every probe contribution and output a cumulative probe file.
+The cumulative probe file will represent the actual measurements of each probe given that every source of the system is accounted for.</p></li>
+<li><p><strong>reduce_point_tags</strong>: If True, then reduce the point_tags.nc file onto the global grid.</p></li>
+<li><p><strong>glob_nx / glob_ny</strong>: The respective number of discretizations along the x and y axes of the global grid.</p></li>
+<li><p><strong>weight_source</strong>: If True, weight the global variables by location probability.</p></li>
+</ul>
+</div>
+<div class="section" id="paths">
+<h2>[paths]<a class="headerlink" href="#paths" title="Permalink to this headline"></a></h2>
+<p>This section sets the directories, path names and file names for inputs and outputs. There is no need to change these parameters unless completely necessary.</p>
+</div>
+<div class="section" id="coordinates">
+<h2>[coordinates]<a class="headerlink" href="#coordinates" title="Permalink to this headline"></a></h2>
+<p><strong>datum</strong>: Sets the datum for coordinate convertions betwen longitude-latitude coordinates and UTM.</p>
+</div>
+<div class="section" id="sources">
+<h2>[sources]<a class="headerlink" href="#sources" title="Permalink to this headline"></a></h2>
+<p>This section is only relevant if <strong>get_source_from == Sources</strong></p>
+<ul class="simple">
+<li><p><strong>source_file</strong>: Sets the filename for the desired sources to run.</p></li>
+</ul>
+</div>
+<div class="section" id="riskmaps">
+<h2>[riskmaps]<a class="headerlink" href="#riskmaps" title="Permalink to this headline"></a></h2>
+<p>This section is only relevant if <strong>get_source_from == Riskmap</strong> or <strong>get_source_from == Riskmap and Wells</strong>.</p>
+<ul class="simple">
+<li><p><strong>risk_file</strong>: Sets the filename for the desired riskmap to use to generate source coordinates.</p></li>
+<li><p><strong>out_path</strong>: Sets the directory for where to save the generated source coordinates. This is only relevant if you use the <strong>risk_to_sources</strong> module as standalone.</p></li>
+<li><p><strong>threshold</strong>: Sets the threshold for what is considered a source in the riskmap.</p></li>
+<li><p><strong>cluster</strong>: Sets the clustering algorithm to use to generate sources. You can either use <strong>dbscan</strong> or <strong>kmeans</strong> clustering.</p></li>
+<li><p><strong>eps / min_samples</strong>: These are dbscan specific attributes. See <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html">dbscan documentation</a> for more information.</p></li>
+<li><p><strong>n_clusters</strong>: This is a kmeans specific attribute. It specifies how many clusters (sources) you want to build out of the riskmap.</p></li>
+</ul>
+</div>
+<div class="section" id="wells">
+<h2>[wells]<a class="headerlink" href="#wells" title="Permalink to this headline"></a></h2>
+<p>This section is only relevant if <strong>get_source_from == Wells</strong> or <strong>get_source_from == Riskmap and Wells</strong>.</p>
+<ul class="simple">
+<li><p><strong>well_file</strong>: What .nc or .csv file to load well locations from.</p></li>
+</ul>
+</div>
+<div class="section" id="velocity">
+<h2>[velocity]<a class="headerlink" href="#velocity" title="Permalink to this headline"></a></h2>
+<p>Here we set what velocity file to read.</p>
+<ul class="simple">
+<li><p><strong>velocity_file</strong>: Sets the filename for the desired velocity to use to run the simulation.</p></li>
+<li><p><strong>depth</strong>: We encountered that some velocity files had an additional depth coordinate.
+Here you can specify which depth index to use, or set <strong>depth = average</strong> to take an average velocity of all depths.</p></li>
+<li><p><strong>fill_type</strong>: When generating local fields from the global velocity field,
+you may encounter NAN values wherever there is missing velocity data, such as whenever the local fields extend beyond the limits of the global field.
+If <strong>fill_type = nearest extrapolation</strong> or <strong>fill_type = fill extrapolation</strong>, then any NANs are filled with extrapolated values.
+If <strong>fill_type = zeroes</strong>, then NANs are filled with zeroes.
+If <strong>fill_type = average</strong>, then NANs are filled with the average value of the field.
+If <strong>fill_type = ignore</strong>, then the simulation around the source in question will be ignored and terminated if any NANs are encountered.</p></li>
+<li><p><strong>allow_synthetic_translation</strong>: If set to <strong>False</strong>, then sources which land outside the limits of the global field will be ignored and terminated.
+This should be the default option for any realistic simulation as it does not impose any stretching of the velocity data to fit onto the source coordinates.
+If set to <strong>True</strong>, then we will allow the module to stretch the global field to fit onto the source coordinates, this will allow us to run velocities and sources with completely different coordinate data.</p></li>
+<li><p><strong>allow_synthetic_scaling</strong>: Same as above, but also allows for scaling of the velocity data to fit over all sources. It will only work in tandem with <strong>allow_synthetic_translation</strong>.</p></li>
+</ul>
+</div>
+<div class="section" id="probes">
+<h2>[probes]<a class="headerlink" href="#probes" title="Permalink to this headline"></a></h2>
+<p>Here we set the probe file to use.</p>
+<ul class="simple">
+<li><p><strong>probe_file</strong>: This is optional, and if you do not want to run any probes, set <strong>probe_file = None</strong>. If the probe coordinates do not overlap with the
+global grid, then probes will be ignored.</p></li>
+</ul>
+</div>
+<div class="section" id="grid">
+<h2>[grid]<a class="headerlink" href="#grid" title="Permalink to this headline"></a></h2>
+<p>Here we can specify the parameters for the meshes used during computation and storage.</p>
+<ul class="simple">
+<li><p><strong>type</strong>: What mesh type should be used for the computational grid. The available options are listed in the config file.
+The triangle and exponential options allow for grids which become more and more refined towards the source.</p></li>
+<li><p><strong>type_out</strong>: What mesh type should be used for the output data.
+This parameter does not allow for triangle grids as of now as xarray offers no simple way for plotting data in unstructured grids, but I may add this in the future.</p></li>
+<li><p><strong>Lx / Ly</strong>: These parameters specify the length of local grids along the x- and y-axis.</p></li>
+<li><p><strong>extrap_nans</strong>: In rare instances when interpolating from a rectilinear mesh to a triangular mesh, NANs will appear along a few of the cells along the boundaries.
+If <strong>True</strong>, then we will allow for nearest interpolation to patch these holes. If <strong>False</strong>, then any NANs will be filled with zeroes instead.
+It is highly recommended to keep this to True.</p></li>
+<li><p><strong>nx / ny</strong>: This specifies the number of discretizations the x- and y-axis should be divided into for the rectilinear grids.</p></li>
+<li><p><strong>maxvol / minvol</strong>: This specifies maximum size of the largest triangle and the minimum size of the smallest triangle in the triangle mesh.
+These values are approximate, and the final values may be off by about 10%.</p></li>
+<li><p><strong>reduction_factor</strong>: How strongly the gridcells decrease in size towards the center when using an exp grid.</p></li>
+<li><dl class="simple">
+<dt><strong>power</strong>: How strongly the gridcells decrease in size towards the center when using a triangular grid.</dt><dd><p>Power = 0.0 –&gt; cell volumes are constant = maxvol.
+Power = 0.5 –&gt; cell volumes increase proportionally to the square root of the distance from the center from minvol to maxvol.
+Power = 1.0 –&gt; cell volumes increase linearily by the distance from the center from minvol to maxvol.
+Power = 2.0 –&gt; cell volumes increase proportionally to the square of the distance from the center from minvol to maxvol.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="visualizer">
+<h2>[visualizer]<a class="headerlink" href="#visualizer" title="Permalink to this headline"></a></h2>
+<p>This section specifies the settings for the visualizer module in visualize.py.</p>
+<ul class="simple">
+<li><p><strong>plot</strong>: When <strong>True</strong>, visualize the results on completion of the simulations in main.py. If <strong>False</strong>, you will have to run python visualizer.py separately.</p></li>
+<li><p><strong>robust</strong>: Sets robust colorbar scaling. This is robust to outliers and points with abnormally large concentration. IF set to False, then plots will typically be hard to see.</p></li>
+<li><p><strong>levels</strong>: Number of levels in contour field.</p></li>
+<li><p><strong>logscale</strong>: Whether or not to plot colorbar on a logscale. (Is fairly buggy).</p></li>
+<li><p><strong>weight_source</strong>: Whether or not to weight the source contributions with respect to location probability. This is independent of weight_source in output section.</p></li>
+<li><p><strong>plot_source_loc</strong>: Whether or not to plot source locations ontop of visualizations as circles. The size of the circles is proportional to location probability.
+The sources are numbered from 0 to N.</p></li>
+<li><p><strong>plot_probe_loc</strong>: Whether or not to plot probe locations optop of visualizations as crosses. The probes are numbered from 0 to N^*.</p></li>
+<li><p><strong>fontsize</strong>: The fontsize of source and probe numbers.</p></li>
+<li><p><strong>markersize</strong>: The markersizes of source and probe markers.</p></li>
+<li><p><strong>filetype</strong>: What image filetype to store figures as.</p></li>
+<li><p><strong>plot_stats</strong>: Plot the statistics?</p></li>
+<li><p><strong>plot_global_fiels</strong>: Plot the global field as a movie?</p></li>
+<li><p><strong>plot_local_fields</strong>: Plot each of the individual local fields as movies?</p></li>
+<li><p><strong>plot_probes</strong>: Plot the probe measurement over time?</p></li>
+<li><p><strong>plot_probe_contrib</strong>: Plot the contributions from each source to every probe measurement over time?</p></li>
+<li><p><strong>plot_mass</strong>: Plot the total mass over time?</p></li>
+<li><p><strong>plot_mass_contrib</strong>: Plot the mass contributions from each source over time?</p></li>
+<li><p><strong>plot_meshes</strong>: Plot the meshes and mesh quality?</p></li>
+<li><p><strong>plot_local_grids</strong>: Plot the local grid locations superimposed on the velocities? (Useful for debugging)</p></li>
+<li><p><strong>plot_map</strong>: Plot a map containing the source locations and velocity locations in space with castlines shown. Requires the <a class="reference external" href="https://scitools.org.uk/cartopy/docs/latest/">Cartopy module</a> to work.</p></li>
+<li><p><strong>plot_global_stream</strong>: Plots the stream fields for the global system. This will only work if <strong>store_fields</strong> and <strong>store_uv</strong> are both true.</p></li>
+<li><p><strong>plot_local_stream</strong>: Plots the stream fields for each local system. This will only work if <strong>store_fields</strong> and <strong>store_uv</strong> are both true.</p></li>
+<li><p><strong>plot_riskmaps</strong>: Plot the riskmaps for every file found in the riskmap directory on it’s own figure?</p></li>
+<li><p><strong>plot_sources</strong>: Plot the source locations for every file in the source directory on it’s own figure?</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="usage.html" class="btn btn-neutral float-left" title="Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="boundary_conditions.html" class="btn btn-neutral float-right" title="Boundary conditions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, ACTOM.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

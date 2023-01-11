@@ -1,0 +1,103 @@
+
+
+<html>
+<head>
+    <style>
+        * {
+            font-family: sans-serif;
+        }
+        body {
+            padding: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            text-align: right;
+        }
+        table tr {
+            border-bottom: 1px solid
+        }
+        table th, table td {
+            padding: 10px 20px;
+        }
+        div.head { width: 1000px; margin: auto; }
+        div.content { width: 960px; margin: auto; }
+    </style>
+</head>
+<body>
+<div class="head">
+<img src='files/ACTOM.png' width="600">
+</div>
+<div class="content">
+
+<h1>Act on Offshore Monitoring Toolbox{{ Documentation }}</h1>
+
+For the Technical Summary <a href="Technical-Summary.html">click here</a>.
+<br><br>
+
+{{ INPUTBYUSER }}
+
+The research in ACTOM works for the advancement of offshore monitoring to ensure alignment of CO<sub>2</sub> storage projects with national and international regulations and societal concerns. The ACTOM toolbox (shown in Figure 1.) equips operators with the ability to plan strategies under site-specific conditions and provides regulators a reliable and independent assessment of proposed monitoring strategies from license applicants. In addition to the tool assisting in the technical design of monitoring programs, it can be used to enhance communication with governments and the public in view of Marine Spatial Planning and Responsible Research and Innovation. 
+<br><br>
+The toolbox is designed to provide value over a range of field cases with diverse subsurface geology and environmental marine characteristics. The end-product of the toolbox is to aid users in defining a monitoring plan that will satisfy local stakeholders.
+<br><br>
+The ACTOM toolbox contains algorithms for determining how the main monitoring aims required by guidance and regulations can be achieved at each site. Namely the algorithm optimizes approaches for detecting anomalies that could signal leakage in the marine environment, and then determining if these anomalies represent leakage. This is not an easy task because CO<sub>2</sub> is already an integral and dynamic part of the marine environment. Which is already undergoing shifts due to climate change. Through using geophysical data on shallow features such as chimneys or fractures, the likely areas where leakage would emanate can be predicted. Knowing the hydrodynamics and bio-chemical processes in marine sediments and seawater allow strategies for location and attribution, setting trigger points for when more action is needed and what instruments can be used for measurements, can be optimized for finding and attributing leakage emissions accounting and environmental protection. 
+<br><br>
+
+<p style="text-align:center"><img src='files/toolbox.png' width="800"></p>
+<p style="text-align:center">Figure 1. Schematic of the toolbox, with tools interacting along with the site specific and user programmable information.</p>
+
+<br>
+<h2>The ACTOM toolbox:</h2>
+
+<li>Enables regulators to quantifiably assess that a proposed monitoring strategy delivers an acceptable standard of assurance.</li>
+<li>Enables operators to properly plan, cost and adapt monitoring strategies to site specific circumstances.</li>
+<li>Enables regulators and operators to communicate to the effectiveness of proposed monitoring strategies to enable informed societal consensus in view of marine spatial planning.
+</li>
+<br>
+<h3>The list of ACTOM tools available are:</h3>
+{{ Tool_List }}
+<br>
+*Any tools marked in red above have not been used for this report. 
+<br><br>
+
+<h3>Site Specific Data</h3>
+
+The toolbox requires multiple sources of site-specific data for input as shown in Figure 1. These include 1) subsurface geophysical/geological data, where will the CO<sub>2</sub> most likely reach the seafloor, 2) hydrodynamic data, how local currents will drive the CO<sub>2</sub> transport and 3) marine biogeochemical data, to what extent will the signal be hidden within natural variability.
+<br>
+<h4>Geological mapping, where will the CO<sub>2</sub> potentially reach the seafloor?</h4>
+
+The first challenge of applying the toolbox is to map the areas of variable risk for CO<sub>2</sub> reaching the sediment surface. Ideally, quantification of risk should involve interpretation and analysis of CO<sub>2</sub> injection and migration in the overburden, which in turn depends on having access to data and models of each CO<sub>2</sub> storage reservoir and the resources to carry out a detailed risk assessment in practice, this step can be resource intensive, and the value of a detailed approach should be evaluated. Indicators of potential leakage pathways such as faults or chimneys are commonly characterised using site specific seismic surveys and subsurface transport simulations. The desired output from these geophysical surveys is the relative likelihood of CO<sub>2</sub> leakage events at the sediment surface.
+<br><br>
+However, geophysical data taken from 3D seismic surveys of the shallow subsurface is not always available and is expensive to get and process. Further, the state-of-the-art in leakage modelling also come with a considerable price tag and may not be sufficiently reliable to support such risk analyses. The added impact of geological architecture and structural elements like faults, stratigraphic traps, spill points etc. could also be considered.
+Locations of wells are often publicly available through web portals, like <a href="https://factpages.npd.no/en" target="_blank">The Norwegian Petroleum Directorate</a>, <a href="https://www.nlog.nl/en" target="_blank">The Dutch oil and gas portal</a>, and <a href="https://www.rrc.texas.gov/resource-center/research/gis-viewer/" target="_blank">The Railroad Commission of Texas</a>. Other sources, such as designated CO<sub>2</sub> storage atlases, e.g. <a href="https://www.npd.no/en/facts/publications/co2-atlases/co2-atlas-for-the-norwegian-continental-shelf/" target="_blank">CO<sub>2</sub> atlas for the Norwegian Continental Shelf</a>, and <a href="https://co2datashare.org/" target="_blank">open datasets</a>, may provide information about regional faults relevant to the storage site. These wells and faults can be used as a first, readily available, risk map.
+<br><br>
+{{ RISKMAP }}
+
+<h4>Ocean current conditions, predict transport and rate of dilution of the signal.</h4>
+Once the seeped CO<sub>2</sub> has reached the water column it will form bubble or droplet trains or plumes, depending on release depth and temperature, and gradually be dissolved into the seawater (<a href="#References">Alendal and Drange, 2001</a>; <a href="#References">Dewar et al., 2015</a>), and transported (and further diluted) by local current conditions (<a href="#References">Drange et al, 2001</a>).
+In an ideal setting, hydrodynamic and marine biogeochemical data can be readily attained from calibrated high-resolution models and simulations, combined with available in-situ measurements. The process of identifying data availability, and later gathering and pre-processing the data, will have to be site specific. It might be necessary to set up a biochemical general circulation model for the area, which can be a considerable task. However, such model systems are often used in regional weather forecasts, in climate research, and as part of marine research and management. Many regional models are in operational use, in Norway NORKYST 800 (<a href="#References">Albretsen et al., 2001</a>, <a href="#References">Asplin et al., 2020</a>,), or being used for process studies. Given all other uncertainties and assumptions made, data from such models provide is adequate for our purpose (<a href="#References">Blackford et al., 2020</a>).<br><br>
+
+{{ HYDRODYNAMICS }}
+
+<h4>Local biochemical characteristics.</h4>
+CO<sub>2</sub> is naturally present in the marine environment and the concentration varies naturally; increased CO<sub>2</sub> concentrations might lead to impact on the local biota (<a href="#References">Blackford et al., 2014</a>). Some of the regional general circulation models also contain biochemical modules (<a href="#References">Artioli et al., 2012</a>). The toolbox uses the C<sub>seep</sub></li> (<a href="#References">Botnen et al., 2015</a> and <a href="#References">Omar et al., 2021</a>) and Rate of Change (RoC) (<a href="#References">Blackford et al., 2017</a>) methods to distinguish a seep signal from natural variability. Most biochemical surveys are done to study air-sea interactions; hence it can be a challenge to secure such data close to the seafloor, gathering such data could be obtained during site characterization and selection. 
+
+{{ OUTPUTS }}
+
+<h3 id="References">Disclaimer</h3>
+
+All figures and data are indication based on simulations. The precision and quality will vary based on the quality, precision and range of data inputted to each tool.
+
+<h2 id="References">References</h2>
+
+{{ REF }}
+
+
+<h2>Aknowledgements</h2>
+
+This project, ACTOM, is funded through the ACT programme (Accelerating CCS Technologies, Horizon2020 Project No 294766). Financial contributions made from; The Research Council of Norway, (RCN), Norway, Netherlands Enterprise Agency (RVO), Netherlands, Department for Business, Energy & Industrial Strategy (BEIS) together with extra funding from NERC and EPSRC research councils, United Kingdom, US-Department of Energy (US-DOE), USA. In-kind contributions from the University of Bergen are gratefully acknowledged.
+<br><br>
+<p style="text-align:center;"><img src='files/partners.png', width="960"></p>
+  </div>
+<body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>interpolator module &mdash; Advection-Diffusion Module 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/my_theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="risk_to_positions module" href="risk_to_positions.html" />
+    <link rel="prev" title="mesh_generator module" href="mesh_generator.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Advection-Diffusion Module
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About AdvDiff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup.ini</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">Boundary conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolator.html">Interpolation with meshA_to_meshB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_types.html">Different mesh-types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates.html">Coordinate transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="synthetic_translation.html">Synthetic translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Code API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tools.html">Tools API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="coord_transform.html">coord_transform module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_processing.html">data_processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="post_processing.html">post_processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_loader.html">file_loader module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesh_generator.html">mesh_generator module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">interpolator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risk_to_positions.html">risk_to_positions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_variable_treatment.html">local_variable_treatment module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parser_tools.html">parser_tools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directory_tools.html">directory_tools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualizer_tools.html">visualizer_tools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scenario_creator.html">scenario_creator module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining_documentation.html">Maintaining the documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">Todo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Advection-Diffusion Module</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="tools.html">Tools API</a> &raquo;</li>
+      <li>interpolator module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/interpolator_module.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="module-interpolator">
+<span id="interpolator-module"></span><h1>interpolator module<a class="headerlink" href="#module-interpolator" title="Permalink to this headline"></a></h1>
+<p>This module includes the main linear- and nearest-neighbor interpolator used in AdvDiff.</p>
+<p>&#64;author: Ketil</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="interpolator.meshA_to_meshB">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">interpolator.</span></span><span class="sig-name descname"><span class="pre">meshA_to_meshB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meshA_points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meshB_points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extrap_qhull</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#interpolator.meshA_to_meshB" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Generalized interpolator class.
+meshA_to_meshB object which can be used to interpolate values defined on a set
+of points defined on meshA to a set of points defined on meshB.</p>
+<p>This interpolator was based on the methods and ideas introduced in:
+* <a class="reference external" href="https://stackoverflow.com/questions/20915502/speedup-scipy-griddata-for-multiple-interpolations-between-two-irregular-grids">https://stackoverflow.com/questions/20915502/speedup-scipy-griddata-for-multiple-interpolations-between-two-irregular-grids</a>
+* <a class="reference external" href="https://stackoverflow.com/questions/51858194/storing-the-weights-used-by-scipy-griddata-for-re-use">https://stackoverflow.com/questions/51858194/storing-the-weights-used-by-scipy-griddata-for-re-use</a>
+* <a class="reference external" href="https://programtalk.com/python-examples/scipy.interpolate.griddata.ravel/">https://programtalk.com/python-examples/scipy.interpolate.griddata.ravel/</a></p>
+<p>Special thanks to Jaime for his excellent linear interpolator function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>meshA_points</strong> (<em>array</em><em> (</em><em>[</em><em>n_points</em><em>,</em><em>2</em><em>]</em><em>)</em>) – Array of cellcenter points from meshA.</p></li>
+<li><p><strong>meshB_points</strong> (<em>array</em><em> (</em><em>[</em><em>n_points</em><em>,</em><em>2</em><em>]</em><em>)</em>) – Array of cellcenter points from meshB.</p></li>
+<li><p><strong>extrap_qhull</strong> (<em>bool</em>) – Whether or not to force nearest extrapolation on points lying on the convex hull.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>meshA_to_meshB object</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="interpolator.meshA_to_meshB.extrapolate_nans">
+<span class="sig-name descname"><span class="pre">extrapolate_nans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meshA_points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meshB_points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataA</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataB</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extrap_from_A</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#interpolator.meshA_to_meshB.extrapolate_nans" title="Permalink to this definition"></a></dt>
+<dd><p>Extrapolate any NANs using nearest neighbour interpolation which might arrise from linear interpolation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>meshA_points</strong> (<em>array</em><em> (</em><em>[</em><em>n_points_A</em><em>, </em><em>2</em><em>]</em><em>)</em>) – A numpy array containing [x,y] coordinates for points on meshA.</p></li>
+<li><p><strong>meshB_points</strong> (<em>array</em><em> (</em><em>[</em><em>n_points_B</em><em>, </em><em>2</em><em>]</em><em>)</em>) – A numpy array containing [x,y] coordinates for points on meshB.</p></li>
+<li><p><strong>dataA</strong> (<em>array</em><em> (</em><em>[</em><em>n_points_A</em><em>, </em><em>1</em><em>]</em><em>)</em>) – A numpy array containing data values for each point on meshA.</p></li>
+<li><p><strong>dataB</strong> (<em>array</em><em> (</em><em>[</em><em>n_points_B</em><em>, </em><em>1</em><em>]</em><em>)</em>) – A numpy array containing data values for each point on meshB.</p></li>
+<li><p><strong>extrap_from_A</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not to extrapolate using data from A or B, by default True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>dataB</strong> – Extrapolated values on meshB.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array ([n_points_B, 1])</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="interpolator.meshA_to_meshB.interp_weights">
+<span class="sig-name descname"><span class="pre">interp_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meshA_points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meshB_points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#interpolator.meshA_to_meshB.interp_weights" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the necessary triangularization, vertices and weights.
+This method is called only once during initialization of the meshA_to_meshB object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>meshA_points</strong> (<em>array</em><em> (</em><em>[</em><em>n_points_A</em><em>, </em><em>2</em><em>]</em><em>)</em>) – A numpy array containing [x,y] coordinates for points on meshA.</p></li>
+<li><p><strong>meshB_points</strong> (<em>array</em><em> (</em><em>[</em><em>n_points_B</em><em>, </em><em>2</em><em>]</em><em>)</em>) – A numpy array containing [x,y] coordinates for points on meshB.</p></li>
+<li><p><strong>d</strong> (<em>int</em><em>, </em><em>optional</em>) – An integer setting the dimensionality, by default 2.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>triA</strong> (<em>object</em>) – A scipy.spatial.Delaynay object containing the triangularization of meshA.</p></li>
+<li><p><strong>vertices</strong> (<em>array</em>) – A numpy array containing the vertices of meshA.</p></li>
+<li><p><strong>weights</strong> (<em>array</em>) – A numpy array containing the corresponding weights.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="interpolator.meshA_to_meshB.interpolate">
+<span class="sig-name descname"><span class="pre">interpolate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extrap_nans</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extrap_from_A</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#interpolator.meshA_to_meshB.interpolate" title="Permalink to this definition"></a></dt>
+<dd><p>Interpolate data (defined on meshA) onto points on meshB using linear interpolation. It is higly recommended to keep extrap_nans=True.
+If extrap_nans=True, then .extrapolate_nans() is automatically called to patch any NANs which may arrise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>array</em><em> (</em><em>[</em><em>n_points_A</em><em>, </em><em>1</em><em>]</em><em>)</em>) – A numpy array containing data defined on meshA.</p></li>
+<li><p><strong>extrap_nans</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not to extrapolate NAN values, by default True.</p></li>
+<li><p><strong>extrap_from_A</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not to extrapolate NAN values by data defined on meshA, by default True.</p></li>
+<li><p><strong>fill_value</strong> (<em>float</em><em>, </em><em>optional</em>) – What value to fill NANs with is extrap_nans = False, by default 0.0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>data_interp</strong> – Interpolated data defined on meshB.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array ([n_points_B, 1])</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="interpolator.meshA_to_meshB.interpolate_nearest">
+<span class="sig-name descname"><span class="pre">interpolate_nearest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#interpolator.meshA_to_meshB.interpolate_nearest" title="Permalink to this definition"></a></dt>
+<dd><p>Interpolate data (defined on meshA) onto points on meshB using nearest neighbor interpolation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>array</em><em> (</em><em>[</em><em>n_points_A</em><em>, </em><em>1</em><em>]</em><em>)</em>) – A numpy array containing data defined on meshA.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>data_interp</strong> – Interpolated data defined on meshB.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array ([n_points_B, 1])</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="interpolator.meshA_to_meshB.nearest_value">
+<span class="sig-name descname"><span class="pre">nearest_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xi</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#interpolator.meshA_to_meshB.nearest_value" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the nearest value to the points in xi.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tree</strong> (<em>object</em>) – Scipy.spatial.KDTree object</p></li>
+<li><p><strong>values</strong> (<em>array</em>) – Values to query.</p></li>
+<li><p><strong>xi</strong> (<em>array</em>) – A numpy array containing points to query.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>values</strong> – A numpy array containing the nearest values for each point in xi.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mesh_generator.html" class="btn btn-neutral float-left" title="mesh_generator module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="risk_to_positions.html" class="btn btn-neutral float-right" title="risk_to_positions module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, ACTOM.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

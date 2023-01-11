@@ -1,0 +1,37 @@
+\documentclass{article}
+\usepackage[ascii]{inputenc}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{listings}
+
+\usepackage{color}
+%\usepackage[backend=biber,citestyle=verbose-ibid,urldate=short,style=apa]{biblatex}
+\usepackage[]{biblatex}
+\DeclareLanguageMapping{american}{american-apa}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\title{The advection diffusion transport module}
+\author{Guttorm Alendal et al. }
+\date{September 2021}
+\addbibresource{manual.bib}
+\begin{document}
+\maketitle
+\section{Introduction}
+
+\begin{equation}\label{eq:advdiff}
+    \frac{\partial}{\partial} C + \bf{\underline{u}} \cdot \nabla C = \nabla \kappa \nabla C + f(\bf{\underline{x}},t)
+\end{equation}
+
+\subsection{The velocity field.}
+\clearpage
+\cite{aliSimulatingSpatialTemporal2016}
+
+test 
+
+\autocite{fallahiNewConceptualToxicokinetic2020}
+%\bibliographystyle{plain} % We choose the "plain" reference style
+%\bibliography{manual} % Entries are in the refs.bib file
+\printbibliography
+
+\end{document}

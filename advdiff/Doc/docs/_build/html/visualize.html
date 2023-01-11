@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>visualize module &mdash; Advection-Diffusion Module 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/my_theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tools API" href="tools.html" />
+    <link rel="prev" title="tracer_transport module" href="tracer_transport.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Advection-Diffusion Module
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About AdvDiff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup.ini</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">Boundary conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolator.html">Interpolation with meshA_to_meshB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_types.html">Different mesh-types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates.html">Coordinate transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="synthetic_translation.html">Synthetic translation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="code.html">Code API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble.html">ensemble module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracer_transport.html">tracer_transport module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">visualize module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining_documentation.html">Maintaining the documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">Todo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Advection-Diffusion Module</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="code.html">Code API</a> &raquo;</li>
+      <li>visualize module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/visualize.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="module-visualize">
+<span id="visualize-module"></span><h1>visualize module<a class="headerlink" href="#module-visualize" title="Permalink to this headline"></a></h1>
+<p>This module includes all visualizer functions.</p>
+<p>&#64;author: Guttorm &amp; Ketil</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="visualize.plot_fields">
+<span class="sig-prename descclassname"><span class="pre">visualize.</span></span><span class="sig-name descname"><span class="pre">plot_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Outdata/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fields'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'C'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Figures/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filetype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">robust</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">movie</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">levels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(6.4,</span> <span class="pre">4.8)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualize.plot_fields" title="Permalink to this definition"></a></dt>
+<dd><p>Plot each local field time-series.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Directory of where to look for field files, by default ‘Outdata/’</p></li>
+<li><p><strong>prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – Prefix of files to load, by default ‘fields’</p></li>
+<li><p><strong>variable</strong> (<em>str</em><em>, </em><em>optional</em>) – What variable to plot, by default ‘C’</p></li>
+<li><p><strong>out_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Where to store figures, by default ‘Figures/’</p></li>
+<li><p><strong>filetype</strong> (<em>str</em><em>, </em><em>optional</em>) – Filetype of figures, by default ‘jpg’</p></li>
+<li><p><strong>robust</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True clip colorbar values such that plot is easier to see, by default True</p></li>
+<li><p><strong>logscale</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True plot with a logscale, by default False</p></li>
+<li><p><strong>movie</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True make a movie, by default False</p></li>
+<li><p><strong>levels</strong> (<em>int</em><em>, </em><em>optional</em>) – How many colorbar-levels to assign to the contorf plot, by default 25</p></li>
+<li><p><strong>dpi</strong> (<em>int</em><em>, </em><em>optional</em>) – DPI of figures, by default 200</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Figsize, by default (6.4,4.8)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="visualize.plot_global_fields">
+<span class="sig-prename descclassname"><span class="pre">visualize.</span></span><span class="sig-name descname"><span class="pre">plot_global_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Outdata/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fields'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'C'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_source</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_source_loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_probe_loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">robust</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">movie</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Figures/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filetype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">levels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">250</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ny</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">250</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(6.4,</span> <span class="pre">4.8)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">markersize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualize.plot_global_fields" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the global field time-series.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Directory of where to look for field files, by default ‘Outdata/’</p></li>
+<li><p><strong>prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – Prefix of files to load, by default ‘fields’</p></li>
+<li><p><strong>variable</strong> (<em>str</em><em>, </em><em>optional</em>) – What variable to plot, by default ‘C’</p></li>
+<li><p><strong>weight_source</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, weight the statistics by location_probability. If False do not weigh the statistics, by default True</p></li>
+<li><p><strong>plot_source_loc</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, plot the source locations, by default True</p></li>
+<li><p><strong>plot_probe_loc</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True plot the probe locations, by default True</p></li>
+<li><p><strong>out_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Where to store figures, by default ‘Figures/’</p></li>
+<li><p><strong>filetype</strong> (<em>str</em><em>, </em><em>optional</em>) – Filetype of figures, by default ‘jpg’</p></li>
+<li><p><strong>robust</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True clip colorbar values such that plot is easier to see, by default True</p></li>
+<li><p><strong>logscale</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True plot with a logscale, by default False</p></li>
+<li><p><strong>movie</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True make a movie, by default False</p></li>
+<li><p><strong>levels</strong> (<em>int</em><em>, </em><em>optional</em>) – How many colorbar-levels to assign to the contorf plot, by default 25</p></li>
+<li><p><strong>dpi</strong> (<em>int</em><em>, </em><em>optional</em>) – DPI of figures, by default 200</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Figsize, by default (6.4,4.8)</p></li>
+<li><p><strong>nx</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of discretizations along x-axis, by default 250</p></li>
+<li><p><strong>ny</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of discretizations along y-axis, by default 250</p></li>
+<li><p><strong>markersize</strong> (<em>int</em><em>, </em><em>optional</em>) – Markersizes of sources and probes, by default 10</p></li>
+<li><p><strong>fontsize</strong> (<em>int</em><em>, </em><em>optional</em>) – Fontsizes of source and probe labels, by default 10</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="visualize.plot_global_stream">
+<span class="sig-prename descclassname"><span class="pre">visualize.</span></span><span class="sig-name descname"><span class="pre">plot_global_stream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Outdata/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fields'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_source_loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_probe_loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">movie</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Figures/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filetype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ny</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorvariable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'velocity'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(6.4,</span> <span class="pre">4.8)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">markersize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualize.plot_global_stream" title="Permalink to this definition"></a></dt>
+<dd><p>Plot the global stream field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Directory of where to look for field files, by default ‘Outdata/’</p></li>
+<li><p><strong>prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – Prefix of files to load, by default ‘fields’</p></li>
+<li><p><strong>plot_source_loc</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, plot the source locations, by default True</p></li>
+<li><p><strong>plot_probe_loc</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True plot the probe locations, by default True</p></li>
+<li><p><strong>logscale</strong> (<em>bool</em><em>, </em><em>optional</em>) – <p>If True plot with a logscale, by default False
+movie             : bool, optional</p>
+<blockquote>
+<div><p>If True make a movie, by default False</p>
+</div></blockquote>
+</p></li>
+<li><p><strong>out_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Where to store figures, by default ‘Figures/’</p></li>
+<li><p><strong>filetype</strong> (<em>str</em><em>, </em><em>optional</em>) – Filetype of figures, by default ‘jpg’</p></li>
+<li><p><strong>nx</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of discretizations along x-axis, by default 100</p></li>
+<li><p><strong>ny</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of discretizations along y-axis, by default 100</p></li>
+<li><p><strong>colorvariable</strong> (<em>str</em><em>, </em><em>optional</em>) – What variable to base the colourmap on, by default ‘velocity’</p></li>
+<li><p><strong>skip</strong> (<em>int</em><em>, </em><em>optional</em>) – How many points to skip in x,y for each vector, by default 5</p></li>
+<li><p><strong>dpi</strong> (<em>int</em><em>, </em><em>optional</em>) – DPI of figures, by default 200</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Figsize, by default (6.4,4.8)</p></li>
+<li><p><strong>markersize</strong> (<em>int</em><em>, </em><em>optional</em>) – Markersizes of sources and probes, by default 10</p></li>
+<li><p><strong>fontsize</strong> (<em>int</em><em>, </em><em>optional</em>) – Fontsizes of source and probe labels, by default 10</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="visualize.plot_local_grids">
+<span class="sig-prename descclassname"><span class="pre">visualize.</span></span><span class="sig-name descname"><span class="pre">plot_local_grids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Indata/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Figures/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quiver'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(6.4,</span> <span class="pre">4.8)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filetype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">markersize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualize.plot_local_grids" title="Permalink to this definition"></a></dt>
+<dd><p>Plot the locations of the local grids superimposed on the velocity locations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Where to look for a config file, by default ‘Indata/’</p></li>
+<li><p><strong>out_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Where to store plots, by default ‘Figures/’</p></li>
+<li><p><strong>variable</strong> (<em>str</em><em>, </em><em>optional</em>) – What type of velocity variable to plot, by default ‘quiver’
+Allowable:  ‘u’, ‘v’, ‘quiver’.</p></li>
+<li><p><strong>time</strong> (<em>int</em><em>, </em><em>optional</em>) – What time to plot for velocity data, by default -1</p></li>
+<li><p><strong>dpi</strong> (<em>int</em><em>, </em><em>optional</em>) – DPI for plots, by default 200</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Figure size, by default (6.4,4.8)</p></li>
+<li><p><strong>filetype</strong> (<em>str</em><em>, </em><em>optional</em>) – Filetype for output, by default ‘jpg’</p></li>
+<li><p><strong>markersize</strong> (<em>int</em><em>, </em><em>optional</em>) – Markersize of source locations, by default 10</p></li>
+<li><p><strong>fontsize</strong> (<em>int</em><em>, </em><em>optional</em>) – Fontsize of source labels, by default 10</p></li>
+<li><p><strong>config</strong> (<em>setup.ini</em><em>, </em><em>optional</em>) – Config file to load. If None, load from data_dir, by default None</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="visualize.plot_map">
+<span class="sig-prename descclassname"><span class="pre">visualize.</span></span><span class="sig-name descname"><span class="pre">plot_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Figures/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_nm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Map'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filetype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jpg'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualize.plot_map" title="Permalink to this definition"></a></dt>
+<dd><p>Plots a map containing the source locations and velocity locations in space with castlines shown.</p>
+<p>REQUIRES cartopy package.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> (<em>setup.ini</em>) – config file. Used to load source and velocity data.</p></li>
+<li><p><strong>out_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Where to store figures, by default ‘Figures/’</p></li>
+<li><p><strong>file_nm</strong> (<em>str</em><em>, </em><em>optional</em>) – What to name the output, by default ‘Map’</p></li>
+<li><p><strong>filetype</strong> (<em>str</em><em>, </em><em>optional</em>) – What filetype to use, by default ‘jpg’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="visualize.plot_mass">
+<span class="sig-prename descclassname"><span class="pre">visualize.</span></span><span class="sig-name descname"><span class="pre">plot_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Outdata/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mass'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_source</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_contrib</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Figures/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filetype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jpg'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualize.plot_mass" title="Permalink to this definition"></a></dt>
+<dd><p>Plot the total mass of the system wrt time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Directory of where to look for mass files, by default ‘Outdata/’</p></li>
+<li><p><strong>prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – Prefix of files to load, by default ‘mass’</p></li>
+<li><p><strong>weight_source</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True weigh the results from each source contribution by location_probability, by default True</p></li>
+<li><p><strong>plot_contrib</strong> (<em>bool</em><em>, </em><em>optional</em>) – Plot each source contribution individually, by default False</p></li>
+<li><p><strong>out_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Where to store figures, by default ‘Figures/’</p></li>
+<li><p><strong>dpi</strong> (<em>int</em><em>, </em><em>optional</em>) – DPI of figures, by default 200</p></li>
+<li><p><strong>filetype</strong> (<em>str</em><em>, </em><em>optional</em>) – Filetype of figures, by default ‘jpg’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="visualize.plot_meshes">
+<span class="sig-prename descclassname"><span class="pre">visualize.</span></span><span class="sig-name descname"><span class="pre">plot_meshes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Indata/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Figures/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filetype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jpg'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualize.plot_meshes" title="Permalink to this definition"></a></dt>
+<dd><p>Plot meshes and mesh quality.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Directory of where to look for config file, by default ‘Indata/’</p></li>
+<li><p><strong>out_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Where to store figures, by default ‘Figures/’</p></li>
+<li><p><strong>dpi</strong> (<em>int</em><em>, </em><em>optional</em>) – DPI of figures, by default 200</p></li>
+<li><p><strong>filetype</strong> (<em>str</em><em>, </em><em>optional</em>) – Filetype of figures, by default ‘jpg’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="visualize.plot_probes">
+<span class="sig-prename descclassname"><span class="pre">visualize.</span></span><span class="sig-name descname"><span class="pre">plot_probes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Outdata/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'probe'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'C'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_source</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_contrib</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Figures/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filetype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jpg'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualize.plot_probes" title="Permalink to this definition"></a></dt>
+<dd><p>Plot probe time-series data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Directory of where to look for probe files, by default ‘Outdata/’</p></li>
+<li><p><strong>prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – Prefix of files to load, by default ‘probe’</p></li>
+<li><p><strong>variable</strong> (<em>str</em><em>, </em><em>optional</em>) – What variable to plot, by default ‘C’</p></li>
+<li><p><strong>weight_source</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True weigh the results from each source contribution by location_probability, by default True</p></li>
+<li><p><strong>plot_contrib</strong> (<em>bool</em><em>, </em><em>optional</em>) – Plot each source contribution individually, by default False</p></li>
+<li><p><strong>out_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Where to store figures, by default ‘Figures/’</p></li>
+<li><p><strong>dpi</strong> (<em>int</em><em>, </em><em>optional</em>) – DPI of figures, by default 200</p></li>
+<li><p><strong>filetype</strong> (<em>str</em><em>, </em><em>optional</em>) – Filetype of figures, by default ‘jpg’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="visualize.plot_riskmap">
+<span class="sig-prename descclassname"><span class="pre">visualize.</span></span><span class="sig-name descname"><span class="pre">plot_riskmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Indata/Riskmaps/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'risk_'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'location_probability'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Figures/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filetype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jpg'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualize.plot_riskmap" title="Permalink to this definition"></a></dt>
+<dd><p>Plots every riskmap contained in the given directory.
+The size of the scatterplot markers will be given by the variable of choice.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Directory of where to look for files, by default ‘Indata/Riskmaps/’</p></li>
+<li><p><strong>prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – Prefix of what files to look for, by default ‘<a href="#id1"><span class="problematic" id="id2">risk_</span></a>’</p></li>
+<li><p><strong>variable</strong> (<em>str</em><em>, </em><em>optional</em>) – What variable to use for the size of the scatterplot markers, by default ‘location_probability’</p></li>
+<li><p><strong>out_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Where to store the figures, by default ‘Figures/’</p></li>
+<li><p><strong>dpi</strong> (<em>int</em><em>, </em><em>optional</em>) – DPI of the figures, by default 200</p></li>
+<li><p><strong>filetype</strong> (<em>str</em><em>, </em><em>optional</em>) – Filetype of the figures, by default ‘jpg’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="visualize.plot_sources">
+<span class="sig-prename descclassname"><span class="pre">visualize.</span></span><span class="sig-name descname"><span class="pre">plot_sources</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Indata/Sources/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'source_'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'location_probability'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Figures/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filetype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jpg'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualize.plot_sources" title="Permalink to this definition"></a></dt>
+<dd><p>Plot all sources found i the given directory.
+The size of the scatterplot markers will be given by the variable of choice.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Directory of where to look for files, by default ‘Indata/Riskmaps/’</p></li>
+<li><p><strong>prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – Prefix of what files to look for, by default ‘<a href="#id3"><span class="problematic" id="id4">risk_</span></a>’</p></li>
+<li><p><strong>variable</strong> (<em>str</em><em>, </em><em>optional</em>) – What variable to use for the size of the scatterplot markers, by default ‘location_probability’</p></li>
+<li><p><strong>out_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Where to store the figures, by default ‘Figures/’</p></li>
+<li><p><strong>dpi</strong> (<em>int</em><em>, </em><em>optional</em>) – DPI of the figures, by default 200</p></li>
+<li><p><strong>filetype</strong> (<em>str</em><em>, </em><em>optional</em>) – Filetype of the figures, by default ‘jpg’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="visualize.plot_statistics">
+<span class="sig-prename descclassname"><span class="pre">visualize.</span></span><span class="sig-name descname"><span class="pre">plot_statistics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Outdata/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'statistics'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['max']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_source</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_source_loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_probe_loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_velocity_loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Figures/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filetype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">robust</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">levels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">250</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ny</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">250</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(6.4,</span> <span class="pre">4.8)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">markersize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualize.plot_statistics" title="Permalink to this definition"></a></dt>
+<dd><p>Plot the global statistics variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Directory of where to look for statistics files, by default ‘Outdata/’</p></li>
+<li><p><strong>prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – Prefix of files to load, by default ‘statistics’</p></li>
+<li><p><strong>variables</strong> (<em>list</em><em>, </em><em>optional</em>) – What variables to plot, by default [‘max’]</p></li>
+<li><p><strong>weight_source</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, weight the statistics by location_probability. If False do not weigh the statistics, by default True</p></li>
+<li><p><strong>plot_source_loc</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, plot the source locations, by default True</p></li>
+<li><p><strong>plot_probe_loc</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True plot the probe locations, by default True</p></li>
+<li><p><strong>plot_velocity_loc</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True plot the convex hull boundary of the velocity location, by default False</p></li>
+<li><p><strong>out_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Where to store the figures, by default ‘Figures/’</p></li>
+<li><p><strong>filetype</strong> (<em>str</em><em>, </em><em>optional</em>) – What filetype to store, by default ‘jpg’</p></li>
+<li><p><strong>logscale</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True plot figures using a logscale, by default False</p></li>
+<li><p><strong>robust</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True clip the colorbar such that the plots become more visible, by default True</p></li>
+<li><p><strong>levels</strong> (<em>int</em><em>, </em><em>optional</em>) – How many color-levels to assing to the contourf plot, by default 100</p></li>
+<li><p><strong>nx</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of discretizations along x-axis, by default 250</p></li>
+<li><p><strong>ny</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of discretizations along y-axis, by default 250</p></li>
+<li><p><strong>dpi</strong> (<em>int</em><em>, </em><em>optional</em>) – DPI of figures, by default 200</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Figsize, by default (6.4,4.8)</p></li>
+<li><p><strong>markersize</strong> (<em>int</em><em>, </em><em>optional</em>) – Markersizes of sources and probes, by default 10</p></li>
+<li><p><strong>fontsize</strong> (<em>int</em><em>, </em><em>optional</em>) – Fontsizes of source and probe labels, by default 10</p></li>
+<li><p><strong>config</strong> (<em>setup.ini</em><em>, </em><em>optional</em>) – Config file to load parameters from, by default None</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="visualize.plot_stream">
+<span class="sig-prename descclassname"><span class="pre">visualize.</span></span><span class="sig-name descname"><span class="pre">plot_stream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Outdata/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fields'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Figures/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filetype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorvariable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'velocity'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">movie</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(6.4,</span> <span class="pre">4.8)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualize.plot_stream" title="Permalink to this definition"></a></dt>
+<dd><p>Plot the local stream fields.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Directory of where to look for field files, by default ‘Outdata/’</p></li>
+<li><p><strong>prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – Prefix of files to load, by default ‘fields’</p></li>
+<li><p><strong>out_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Where to store figures, by default ‘Figures/’</p></li>
+<li><p><strong>filetype</strong> (<em>str</em><em>, </em><em>optional</em>) – Filetype of figures, by default ‘jpg’</p></li>
+<li><p><strong>colorvariable</strong> (<em>str</em><em>, </em><em>optional</em>) – What variable to base the colourmap on, by default ‘velocity’</p></li>
+<li><p><strong>skip</strong> (<em>int</em><em>, </em><em>optional</em>) – How many points to skip in x,y for each vector, by default 5</p></li>
+<li><p><strong>logscale</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True plot with a logscale, by default False</p></li>
+<li><p><strong>movie</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True make a movie, by default False</p></li>
+<li><p><strong>dpi</strong> (<em>int</em><em>, </em><em>optional</em>) – DPI of figures, by default 200</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Figsize, by default (6.4,4.8)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="visualize.visualizer">
+<span class="sig-prename descclassname"><span class="pre">visualize.</span></span><span class="sig-name descname"><span class="pre">visualizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualize.visualizer" title="Permalink to this definition"></a></dt>
+<dd><p>Master visualizer function. If config file provided, use the information therein to plot.
+If no config file provided, load one from the outdata path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>config</strong> (<em>setup.ini</em><em>, </em><em>optional</em>) – Config containing relevant visualizer information, by default None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tracer_transport.html" class="btn btn-neutral float-left" title="tracer_transport module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tools.html" class="btn btn-neutral float-right" title="Tools API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, ACTOM.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

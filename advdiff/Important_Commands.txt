@@ -1,0 +1,20 @@
+This document describes important commands that are used to maintain and run the module.
+
+# Activate environment
+conda activate conda-environment-name
+
+# Dockerizing the module
+docker tag advdiff username/advdiff:latest
+docker push username/advdiff:latest
+docker run -it --entrypoint /bin/bash advdiff
+
+# Cleaning and generating the documentation
+.\Doc\docs\make.bat clean
+.\Doc\docs\make.bat html
+
+# Running the module in single scenario mode
+python main.py
+# Running multiple scenarios in ensemble mode
+python ensemble.py
+# Running the visualizer as a standalone module
+python visualize.py

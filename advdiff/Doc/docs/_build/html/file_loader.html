@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>file_loader module &mdash; Advection-Diffusion Module 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/my_theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="mesh_generator module" href="mesh_generator.html" />
+    <link rel="prev" title="post_processing module" href="post_processing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Advection-Diffusion Module
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About AdvDiff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup.ini</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">Boundary conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolator.html">Interpolation with meshA_to_meshB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_types.html">Different mesh-types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates.html">Coordinate transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="synthetic_translation.html">Synthetic translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Code API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tools.html">Tools API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="coord_transform.html">coord_transform module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_processing.html">data_processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="post_processing.html">post_processing module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">file_loader module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesh_generator.html">mesh_generator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpolator_module.html">interpolator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risk_to_positions.html">risk_to_positions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_variable_treatment.html">local_variable_treatment module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parser_tools.html">parser_tools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directory_tools.html">directory_tools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualizer_tools.html">visualizer_tools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scenario_creator.html">scenario_creator module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining_documentation.html">Maintaining the documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">Todo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Advection-Diffusion Module</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="tools.html">Tools API</a> &raquo;</li>
+      <li>file_loader module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/file_loader.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="module-file_loader">
+<span id="file-loader-module"></span><h1>file_loader module<a class="headerlink" href="#module-file_loader" title="Permalink to this headline"></a></h1>
+<p>Created on Tue Feb 22 14:13:52 2022</p>
+<p>This module includes all methods which load and initialize files based on information gathered from the config file.</p>
+<p>&#64;author: Ketil</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="file_loader.concat_sources">
+<span class="sig-prename descclassname"><span class="pre">file_loader.</span></span><span class="sig-name descname"><span class="pre">concat_sources</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sources_A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sources_B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">point_tags_A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">point_tags_B</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_loader.concat_sources" title="Permalink to this definition"></a></dt>
+<dd><p>Concatenate two source and two point tag files together.
+The labels of set B are numbered after the labels of set A.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sources_A</strong> (<em>xarray dataset</em>) – An xarray dataset containing sources</p></li>
+<li><p><strong>sources_B</strong> (<em>xarray dataset</em>) – An xarray dataset containing sources</p></li>
+<li><p><strong>point_tags_A</strong> (<em>xarray dataset</em>) – An xarray dataset containing point tags</p></li>
+<li><p><strong>point_tags_B</strong> (<em>xarray dataset</em>) – An xarray dataset containing point tags</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>First element of the tuple contains sources, the second contains the corresponding point tags.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple of xarray datasets</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_loader.construct_meshes_from_unstructured">
+<span class="sig-prename descclassname"><span class="pre">file_loader.</span></span><span class="sig-name descname"><span class="pre">construct_meshes_from_unstructured</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lxy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[None,</span> <span class="pre">None]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_loader.construct_meshes_from_unstructured" title="Permalink to this definition"></a></dt>
+<dd><p>Generates meshpoints from the dataset to a [outx,outy] grid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array</em>) – Array containing x coordinates for each point.</p></li>
+<li><p><strong>Y</strong> (<em>array</em>) – Array containing y coordinates for each point.</p></li>
+<li><p><strong>outx</strong> (<em>int</em>) – Number of points along x. The default is 100.</p></li>
+<li><p><strong>outy</strong> (<em>int</em>) – Number of points along y. The default is 100.</p></li>
+<li><p><strong>Lx</strong> (<em>float</em>) – Local grid width Lx</p></li>
+<li><p><strong>Ly</strong> (<em>float</em>) – Local grid width Ly</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>meshA_points</strong> (<em>array ([n_points,2])</em>) – Array of points from dataset.</p></li>
+<li><p><strong>meshB_points</strong> (<em>array ([n_points,2])</em>) – Array of points from [outx,outy] grid.</p></li>
+<li><p><strong>X</strong> (<em>array ([x_points,y_points])</em>) – Meshgrid X</p></li>
+<li><p><strong>Y</strong> (<em>array ([x_points,y_points])</em>) – Meshgrid Y</p></li>
+<li><p><strong>Xl</strong> (<em>([x_points])</em>) – np.linspace(x)</p></li>
+<li><p><strong>Yl</strong> (<em>([y_points])</em>) – np.linspace(y)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_loader.get_sources">
+<span class="sig-prename descclassname"><span class="pre">file_loader.</span></span><span class="sig-name descname"><span class="pre">get_sources</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filenm</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_loader.get_sources" title="Permalink to this definition"></a></dt>
+<dd><p>Read and return source netcdf files with point tags.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inpath</strong> (<em>str</em>) – Directory path of where to look for sources.</p></li>
+<li><p><strong>filenm</strong> (<em>str</em>) – Filename of what file to read.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>First element of the tuple contains sources, the second contains the corresponding point tags.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple of xarray datasets</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_loader.get_velocity">
+<span class="sig-prename descclassname"><span class="pre">file_loader.</span></span><span class="sig-name descname"><span class="pre">get_velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filenm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_variables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_setup</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_loader.get_velocity" title="Permalink to this definition"></a></dt>
+<dd><p>Get velocity from netcdf file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inpath</strong> (<em>str</em>) – Directory for where to find file.</p></li>
+<li><p><strong>filenm</strong> (<em>str</em>) – Filename to read.</p></li>
+<li><p><strong>drop_variables</strong> (<em>str</em>) – What variables to drop if any are problematic. The default is None. (‘depth’ causes a lot of trouble)</p></li>
+<li><p><strong>time_setup</strong> (<em>dict</em>) – Dictionary describing what times to extract. The default is None. If none, the entire file is extracted.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – Sets function to verbose.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ERROR</strong> – If time start is larger than max time in velocity file, raise error and terminate program.:</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>out</strong> – An xarray velocity file.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>xarray dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_loader.get_wells">
+<span class="sig-prename descclassname"><span class="pre">file_loader.</span></span><span class="sig-name descname"><span class="pre">get_wells</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filenm</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_loader.get_wells" title="Permalink to this definition"></a></dt>
+<dd><p>Get wells from either a .nc file or a .csv file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inpath</strong> (<em>str</em>) – Directory path for where to look for file.</p></li>
+<li><p><strong>filenm</strong> (<em>str</em>) – Filename of what file to read.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>First element of the tuple contains sources, the second contains the corresponding point tags.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple of xarray datasets</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_loader.get_wells_CSV">
+<span class="sig-prename descclassname"><span class="pre">file_loader.</span></span><span class="sig-name descname"><span class="pre">get_wells_CSV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_nm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lp_wells</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Random'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lp_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lp_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_loader.get_wells_CSV" title="Permalink to this definition"></a></dt>
+<dd><p>Loads well locations from CSV file and returns an xarray dataset which contains x,y coordinates for each well, similar to the source datasets.
+Also returns a point_tags dataset.
+You can set random location probability or a constant location probability for all wells.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_path</strong> (<em>str</em>) – Directory path for where to look for csv file.</p></li>
+<li><p><strong>file_nm</strong> (<em>str</em>) – Filename of csv to load.</p></li>
+<li><p><strong>lp_wells</strong> (<em>str</em><em> or </em><em>float</em><em>, </em><em>optional</em>) – If ‘Random’ then each well will be assigned a random location probability between the two bounds.
+If a float then every well will be given the same location probability, by default ‘Random’</p></li>
+<li><p><strong>lp_min</strong> (<em>float</em><em>, </em><em>optional</em>) – Lower bound for random location probability, by default 0.1</p></li>
+<li><p><strong>lp_max</strong> (<em>int</em><em>, </em><em>optional</em>) – Upper bound for random location probability, by default 100</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_loader.interpolate_velocity_over_time">
+<span class="sig-prename descclassname"><span class="pre">file_loader.</span></span><span class="sig-name descname"><span class="pre">interpolate_velocity_over_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">velocity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'15T'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_loader.interpolate_velocity_over_time" title="Permalink to this definition"></a></dt>
+<dd><p>Interpolate the global velocity-field over time. This is used to unify datsets to specific time-step intervals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>velocity</strong> (<em>xarray dataset</em>) – An xarray dataset containing the global velocity-field stored on an unstructured grid.</p></li>
+<li><p><strong>freq</strong> (<em>str</em>) – A string describing what frequency to interpolate at, default 15T which equals intervals of 15 minutes. Check pandas date_range() documentation for alternatives.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An xarray dataset containing the global velocity-field interpolated over time with a regular time-step interval.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>xarray dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_loader.is_unstructured">
+<span class="sig-prename descclassname"><span class="pre">file_loader.</span></span><span class="sig-name descname"><span class="pre">is_unstructured</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_loader.is_unstructured" title="Permalink to this definition"></a></dt>
+<dd><p>Check if dataset is unstructured or structured (According to the conventions I have dealt with so far.)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataset</strong> (<em>xarray dataset</em>) – An xarray dataset.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if dataset is unstructured, False if dataset is structured.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_loader.load_probes">
+<span class="sig-prename descclassname"><span class="pre">file_loader.</span></span><span class="sig-name descname"><span class="pre">load_probes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_loader.load_probes" title="Permalink to this definition"></a></dt>
+<dd><p>Load probes by name given in config file.</p>
+<p>config file requires:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>(str)   : config[‘paths’][‘indata_path’]</p></li>
+<li><p>(str)   : config[‘paths’][‘probes_path’]</p></li>
+<li><p>(str)   : config[‘probes’][‘probes_file’]</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>config</strong> (<em>setup.ini</em>) – Config file describing file path, filename etc to read.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>probes</strong> (<em>xarray dataset</em>) – An xarray dataset containing (x,y) coordinates for probes.</p></li>
+<li><p><strong>probes_inpath</strong> (<em>str</em>) – Pathname for probe file.</p></li>
+<li><p><strong>probes_file</strong> (<em>str</em>) – Filename for probe file.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_loader.load_sources">
+<span class="sig-prename descclassname"><span class="pre">file_loader.</span></span><span class="sig-name descname"><span class="pre">load_sources</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_loader.load_sources" title="Permalink to this definition"></a></dt>
+<dd><p>Load sources by filename given in config file. (Either through riskmap or sources).</p>
+<p>config file requires:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>(str)   : config[‘paths’][‘indata_path’]</p></li>
+<li><p>(str)   : config[‘paths’][‘sources_path’]</p></li>
+<li><p>(str)   : config[‘sources’][‘source_file’]</p></li>
+<li><p>(bool)  : config[‘sources’][‘get_source_from_file’]</p></li>
+<li><p>(str)   : config[‘paths’][‘riskmap_path’]</p></li>
+<li><p>(str)   : config[‘riskmaps’][‘risk_file’]</p></li>
+<li><p>(str)   : config[‘riskmaps’][‘cluster’]</p></li>
+<li><p>(float) : config[‘riskmaps’][‘threshold’]</p></li>
+<li><p>(float) : config[‘riskmaps’][‘eps’]</p></li>
+<li><p>(int)   : config[‘riskmaps’][‘min_samples’]</p></li>
+<li><p>(int)   : config[‘riskmaps’][‘n_clusters’]</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>config</strong> (<em>setup.ini</em>) – Config file describing file path, filename etc to read.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>sources</strong> (<em>xarray dataset</em>) – An xarray dataset containing (x,y) coordinates for each source.</p></li>
+<li><p><strong>source_file</strong> (<em>str</em>) – Filepath and filename for printing.</p></li>
+<li><p><strong>point_tags</strong> (<em>xarray dataset</em>) – An xarray dataset containing (x,y) coordinates and corresponding source tags for each point in the riskmap above a certain threshold.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_loader.load_velocity">
+<span class="sig-prename descclassname"><span class="pre">file_loader.</span></span><span class="sig-name descname"><span class="pre">load_velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_unstructured</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_loader.load_velocity" title="Permalink to this definition"></a></dt>
+<dd><p>Load velocity by name given in config file.</p>
+<p>config file requires:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>(str)   : config[‘paths’][‘indata_path’]</p></li>
+<li><p>(str)   : config[‘paths’][‘velocity_path’]</p></li>
+<li><p>(str)   : config[‘velocity’][‘velocity_file’]</p></li>
+<li><p>(int)   : config[‘velocity’][‘depth’]</p></li>
+<li><p>(str)   : config[‘velocity’][‘fill_type’]</p></li>
+<li><p>(str)   : config[‘setup’][‘time_start’]</p></li>
+<li><p>(str)   : config[‘setup’][‘time_delta’]</p></li>
+<li><p>(str)   : config[‘setup’][‘time_delta_unit’]</p></li>
+<li><p>(float) : config[‘setup’][‘time_seed]</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> (<em>setup.ini</em>) – Config file describing file path, filename etc to read.</p></li>
+<li><p><strong>return_unstructured</strong> (<em>bool</em>) – If True, returns the xarray dataset in unstructured form. This is what AdvDiff needs to run. Structured form is better
+for when you want to visualize the loaded dataset for example during debugging.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – If True, print information about the loading process to the logger, else stay quiet.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>velocities</strong> (<em>xarray dataset</em>) – An xarray dataset containing u and v components of velocity for (t,x,y) (and possibly multiple velocities)</p></li>
+<li><p><strong>velocity_inpath</strong> (<em>str</em>) – Pathname for velocity file.</p></li>
+<li><p><strong>file</strong> (<em>str</em>) – Filename for velocity file.</p></li>
+<li><p><strong>mean_dts</strong> (<em>list</em>) – List of mean time-step sizes in seconds. List has only one element for one velocity file.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_loader.select_depth">
+<span class="sig-prename descclassname"><span class="pre">file_loader.</span></span><span class="sig-name descname"><span class="pre">select_depth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'average'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_loader.select_depth" title="Permalink to this definition"></a></dt>
+<dd><p>Select depth from dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> (<em>xarray dataset</em>) – An xarray dataset containing depth layers</p></li>
+<li><p><strong>depth</strong> (<em>int</em><em> or </em><em>str</em><em>, </em><em>optional</em>) – Int describing what layer to extract. If depth = ‘average’, take average of all layers, by default ‘average’.
+If depth coordinate not found, do nothing.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An xarray dataset</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>xarray dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_loader.treat_structured_velocity">
+<span class="sig-prename descclassname"><span class="pre">file_loader.</span></span><span class="sig-name descname"><span class="pre">treat_structured_velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">velocity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'average'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_loader.treat_structured_velocity" title="Permalink to this definition"></a></dt>
+<dd><p>Prepare raw velocity file of the form f(t,x,y) for use with AdvDiff.
+Transforms velocity file from f(t,x,y) to f(t,node). This is to unify the inputs to AdvDiff to unstructured form.
+Any NANs in a Raw velocity file will be interpreted as coastline or walls with zero velocity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>velocity</strong> (<em>xarray dataset</em>) – An xarray dataset object containing a unstructured velocity file of the form f(t,x,y).</p></li>
+<li><p><strong>depth</strong> (<em>int</em><em>, </em><em>optional</em>) – An int describing what depth layer to extract. If depth = ‘average’, then take an average of all layers, by default ‘average’.
+If no depth layer found, do nothing.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An xarray dataset containing velocities of the form f(t,node)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>xarray dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_loader.treat_unstructured_velocity">
+<span class="sig-prename descclassname"><span class="pre">file_loader.</span></span><span class="sig-name descname"><span class="pre">treat_unstructured_velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">velocity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'average'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_loader.treat_unstructured_velocity" title="Permalink to this definition"></a></dt>
+<dd><p>Prepare raw unstructured velocity file of the form f(t,node) for use with AdvDiff.
+Any NANs in a Raw velocity file will be interpreted as coastline or walls with zero velocity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>velocity</strong> (<em>xarray dataset</em>) – An xarray dataset object containing a unstructured velocity file of the form f(t,node).</p></li>
+<li><p><strong>depth</strong> (<em>int</em><em>, </em><em>optional</em>) – An int describing what depth layer to extract. If depth = ‘average’, then take an average of all layers, by default ‘average’.
+If no depth layer found, do nothing.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An xarray dataset containing velocities of the form f(t,node)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>xarray dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_loader.unstructured_to_structured">
+<span class="sig-prename descclassname"><span class="pre">file_loader.</span></span><span class="sig-name descname"><span class="pre">unstructured_to_structured</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">velocity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extrap_nans</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest</span> <span class="pre">extrapolation'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lxy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[None,</span> <span class="pre">None]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_loader.unstructured_to_structured" title="Permalink to this definition"></a></dt>
+<dd><p>Function which allows us to convert a unstructured xarray velocity file to a structured xarray file.
+It uses linear interpolation to compute the velocity for all (x,y) coordinates on a (100,100) grid. Also converts
+coordinates from longitude-latitude to x-y UTM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>velocity</strong> (<em>xarray dataset</em>) – An xarray unstructured velocity file (for example a GOM velocity file).</p></li>
+<li><p><strong>extrap_nans</strong> (<em>bool</em>) – Whether or not to extrapolate missing velocities with nearest neighbour interpolation. The default is True.</p></li>
+<li><p><strong>fill_type</strong> (<em>str</em>) – What fill type to use if extrap_nans is False.</p></li>
+<li><p><strong>Lxy</strong> (<em>array</em>) – Array containing local grid width Lx and local grid height Ly. If none, then bounding box will be the minimal size.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>velocity</strong> – An xarray velocity file suitable for our solver.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>xarray dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="post_processing.html" class="btn btn-neutral float-left" title="post_processing module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mesh_generator.html" class="btn btn-neutral float-right" title="mesh_generator module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, ACTOM.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

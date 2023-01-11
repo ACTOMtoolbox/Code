@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About AdvDiff &mdash; Advection-Diffusion Module 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/my_theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="#" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="Welcome to Advection-Diffusion Module’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Advection-Diffusion Module
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">About AdvDiff</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input">Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sources-riskmaps-wells">Sources &amp; Riskmaps &amp; Wells</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#velocities">Velocities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#structured-velocities">Structured velocities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unstructured-velocities">Unstructured velocities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#probes">Probes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#output">Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#statistics">statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fields">fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">probes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mass">mass</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pipeline">Pipeline</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#loading-source-locations">Loading source locations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pre-processing-velocity-data">Pre-processing velocity data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generating-local-velocity-data">Generating local velocity data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generating-the-solutions">Generating the solutions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup.ini</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">Boundary conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolator.html">Interpolation with meshA_to_meshB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_types.html">Different mesh-types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates.html">Coordinate transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="synthetic_translation.html">Synthetic translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Code API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining_documentation.html">Maintaining the documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">Todo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Advection-Diffusion Module</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>About AdvDiff</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/about.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="about-advdiff">
+<h1>About AdvDiff<a class="headerlink" href="#about-advdiff" title="Permalink to this headline"></a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h2>
+<p><strong>AdvDiff</strong> is a Python module for simulating the tracer transport problem on an ensemble of point sources.
+To this end, the module utilizes parallel computing capabilities of multi-core CPUs.
+Each core/thread of the CPU works with a single source at any given time, and each source is solved for on individual local grids.
+As the advection-diffusion equation is a linear partial differential equation (PDE),
+we are able to assemble the aggregate solution by simply summing the contributions from each local solution together.
+As such, we can construct a global solution which describes the behaviour of all sources acting together.
+This has several advantages over solving all sources together on the same global grid.
+For one, it allows us to utilize parallelization as each source is solved separately.
+Moreover, it gives us the ability to generate multiple possible scenarios from running the module only once.
+As each source is stored separately on individual local grids, we are able to change the resulting global outcome
+by weighting the contributions from each source independently.
+Therefore, we are able to account for many possible leakage scenarios without having to redo simulations.</p>
+<p>The tracer transport problem in two dimensions is modelled by the following PDE:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial C}{\partial t} + \mathbf{v} \cdot \nabla C = D \Delta C + F(\mathbf{x}), \quad \mathbf{x} \in \mathbb{R}^2, t &gt; 0\]</div>
+<p>For which <span class="math notranslate nohighlight">\(C [\frac{kg}{m^2}]\)</span> is the tracer variable, <span class="math notranslate nohighlight">\(\mathbf{v} [\frac{m}{s}]\)</span>
+is the velocity field which may be space-time dependent, <span class="math notranslate nohighlight">\(D [\frac{m^2}{s}]\)</span> is the diffusion rate
+and <span class="math notranslate nohighlight">\(F [\frac{kg}{m^2 s}]\)</span> is the source function of the form:</p>
+<div class="math notranslate nohighlight">
+\[F(\mathbf{x}) = \sum_{i=1}^{N_s} \delta(\mathbf{x}-\mathbf{x}_i) / V_i\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(\delta(\mathbf{x})\)</span> is the Kronecker-delta function and <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> are the source locations in the plane.
+Due to discretizations, we assume that the source only occupies a single gridcell of the computational mesh.
+For each source to have a total flux of 1, we scale each source by the volume of the source cell <span class="math notranslate nohighlight">\(V_i\)</span>, where
+the gridcell nearest <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> is the source cell.</p>
+<p>The solution of the tracer transport problem is computed using the finite-volumes python package FiPy.
+See the <a class="reference external" href="https://www.ctcms.nist.gov/fipy/">FiPy website</a> and the <a class="reference external" href="https://www.ctcms.nist.gov/fipy/download/fipy-3.1.3.pdf">FiPy manual</a> for more information.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The AdvDiff module works best on the open ocean, away from islands or coastlines that could affect the solution.
+This is because there is no special consideration of landmasses in the solver.
+At the current moment, if the velocity data contains any NANs (typical for locations where there is land), then these locations will be filled with
+zero velocities. This is to simulate a no flux boundary on land. This is obviously only a rough approximation, but it was the simplest to implement.
+As such, if a plume of tracer moves rapidly onto the coastline, it may get ‘stuck’ there due to the zero velocity at these locations.
+If you want to change this behaviour, check the <strong>fillna()</strong> method in the <strong>treat_structured_velocity()</strong> and <strong>treat_unstructured_velocity()</strong>
+functions in <a class="reference internal" href="file_loader.html"><span class="doc">file_loader.py module</span></a>.</p>
+<p>One option for the future, is to generate a mask based on locations in space that contain land, then using this mask to set no-flux, Diriclet or Robin
+boundary conditions on this mask in addition to the regular boundary condition. This should be possible by using the <strong>where</strong> keyword in
+FiPy when setting boundary conditions or defining variables. However, this has never been tested.</p>
+</div>
+</div>
+<div class="section" id="input">
+<span id="id1"></span><h2>Input<a class="headerlink" href="#input" title="Permalink to this headline"></a></h2>
+<p>To run the tracer transport module, you require:</p>
+<ul class="simple">
+<li><p>A config file which specifies the module parameters. See <a class="reference internal" href="setup.html"><span class="doc">setup.ini</span></a>.</p></li>
+<li><p>A netcdf file containing a riskmap, source coordinates or well locations.</p></li>
+<li><p>A netcdf file containing velocity data.</p></li>
+<li><p>A netcdf file containing coordinates for measurement probes (Optional).</p></li>
+</ul>
+<p>The repository comes pre-packaged with several netcdf files and a template for the config file, which the user can tweak and work with.</p>
+<p>If you just want to run a test scenario, you can keep everything in the config file at default for now, and head over to <a class="reference internal" href="usage.html"><span class="doc">quick-start</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is important that if you design your own riskmap, source, well, velocity or probe data, that it follows the conventions below <strong>EXACTLY</strong>.
+Many of the submodules require that the coordinate-, dimension- and variable-names align with the expected conventions.</p>
+</div>
+<div class="section" id="sources-riskmaps-wells">
+<h3>Sources &amp; Riskmaps &amp; Wells<a class="headerlink" href="#sources-riskmaps-wells" title="Permalink to this headline"></a></h3>
+<p>Sources, wells and riskmaps are needed to determine where to place the point fluxes.
+Any of these files can be used to specify where in space the sources are located.</p>
+<ul class="simple">
+<li><p><strong>Sources</strong>: Provides the module the exact coordinates for where the sources should be located and also gives a corresponding <strong>location_probability</strong>.</p></li>
+<li><p><strong>Riskmaps</strong>: Provides the module potential zones for where sources could be located.
+A clustering algorithm is then used to determine exact source coordinates and corresponding location probabilities.</p></li>
+<li><p><strong>Wells</strong>: Provides the module the exact coordinates for where the sources should be located and also gives a corresponding <strong>location_probability</strong>.
+This is similar to the source file. However, you can also load wells from a CSV fileformat.</p></li>
+</ul>
+<p>To determine what files to read from, set the <strong>get_source_from</strong> variable in <a class="reference internal" href="setup.html"><span class="doc">setup.ini</span></a> to either
+<strong>Sources</strong>, <strong>Riskmap</strong>, <strong>Wells</strong>, <strong>Riskmap and Wells</strong> or <strong>Riskmap and Sources</strong>.
+Regardless of which files you use, they need to contain coordinates for each relevant location
+and a corresponding <strong>location_probability</strong> variable which determines probabilities of each location.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <strong>location_probability</strong> does not affect the flux of the sources during the simulation. All sources are run with a flux of 1.
+However, <strong>location_probability</strong> can be used to scale the results in post-processing (which would be equivalent to scaling the flux due to linearity).
+If you do not want to scale the solutions, set <strong>weight_source</strong> to False in the ouptut section of <a class="reference internal" href="setup.html"><span class="doc">setup.ini</span></a>.</p>
+</div>
+<p>A valid riskmap should look like one of the following:</p>
+<div class="figure align-center" id="id3">
+<a class="reference internal image-reference" href="_images/riskmap.png"><img alt="_images/riskmap.png" src="_images/riskmap.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-text">Example of a Riskmap netcdf file in UTM coordinates.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</div>
+<div class="figure align-center" id="id4">
+<a class="reference internal image-reference" href="_images/riskmap_lonlat.png"><img alt="_images/riskmap_lonlat.png" src="_images/riskmap_lonlat.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-text">Example of a Riskmap netcdf file in WGS84 coordinates.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</div>
+<p>A valid source file should look like one of the following:</p>
+<div class="figure align-center" id="id5">
+<a class="reference internal image-reference" href="_images/sources.png"><img alt="_images/sources.png" src="_images/sources.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-text">Example of a Source netcdf file in UTM coordinates.</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</div>
+<div class="figure align-center" id="id6">
+<a class="reference internal image-reference" href="_images/sources_lonlat.png"><img alt="_images/sources_lonlat.png" src="_images/sources_lonlat.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-text">Example of a Source netcdf file in WGS84 coordinates.</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</div>
+<p>A valid wells file should look like one of the following:</p>
+<div class="figure align-center" id="id7">
+<a class="reference internal image-reference" href="_images/wells_netcdf.png"><img alt="_images/wells_netcdf.png" src="_images/wells_netcdf.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-text">Example of a Wells netcdf file in UTM coordinates.</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</div>
+<div class="figure align-center" id="id8">
+<a class="reference internal image-reference" href="_images/wells_netcdf_lonlat.png"><img alt="_images/wells_netcdf_lonlat.png" src="_images/wells_netcdf_lonlat.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-text">Example of a Wells netcdf file in WGS84 coordinates.</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ensure that any x-y coordinates in any of the source, riskmap, or well files are in UTM coordinates (meters Easting and meters Northing)
+and that any lon-lat coordinates are in WGS84 coordinates.</p>
+</div>
+<p>In addition, a csv file can be read to determine well locations.
+The csv files we have encountered set the coordinates of these wells with coordinates with names [‘Long83’,’Lat83’] and [‘Long27’,’Lat27’].
+At the moment, the csv reader is hard-coded to deal with this naming scheme only.
+If you want to change this behaviour, look at the <strong>get_wells_CSV()</strong> located in the <a class="reference internal" href="file_loader.html"><span class="doc">file_loader</span></a> tool.
+Moreover, the csv files we have encountered do not include a ‘location_probability’, as such this is artificially set to 1 by the <strong>lp_well</strong> variable in <strong>get_wells_CSV()</strong>.</p>
+<p>A valid well csv file should look like the following:</p>
+<div class="figure align-center" id="id9">
+<a class="reference internal image-reference" href="_images/Wells.png"><img alt="_images/Wells.png" src="_images/Wells.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-text">Example of a Wells csv file in WGS84 coordinates.</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</div>
+</div>
+<div class="section" id="velocities">
+<h3>Velocities<a class="headerlink" href="#velocities" title="Permalink to this headline"></a></h3>
+<p>Velocities are used to determine how the tracer flows in the domain with time.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For best results try to ensure that the area of where the velocities are defined, covers all the source locations
+with some margin to give room for the local grids. If the module discovers that there are some sources which lie outside the region where the velocities are defined,
+it will display a warning and proceed depending on what the user sets in the config file (see <a class="reference internal" href="synthetic_translation.html"><span class="doc">synthetic translation</span></a> and <a class="reference internal" href="setup.html"><span class="doc">setup.ini</span></a>).</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ensure that the velocities are defined in meters per second <span class="math notranslate nohighlight">\(\frac{m}{s}\)</span>.
+The module does not check for this and it will not do any scaling to account for any other possible velocity units.</p>
+</div>
+<p>There are currently two different velocity file formats that are valid inputs to our module:</p>
+<ul class="simple">
+<li><p>Structured velocity time-series data defined on a rectilinear grid (<span class="math notranslate nohighlight">\(f(t,x,y))\)</span>.</p></li>
+<li><p>Unstructured velocity time-series data defined on a set of unstructured points in space (<span class="math notranslate nohighlight">\(f(t,node)\)</span>).</p></li>
+</ul>
+</div>
+<div class="section" id="structured-velocities">
+<h3>Structured velocities<a class="headerlink" href="#structured-velocities" title="Permalink to this headline"></a></h3>
+<p>The structured velocity data may look something like:</p>
+<div class="figure align-center" id="id10">
+<a class="reference internal image-reference" href="_images/velocity_dense.png"><img alt="_images/velocity_dense.png" src="_images/velocity_dense.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-text">Example of a structured velocity netcdf file.</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</div>
+<p>The velocity is defined for every point <span class="math notranslate nohighlight">\((x,y)\)</span> on a rectilinear grid and for each time-step.</p>
+</div>
+<div class="section" id="unstructured-velocities">
+<h3>Unstructured velocities<a class="headerlink" href="#unstructured-velocities" title="Permalink to this headline"></a></h3>
+<p>The module also supports unstructured velocity data. The following example is taken from the Gulf of Mexico dataset:</p>
+<div class="figure align-center" id="id11">
+<a class="reference internal image-reference" href="_images/velocity_sparse.png"><img alt="_images/velocity_sparse.png" src="_images/velocity_sparse.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-text">Example of an unstructured velocity netcdf file.</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</div>
+<p>The velocity is defined only for a handful of locations <span class="math notranslate nohighlight">\((nodes)\)</span> in space.
+It has the benefit of not requiring as much data in memory, however the module needs to interpolate this data to ‘fill the empty gaps’.
+And as such, we lose out on the high fidelity variations in the velocity field.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Both types of velocity files accept a depth dimension. The depth slice is selected by the user in the config file see <a class="reference internal" href="setup.html"><span class="doc">setup.ini</span></a>.</p></li>
+<li><p>The time dimension can be named either ‘time’ or ‘ocean_time’.</p></li>
+<li><p>Both types of files can be in terms of either UTM or WGS84 coordinates.</p></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The time-stepping procedure that AdvDiff uses, is independent of the time-step length in the velocity data.
+For example, if the velocity file steps forward in time with 1 hour increments, the module will be able to step forward in time with say 15 minute increments
+or vice versa. The AdvDiff module will interpolate the velocity data in time if needed.
+To set a time-step length, see <strong>dt_size</strong> and <strong>dt_unit</strong> in <a class="reference internal" href="setup.html"><span class="doc">setup.ini</span></a>.</p>
+</div>
+</div>
+<div class="section" id="probes">
+<h3>Probes<a class="headerlink" href="#probes" title="Permalink to this headline"></a></h3>
+<p>The probes are an optional part of the module. Probes lets the user specify measurement locations for where to ‘probe’ the solution for every timestep.
+If you want to run probes, you should provide a file of the following form:</p>
+<div class="figure align-center" id="id12">
+<a class="reference internal image-reference" href="_images/probes.png"><img alt="_images/probes.png" src="_images/probes.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-text">Example of a Probes netcdf file in UTM coordinates.</span><a class="headerlink" href="#id12" title="Permalink to this image"></a></p>
+</div>
+<div class="figure align-center" id="id13">
+<a class="reference internal image-reference" href="_images/probes_lonlat.png"><img alt="_images/probes_lonlat.png" src="_images/probes_lonlat.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-text">Example of a Probes netcdf file in WGS84 coordinates.</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
+</div>
+</div>
+</div>
+<div class="section" id="output">
+<h2>Output<a class="headerlink" href="#output" title="Permalink to this headline"></a></h2>
+<p>Currently, the module has several different outputs which serve different purposes, <strong>Statistics</strong>, <strong>Fields</strong>, <strong>Probes</strong>, <strong>Mass</strong> and <strong>point tags</strong>.
+The user has the ability to enable or disable storing these outputs during the simulation. See <a class="reference internal" href="setup.html"><span class="doc">setup.ini</span></a>.</p>
+<div class="section" id="statistics">
+<h3>statistics<a class="headerlink" href="#statistics" title="Permalink to this headline"></a></h3>
+<p>The statistics store the maximum, mean, variance etc of the tracer field variable <span class="math notranslate nohighlight">\(C(t,x,y)\)</span>.
+They can be used to show aggregation zones and the overall behaviour of the system over longer time-scales without having to store the solution for each time-step.
+This allows us to observe long time-scale behaviour while preserving memory.
+Currently, the AdvDiff module can output the following statistics variables:</p>
+<ul>
+<li><dl>
+<dt><strong>max</strong>:</dt><dd><div class="math notranslate nohighlight">
+\[\max_{t} {C(t)}\]</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>mean</strong>:</dt><dd><div class="math notranslate nohighlight">
+\[\text{mean}_{t} {C(t)}\]</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>var</strong>:</dt><dd><div class="math notranslate nohighlight">
+\[\text{var}_{t} {C(t)} = \text{mean}_{t} {C(t)^2} - [\text{mean}_{t} {C(t)}]^2\]</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>delta_max</strong>:</dt><dd><div class="math notranslate nohighlight">
+\[\max_{t} {[C(t+dt)-C(t)]}\]</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>delta_min</strong>:</dt><dd><div class="math notranslate nohighlight">
+\[\min_{t} {[C(t+dt)-C(t)]}\]</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>delta_mean</strong>:</dt><dd><div class="math notranslate nohighlight">
+\[\text{mean}_{t} {[C(t+dt)-C(t)]}\]</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>delta_var</strong>:</dt><dd><div class="math notranslate nohighlight">
+\[\text{var}_{t} {[C(t+dt)-C(t)]} = \text{mean}_{t} {[C(t+dt)-C(t)]^2} - [\text{mean}_{t} {[C(t+dt)-C(t)]}]^2\]</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>delta_max_abs</strong>:</dt><dd><div class="math notranslate nohighlight">
+\[\max_{t} {|C(t+dt)-C(t)|}\]</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>delta_mean_abs</strong>:</dt><dd><div class="math notranslate nohighlight">
+\[\text{mean}_{t} {|C(t+dt)-C(t)|}\]</div>
+</dd>
+</dl>
+</li>
+</ul>
+<p>The user has the ability to pick and choose which of these variables to solve for and store in the output. See <a class="reference internal" href="setup.html"><span class="doc">setup.ini</span></a>.
+Typical statistics outputs are shown below:</p>
+<a class="reference internal image-reference" href="_images/results_max.jpg"><img alt="_images/results_max.jpg" src="_images/results_max.jpg" style="width: 33%;" /></a>
+<a class="reference internal image-reference" href="_images/results_mean.jpg"><img alt="_images/results_mean.jpg" src="_images/results_mean.jpg" style="width: 33%;" /></a>
+<a class="reference internal image-reference" href="_images/results_var.jpg"><img alt="_images/results_var.jpg" src="_images/results_var.jpg" style="width: 33%;" /></a>
+<a class="reference internal image-reference" href="_images/statistics_delta_max15.jpg"><img alt="_images/statistics_delta_max15.jpg" src="_images/statistics_delta_max15.jpg" style="width: 33%;" /></a>
+<a class="reference internal image-reference" href="_images/statistics_delta_max30.jpg"><img alt="_images/statistics_delta_max30.jpg" src="_images/statistics_delta_max30.jpg" style="width: 33%;" /></a>
+<a class="reference internal image-reference" href="_images/statistics_delta_max60.jpg"><img alt="_images/statistics_delta_max60.jpg" src="_images/statistics_delta_max60.jpg" style="width: 33%;" /></a>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>For the delta variables, the user has the ability to change the size of <span class="math notranslate nohighlight">\(dt\)</span> to any integer multiple of the time-step length <strong>dt_size</strong>.
+See <a class="reference internal" href="setup.html"><span class="doc">setup.ini</span></a>.</p></li>
+<li><p>See the clear rectangular shaped boundaries created by the tracer? This is caused by the fact that the local grids are a subset of the global grid.
+Any tracer that moves beyond the boundary of the local grid is no longer accounted for in the simulation, as such we get clearly defined borders around each source.
+A solution to this issue is to just make the local grids large enough such that the tracer cannot travel beyond the boundaries.</p></li>
+<li><p>The white circles in the plot show each of the locations of the sources, they are numbered from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(N_{sources}\)</span>.
+The size of each individual circle is related to the location_probability of the respecive source.
+In this specific example, we can see that source 3 has the largest circle, and as such it dominates the behaviour of the system, while source 6 has one of the smallest circles
+and thus contributes an indistinguishable amount to the overall solution.</p></li>
+<li><p>The white crosses in the plot show the locations of where the probes are placed. They are numbered from <span class="math notranslate nohighlight">\(0^*\)</span> to <span class="math notranslate nohighlight">\(N_{probes}^*\)</span>.</p></li>
+<li><p>Plotting both source locations and probe locations can make the plots messy. As such, <a class="reference internal" href="setup.html"><span class="doc">setup.ini</span></a> includes an option to include or exclude them from plots.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="fields">
+<h3>fields<a class="headerlink" href="#fields" title="Permalink to this headline"></a></h3>
+<p>The fields output store the field-variables for the tracer <span class="math notranslate nohighlight">\(C\)</span> and the horizontal and vertical components for velocity <span class="math notranslate nohighlight">\((u,v)\)</span> for every time-step.
+They can be used to visualize the behaviours of the tracer or velocity for all times using animations.
+However, storing the fields is quite memory intensive, as fields store several solution variables for thousands of grid-cells
+over potentially hundreds of time-steps.
+Typical results are shown below:</p>
+<a class="reference internal image-reference" href="_images/Cmovie.gif"><img alt="_images/Cmovie.gif" class="align-center" src="_images/Cmovie.gif" style="width: 50%;" /></a>
+</div>
+<div class="section" id="id2">
+<h3>probes<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h3>
+<p>The probes output store the field-variables for the tracer <span class="math notranslate nohighlight">\(C\)</span> and the horizontal and vertical components for velocity <span class="math notranslate nohighlight">\((u,v)\)</span> for every time-step,
+at a small set of points in space.
+They can be used to reduce the amount of memory needed in comparison to storing <strong>fields</strong>.</p>
+<a class="reference internal image-reference" href="_images/probe_total_C.jpg"><img alt="_images/probe_total_C.jpg" class="align-center" src="_images/probe_total_C.jpg" style="width: 50%;" /></a>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>The probes are numbered here from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(N_{probes}\)</span> as in the plots shown above, but dropping the * superscript.</p></li>
+<li><p>Each timeseries is what each probe would have measured if placed at their respective locations in the global grid.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="mass">
+<h3>mass<a class="headerlink" href="#mass" title="Permalink to this headline"></a></h3>
+<p>The mass output stores the total mass generated by the source in the local grid per time.
+It also stores the expected theoretical mass, based on the total flux of the source and time since simulation start.
+Any deviation of the actual mass versus the theoretical mass means that boundary effects are affecting the solution.
+This can give you a hint to whether or not they should try to increase the size of the local grids to improve
+the accuracy of the simulations.</p>
+<a class="reference internal image-reference" href="_images/mass_total.jpg"><img alt="_images/mass_total.jpg" class="align-center" src="_images/mass_total.jpg" style="width: 50%;" /></a>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>If the theoretical mass &gt; actual mass, then mass is escaping through the boundaries and can no longer be accounted for in the simulation.</p></li>
+<li><p>If the theoretical mass &lt; actual mass, then mass is being generated by the boundaries due to the Neumann boundary conditions,
+and the results should be taken with a grain of salt.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="pipeline">
+<h2>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline"></a></h2>
+<p>This following section gives a rough explanation for how the data is treated and how the AdvDiff module arrives to its solution.</p>
+<p>Let us say we want to solve for a system containing 4 sources located at the Gulf of Mexico.</p>
+<div class="section" id="loading-source-locations">
+<h3>Loading source locations<a class="headerlink" href="#loading-source-locations" title="Permalink to this headline"></a></h3>
+<p>First, the riskmap is analyzed by the <a class="reference internal" href="risk_to_positions.html"><span class="doc">risk_to_positions.py</span></a> module. Here, a clustering algorithm is used to select all
+all points in the riskmap which satisfy a threshold, and organizes them in distinct clusters.</p>
+<p>The resultant output is a set of coordinates with an accompanying <strong>location_probability</strong> variable.
+The location_probability determines the ‘strength’ of the source cluster.
+The following figure displays a riskmap with each source discovered by the clustering algorithm given by the black circles.
+The sizes of each circle are corrolated to the <strong>location_probability</strong> variable, and it determines how we weight the results at the end.
+This specific example shows the resulting clustering using kmeans with n=4. Using dbscan instead would result in a different set of sources.
+The desired clustering algorithm can be set in the config file, see <a class="reference internal" href="setup.html"><span class="doc">setup.ini</span></a>.</p>
+<div class="figure align-center" id="id14">
+<a class="reference internal image-reference" href="_images/riskmap_and_sources.png"><img alt="_images/riskmap_and_sources.png" src="_images/riskmap_and_sources.png" style="width: 75%;" /></a>
+<p class="caption"><span class="caption-text">Source locations superimposed on the riskmap.</span><a class="headerlink" href="#id14" title="Permalink to this image"></a></p>
+</div>
+</div>
+<div class="section" id="pre-processing-velocity-data">
+<h3>Pre-processing velocity data<a class="headerlink" href="#pre-processing-velocity-data" title="Permalink to this headline"></a></h3>
+<p>When the module has aquired source locations, it begins pre-processing the velocity data.
+The following figure shows the global u-velocity provided to us by the GOM velocity file <strong>GOM-1-1993-01.nc</strong>.</p>
+<div class="figure align-center" id="id15">
+<a class="reference internal image-reference" href="_images/velocity_raw.png"><img alt="_images/velocity_raw.png" src="_images/velocity_raw.png" style="width: 75%;" /></a>
+<p class="caption"><span class="caption-text">Raw GOM velocity file.</span><a class="headerlink" href="#id15" title="Permalink to this image"></a></p>
+</div>
+<p>Notice how the coordinates are in in terms of latitudes-longitudes values.
+Our module solves for the tracer on x-y coordinates in terms of UTM coordinates only.
+As such the latitude-longitude coordinates are transformed into UTM coordinates.
+This is done by using the <a class="reference external" href="https://pyproj4.github.io/pyproj/stable/#">pyproj package</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The red boundary is the convex hull of all points in the dataset.
+It shows the boundary of the region where we are able to interpolate
+data using a linear interpolator. Outside this region, we have no other option but to extrapolate using a nearest neighbor interpolator.
+This causes a degredation of accuracy outside the convex hull boundary.
+This is not usually a problem unless the sources lie very close the convex hull boundary.
+The best solution is to either let the local grids be so small that no part of the local grid extends beyond the convex hull,
+or let the input velocity span a large enough area to encompass all sources and all local grids such that linear interpolation
+can be performed for all subsets covered by each of the local grids.</p>
+</div>
+</div>
+<div class="section" id="generating-local-velocity-data">
+<h3>Generating local velocity data<a class="headerlink" href="#generating-local-velocity-data" title="Permalink to this headline"></a></h3>
+<p>Once source locations has been set, and the global velocity has been loaded,
+the module extracts the local velocity data around each individual source. They are then stored on seperate local grids.</p>
+<div class="figure align-center" id="id16">
+<a class="reference internal image-reference" href="_images/sources_and_local_grids.png"><img alt="_images/sources_and_local_grids.png" src="_images/sources_and_local_grids.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-text">Source locations and local grids superimposed on the u-velocity field.</span><a class="headerlink" href="#id16" title="Permalink to this image"></a></p>
+</div>
+<p>Here we see the source locations as black circles, superimposed onto the global u-velocity.
+The boxes show us the boundaries of the local grids.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Notice how the local grid around source 1 does not intersect the convex hull of the global velocity and as such all velocity values are interpolated linearly.
+However, for all the other sources, a major section of the local grid needs to be interpolated using nearest interpolation…</p>
+</div>
+<p>As stated previously, each thread/core of the CPU will be given one local grid each to work with at any given time.
+So in essence, each thread/core will be individually working with the following four instances:</p>
+<div class="figure align-center" id="id17">
+<a class="reference internal image-reference" href="_images/all_local_grids.png"><img alt="_images/all_local_grids.png" src="_images/all_local_grids.png" style="width: 75%;" /></a>
+<p class="caption"><span class="caption-text">Each source centered in a local grid superimposed on the u-velocity.</span><a class="headerlink" href="#id17" title="Permalink to this image"></a></p>
+</div>
+</div>
+<div class="section" id="generating-the-solutions">
+<h3>Generating the solutions<a class="headerlink" href="#generating-the-solutions" title="Permalink to this headline"></a></h3>
+<p>Once each of the 4 simulations are finished, we may end up with something like:</p>
+<div class="figure align-center" id="id18">
+<a class="reference internal image-reference" href="_images/all_local_results.png"><img alt="_images/all_local_results.png" src="_images/all_local_results.png" style="width: 75%;" /></a>
+<p class="caption"><span class="caption-text">The results on each local grid at a certain time after simulation terminates.</span><a class="headerlink" href="#id18" title="Permalink to this image"></a></p>
+</div>
+<p>Here we see the field solutions for the tracer <span class="math notranslate nohighlight">\(C\)</span> at one instance in time. Notice that the amplitudes for each source are approximately the same.
+This is because each source are assigned a total flux of 1 during computation.
+We can assemble these solutions back together onto the global grid such that we end up with the following:</p>
+<div class="figure align-center" id="id19">
+<a class="reference internal image-reference" href="_images/global_result.png"><img alt="_images/global_result.png" src="_images/global_result.png" style="width: 75%;" /></a>
+<p class="caption"><span class="caption-text">The resultant global solution.</span><a class="headerlink" href="#id19" title="Permalink to this image"></a></p>
+</div>
+<p>Now notice how the amplitudes for each of the sources are different.
+This is because we construct the global solution using a weighted sum of contributions from each source.
+The weights are given by <strong>location_probability</strong>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Advection-Diffusion Module’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, ACTOM.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

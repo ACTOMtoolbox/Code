@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usage &mdash; Advection-Diffusion Module 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/my_theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Setup.ini" href="setup.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Advection-Diffusion Module
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About AdvDiff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quick-start">Quick-Start</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setup-ini">Setup.ini</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-a-single-scenario">Running a single scenario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-multiple-scenarios-in-an-ensemble">Running multiple scenarios in an ensemble</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#important-commands">Important commands</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#build-a-docker-image">Build a docker image</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup.ini</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">Boundary conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolator.html">Interpolation with meshA_to_meshB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_types.html">Different mesh-types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates.html">Coordinate transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="synthetic_translation.html">Synthetic translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Code API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining_documentation.html">Maintaining the documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">Todo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Advection-Diffusion Module</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Usage</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h1>
+<div class="section" id="quick-start">
+<span id="quickstart"></span><h2>Quick-Start<a class="headerlink" href="#quick-start" title="Permalink to this headline"></a></h2>
+<div class="section" id="setup-ini">
+<h3>Setup.ini<a class="headerlink" href="#setup-ini" title="Permalink to this headline"></a></h3>
+<p>The setup.ini config file determines the parameteres to be used when running the AdvDiff module. Here the user can for example configure how the module should be run,
+what outputs should be computed, what solvers should be used, grid specifications and how outputs should be handled.
+For now, the config file can be left unchanged and left at default, however when running your own scenarios, you will have to configure
+what files to read etc in setup.ini. Read more <a class="reference internal" href="setup.html"><span class="doc">here</span></a>.</p>
+</div>
+<div class="section" id="running-a-single-scenario">
+<h3>Running a single scenario<a class="headerlink" href="#running-a-single-scenario" title="Permalink to this headline"></a></h3>
+<p>The cloned repository should come prepackaged with the necessary inputs and a preconfigured setup.ini, ready to run a test scenario.
+It may be helpful to run a test to get accustomed to how the module is run, and what types of inputs and outputs are expected.</p>
+<p>To run the module, leave everything in the setup.ini config file at default values.
+Then open a python shell with the virtual environment containing all necessary dependencies.
+Then navigate to the directory where the repository was cloned and type the following:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(venv)</span> <span class="gp">$ </span>python main.py
+</pre></div>
+</div>
+<p>This will run the AdvDiff module using the configurations as defined in setup.ini. The outputs will be stored in the Outdata/ folder.</p>
+<p>To visualize the results generated in the Outdata/ folder, open a python shell with the virtual environment containing all necessary dependencies, and navigate to the directory where the repository was cloned.
+Type the following:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(venv)</span> <span class="gp">$ </span>python visualize.py
+</pre></div>
+</div>
+<p>This will run the visualizer module using the condigurations as defined in setup.ini. The outputs will be stored in the Figures/ folder.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is not necessary to run the visualizer if you have set <strong>plot = True</strong> in the config file.
+If True, then the visualizer will be automatically be run after a simulation terminates.</p>
+</div>
+</div>
+<div class="section" id="running-multiple-scenarios-in-an-ensemble">
+<h3>Running multiple scenarios in an ensemble<a class="headerlink" href="#running-multiple-scenarios-in-an-ensemble" title="Permalink to this headline"></a></h3>
+<p>You can also run multiple different scenarios by using the ensemble module. It allows you to run several simulations with different;</p>
+<ul class="simple">
+<li><p>Velocity files</p></li>
+<li><p>Starting dates</p></li>
+<li><p>Time-scales</p></li>
+<li><p>Diffusion rates</p></li>
+<li><p>Boundary condtition types</p></li>
+</ul>
+<p>Without having to rewrite the config file and manually calling for main.py over and over. The output data will then be stored in Outdata/Scenario_number/.
+Similarly, any figures will be stored in Figures/Scenario_number/.</p>
+<p>To do this, you need to change some of the variables in the config file then run the enseble module.
+For example, if you want to run two simulations with the same velocity data,
+but with different starting dates, you can;</p>
+<ol class="arabic simple">
+<li><p>Set <strong>velocity_file</strong> to the desired velocity data to read.</p></li>
+<li><p>Set <strong>time_start = Random</strong> so the module picks a random starting date for each simulation.</p></li>
+<li><p>Set <strong>time_seed = 111, 222</strong>. This means that first simulation’s starting date will be picked with the random seed 111,
+while the second simulation will be set with random seed 222. The two different scenarios <strong>MUST BE COMMA SEPARATED</strong>.</p></li>
+</ol>
+<p>Then run the ensemble module by typing the following:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(venv)</span> <span class="gp">$ </span>python ensemble.py
+</pre></div>
+</div>
+<p>The ensemble module will now call on main.py first with <strong>time_seed = 111</strong> then <strong>time_seed = 222</strong>, giving us two different scenarios.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can also combine multiple comma separated variables. Say, if you also wanted to vary the diffusion rate between the different scenarios,
+simply set <strong>D = 0.0, 1.0</strong>. Now the module will run 4 scenarios: (<strong>time_seed = 111</strong>, <strong>D = 0.0</strong>), (<strong>time_seed = 111</strong>, <strong>D = 1.0</strong>),
+(<strong>time_seed = 222</strong>, <strong>D = 0.0</strong>) and (<strong>time_seed = 222</strong>, <strong>D = 1.0</strong>).
+When constructing your own custom ensemble sets, it is important to note that the different variables are comma separated.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Attempting to run main.py with comma separated variables will lead to an error! If you want to run single scenarios, ensure that
+the variables do not contain multiple different options! The exception is <strong>stat_variables</strong> and <strong>step_N_stats</strong>.</p>
+</div>
+</div>
+<div class="section" id="important-commands">
+<span id="id1"></span><h3>Important commands<a class="headerlink" href="#important-commands" title="Permalink to this headline"></a></h3>
+<p>Have a look at the <a class="reference download internal" download="" href="_downloads/ad1af6042cfedcd2a431158042940fc1/Important_Commands.txt"><code class="xref download docutils literal notranslate"><span class="pre">Important_Commands.txt</span> <span class="pre">file</span></code></a> to see other important commands used to run and maintain the code.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">This</span> <span class="n">document</span> <span class="n">describes</span> <span class="n">important</span> <span class="n">commands</span> <span class="n">that</span> <span class="n">are</span> <span class="n">used</span> <span class="n">to</span> <span class="n">maintain</span> <span class="ow">and</span> <span class="n">run</span> <span class="n">the</span> <span class="n">module</span><span class="o">.</span>
+
+<span class="c1"># Activate environment</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="n">conda</span><span class="o">-</span><span class="n">environment</span><span class="o">-</span><span class="n">name</span>
+
+<span class="c1"># Dockerizing the module</span>
+<span class="n">docker</span> <span class="n">tag</span> <span class="n">advdiff</span> <span class="n">username</span><span class="o">/</span><span class="n">advdiff</span><span class="p">:</span><span class="n">latest</span>
+<span class="n">docker</span> <span class="n">push</span> <span class="n">username</span><span class="o">/</span><span class="n">advdiff</span><span class="p">:</span><span class="n">latest</span>
+<span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">it</span> <span class="o">--</span><span class="n">entrypoint</span> <span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">bash</span> <span class="n">advdiff</span>
+
+<span class="c1"># Cleaning and generating the documentation</span>
+<span class="o">.</span>\<span class="n">Doc</span>\<span class="n">docs</span>\<span class="n">make</span><span class="o">.</span><span class="n">bat</span> <span class="n">clean</span>
+<span class="o">.</span>\<span class="n">Doc</span>\<span class="n">docs</span>\<span class="n">make</span><span class="o">.</span><span class="n">bat</span> <span class="n">html</span>
+
+<span class="c1"># Running the module in single scenario mode</span>
+<span class="n">python</span> <span class="n">main</span><span class="o">.</span><span class="n">py</span>
+<span class="c1"># Running multiple scenarios in ensemble mode</span>
+<span class="n">python</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">py</span>
+<span class="c1"># Running the visualizer as a standalone module</span>
+<span class="n">python</span> <span class="n">visualize</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="build-a-docker-image">
+<span id="docker"></span><h2>Build a docker image<a class="headerlink" href="#build-a-docker-image" title="Permalink to this headline"></a></h2>
+<p>To build an AdvDiff docker container, simply run the Dockerfile in the main directory. This can be done in VScode by right-clicking and selecting build image as shown in the figure below.</p>
+<div class="figure align-center" id="id2">
+<a class="reference internal image-reference" href="_images/Docker_Build.png"><img alt="_images/Docker_Build.png" src="_images/Docker_Build.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-text">How to build a docker image in VScode.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</div>
+<p>Everything in the dockerfile is preconfigured to install an instance of the correct python version and the correct dependencies into the image.
+The python dependencies are installed via use of the requirements.txt file.</p>
+<p>However, it is important to note that gmsh requires additional packages on linux distros. That is why libgl1-mesa-glx, ffmpeg, libsm6, libxext6 and libglu1 are set to be installed.
+It is critically important that these packages are installed in order. Without them, the AdvDiff will crash whenever triangle meshes are used.</p>
+<p>The docker container is set up such that it will run independently without any inputs hooked to it. Therefore you should be able to run a test example from within the docker container without
+having to do anything. However, if you want the docker image to hook to content outside the container, you will have to do some manual work.
+The most important folders are the Indata, Outdata and Figures folders. Indata contain all the necessary user input that the module needs, while the Outdata and Figures folder contain
+any and all potential outputs of the module. So some work may have to be done to hook the three folders into a directory contained outside the docker container.
+Moreover, the setup.ini file located within the Indata folder contains all the userdefined settings. If you want to change what files to load when running the module, you will have
+to modify the filenames within.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="setup.html" class="btn btn-neutral float-right" title="Setup.ini" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, ACTOM.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

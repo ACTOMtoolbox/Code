@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coordinate transformations &mdash; Advection-Diffusion Module 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/my_theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Synthetic translation" href="synthetic_translation.html" />
+    <link rel="prev" title="Different mesh-types" href="mesh_types.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Advection-Diffusion Module
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About AdvDiff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup.ini</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">Boundary conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolator.html">Interpolation with meshA_to_meshB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_types.html">Different mesh-types</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Coordinate transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="synthetic_translation.html">Synthetic translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Code API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining_documentation.html">Maintaining the documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">Todo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Advection-Diffusion Module</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Coordinate transformations</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/coordinates.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="coordinate-transformations">
+<h1>Coordinate transformations<a class="headerlink" href="#coordinate-transformations" title="Permalink to this headline"></a></h1>
+<p>As seen in the <a class="reference internal" href="about.html#input"><span class="std std-ref">inputs section</span></a>, the AdvDiff module can take two different coordinate systems as inputs.</p>
+<ul class="simple">
+<li><p>UTM coordinates in terms of meters Easting (x-axis) and meters Northing (y-axis)</p></li>
+<li><p>WGS84 coordinates in terms of longitude (x-axis) and latitudes (y-axis).</p></li>
+</ul>
+<p>The AdvDiff module computes its solutions on flat 2D grids mapped on UTM coordinates.
+And thus, all inputs are converted to UTM before the simulation can run.
+One problem with UTM, is that they do not offer a unique mapping to longitude-latitude coordinates.
+One set of UTM coordinates can point to several different locations on the Earth, depending on what UTM zone is implied.
+To perform an accurate transformation, a UTM zone or a rough area of interest has to be given.
+Unfortunately, the inputs we have been provided do not contain any UTM zones by default.
+Therefore we have chosen to not include an option to transform the ouput data back in terms of longitude-latitude coordinates.</p>
+<p>However, any set of longitude-latitude coordinates can map to a unique UTM zone. If we know what longitude-latitude coordinates we are expecting,
+then a UTM zone can be extracted and hence we will be able to convert UTM to longitude-latitude coordinates.
+The <a class="reference external" href="https://pyproj4.github.io/pyproj/stable/#">pyproj package</a>, gives us the ability to automatically discover the correct UTM zone
+given a bound for the longitude-latitude coordinates.
+So, if the user defines sources, riskmaps, velocities, or probes in terms of longitude-latitude coordinates, then
+the module will be able to convert UTM back into the correct longitude-latitude coordinates if needed.
+Therefore it may be beneficial to start defining inputs in terms of longitude-latitude coordinates instead of UTM as you will be able to convert UTM back
+into the correct location.</p>
+<p>To do this, have a look at the <a class="reference internal" href="coord_transform.html"><span class="doc">coord_transform module</span></a>. It can transform longitude-latitude to UTM but also back,
+<strong>if and only if</strong> an area of interest is given. If any of the inputs given to AdvDiff are in terms of longitude-latitude coordinates during the simulation,
+an area of interest netcdf file will be generated. This file simply contains the longitude-latitude bounds of the area we are simulating.
+The bounds are enough information for <a class="reference external" href="https://pyproj4.github.io/pyproj/stable/#">pyproj</a>, to recognize the correct UTM zone. This file is then stored in Indata/Coordinates/.
+Whenever coordinate transforms are called for, the coord_transform module will check if this file exists, if not then there will be a warning whenever UTM coordinates
+are attempted to be transformed into longitude-latitude coordinates.</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mesh_types.html" class="btn btn-neutral float-left" title="Different mesh-types" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="synthetic_translation.html" class="btn btn-neutral float-right" title="Synthetic translation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, ACTOM.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

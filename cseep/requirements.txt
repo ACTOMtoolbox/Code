@@ -1,0 +1,7 @@
+netCDF4
+PyCO2SYS
+numpy
+matplotlib
+scipy
+pandas
+gsw

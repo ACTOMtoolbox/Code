@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to Advection-Diffusion Module’s documentation! &mdash; Advection-Diffusion Module 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/my_theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="About AdvDiff" href="about.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="#" class="icon icon-home"> Advection-Diffusion Module
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About AdvDiff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup.ini</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">Boundary conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolator.html">Interpolation with meshA_to_meshB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_types.html">Different mesh-types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates.html">Coordinate transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="synthetic_translation.html">Synthetic translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Code API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining_documentation.html">Maintaining the documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">Todo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Advection-Diffusion Module</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+      <li>Welcome to Advection-Diffusion Module’s documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="welcome-to-advection-diffusion-module-s-documentation">
+<h1>Welcome to Advection-Diffusion Module’s documentation!<a class="headerlink" href="#welcome-to-advection-diffusion-module-s-documentation" title="Permalink to this headline"></a></h1>
+<p><strong>ADVDiff</strong> is a Python module for simulating the tracer transport problem on multiple point sources in parallel.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This project is under active development.</p>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About AdvDiff</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#input">Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="about.html#sources-riskmaps-wells">Sources &amp; Riskmaps &amp; Wells</a></li>
+<li class="toctree-l3"><a class="reference internal" href="about.html#velocities">Velocities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="about.html#structured-velocities">Structured velocities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="about.html#unstructured-velocities">Unstructured velocities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="about.html#probes">Probes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#output">Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="about.html#statistics">statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="about.html#fields">fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="about.html#id2">probes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="about.html#mass">mass</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#pipeline">Pipeline</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="about.html#loading-source-locations">Loading source locations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="about.html#pre-processing-velocity-data">Pre-processing velocity data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="about.html#generating-local-velocity-data">Generating local velocity data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="about.html#generating-the-solutions">Generating the solutions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#pre-requisite-packages">Pre-requisite packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#manual-installation-of-packages-with-anaconda">Manual installation of packages with Anaconda:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-of-packages-using-environment-yml-with-anaconda">Installation of packages using environment.yml with Anaconda:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#quick-start">Quick-Start</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#setup-ini">Setup.ini</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#running-a-single-scenario">Running a single scenario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#running-multiple-scenarios-in-an-ensemble">Running multiple scenarios in an ensemble</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#important-commands">Important commands</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#build-a-docker-image">Build a docker image</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup.ini</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#default">[DEFAULT]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#id1">[setup]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#output">[output]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#paths">[paths]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#coordinates">[coordinates]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#sources">[sources]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#riskmaps">[riskmaps]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#wells">[wells]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#velocity">[velocity]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#probes">[probes]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#grid">[grid]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#visualizer">[visualizer]</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">Boundary conditions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="boundary_conditions.html#comparing-the-different-boundary-conditions">Comparing the different boundary conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boundary_conditions.html#robin-boundary-conditions">Robin boundary conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boundary_conditions.html#neumann-boundary-conditions">Neumann boundary conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boundary_conditions.html#no-flux-boundary-conditions">No flux boundary conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boundary_conditions.html#dirichlet-boundary-conditions">Dirichlet boundary conditions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="interpolator.html">Interpolation with meshA_to_meshB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="interpolator.html#credits">Credits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpolator.html#what-is-mesha-to-meshb">What is meshA_to_meshB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpolator.html#why-mesha-to-meshb">Why meshA_to_meshB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpolator.html#mesha-to-meshb-vs-scipy-interpolate-griddata">meshA_to_meshB** vs. scipy.interpolate.griddata()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="interpolator.html#accuracy-comparison">Accuracy comparison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interpolator.html#speed-comparison">Speed comparison</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_types.html">Different mesh-types</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mesh_types.html#normalized-shape-ratio">Normalized Shape Ratio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesh_types.html#unstructured-meshes">Unstructured meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesh_types.html#structured-meshes">Structured meshes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates.html">Coordinate transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="synthetic_translation.html">Synthetic translation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="synthetic_translation.html#id1">Synthetic translation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Code API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble.html">ensemble module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracer_transport.html">tracer_transport module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualize.html">visualize module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="coord_transform.html">coord_transform module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_processing.html">data_processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="post_processing.html">post_processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_loader.html">file_loader module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesh_generator.html">mesh_generator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpolator_module.html">interpolator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risk_to_positions.html">risk_to_positions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_variable_treatment.html">local_variable_treatment module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parser_tools.html">parser_tools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directory_tools.html">directory_tools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualizer_tools.html">visualizer_tools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scenario_creator.html">scenario_creator module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining_documentation.html">Maintaining the documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">Todo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="todo.html#improving-performance">Improving performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="todo.html#uniformity-of-inputs-and-outputs">Uniformity of inputs and outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="todo.html#dealing-with-coastlines-islands-and-other-landmasses">Dealing with coastlines, islands and other landmasses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="todo.html#investigating-the-diriclet-boundary-condition">Investigating the Diriclet boundary condition</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="about.html" class="btn btn-neutral float-right" title="About AdvDiff" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, ACTOM.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

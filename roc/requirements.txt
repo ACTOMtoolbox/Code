@@ -1,0 +1,6 @@
+netCDF4
+PyCO2SYS
+numpy
+scipy
+matplotlib
+seawater

@@ -1,0 +1,1 @@
+24Correlation coeffiscient: 0.73, slope: 0.40, y-offset: -5.40

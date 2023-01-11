@@ -1,0 +1,5 @@
+netCDF4
+PyCO2SYS
+numpy
+PyYAML
+scipy

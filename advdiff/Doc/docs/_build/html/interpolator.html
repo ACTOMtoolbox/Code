@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interpolation with meshA_to_meshB &mdash; Advection-Diffusion Module 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/my_theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Different mesh-types" href="mesh_types.html" />
+    <link rel="prev" title="Boundary conditions" href="boundary_conditions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Advection-Diffusion Module
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About AdvDiff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup.ini</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">Boundary conditions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Interpolation with meshA_to_meshB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#credits">Credits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-mesha-to-meshb">What is meshA_to_meshB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-mesha-to-meshb">Why meshA_to_meshB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mesha-to-meshb-vs-scipy-interpolate-griddata">meshA_to_meshB** vs. scipy.interpolate.griddata()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#accuracy-comparison">Accuracy comparison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#speed-comparison">Speed comparison</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_types.html">Different mesh-types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates.html">Coordinate transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="synthetic_translation.html">Synthetic translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Code API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining_documentation.html">Maintaining the documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">Todo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Advection-Diffusion Module</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Interpolation with meshA_to_meshB</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/interpolator.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="interpolation-with-mesha-to-meshb">
+<h1>Interpolation with meshA_to_meshB<a class="headerlink" href="#interpolation-with-mesha-to-meshb" title="Permalink to this headline"></a></h1>
+<div class="section" id="credits">
+<h2>Credits<a class="headerlink" href="#credits" title="Permalink to this headline"></a></h2>
+<p>Special thanks for the linear interpolation function goes to <a class="reference external" href="https://stackoverflow.com/users/110026/jaime">Jaime</a> who designed an excellent linear interpolator
+and posted it to <a class="reference external" href="https://stackoverflow.com/questions/20915502/speedup-scipy-griddata-for-multiple-interpolations-between-two-irregular-grids">stackoverflow</a>.
+I used his framework to design a more flexible version with more features and improved ease of use.</p>
+</div>
+<div class="section" id="what-is-mesha-to-meshb">
+<h2>What is meshA_to_meshB<a class="headerlink" href="#what-is-mesha-to-meshb" title="Permalink to this headline"></a></h2>
+<p>One of the core submodules of <strong>AdvDiff</strong> is the <strong>meshA_to_meshB</strong> interpolator module (see <a class="reference internal" href="interpolator_module.html"><span class="doc">interpolator.py</span></a>).
+It is a general purpose linear- and nearest-neighbor interpolator that can interpolate data defined on any arbitrary set of points (meshA) onto any other arbitrary set of points (meshB).</p>
+<p>Interpolation is a central tool for enabling AdvDiff’s flexibility. Data can come in many forms and be defined on many different types of structured and unstructured grids.
+For example, interpolation is needed when transferring velocity data from the raw netcdf files onto the unstructured computational FiPy grid.
+The same goes for when data variables on the FiPy grid is transferred onto a structured output grid which can then be stored as a netcdf file.</p>
+<p>As the user can choose what grid-type to utilize during the simulation,
+it is important that AdvDiff can accurately anc quickly interpolate data from one arbitrary grid to any other.</p>
+</div>
+<div class="section" id="why-mesha-to-meshb">
+<h2>Why meshA_to_meshB<a class="headerlink" href="#why-mesha-to-meshb" title="Permalink to this headline"></a></h2>
+<p>Why design a custom interpolator when Scipy’s <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.griddata.html#scipy-interpolate-griddata">scipy.interpolate.griddata()</a>
+module does the exact same thing?
+There are two main reasons:</p>
+<ol class="arabic simple">
+<li><p>The Scipy griddata() module is VERY slow when interpolating between two meshes that both contain many points.
+For use with AdvDiff, it is common to interpolate between meshes containing 10.000 points or more.
+Scipy griddata() is slow as the module reinitializes the Delaunay triangularization for both meshA and meshB for every call.
+This is computationally expensive and wasteful, as we are interpolating between the same two static meshes for every time-step and thus there is no need to
+recompute the Delaunay triangularization.</p></li>
+<li><p>The Scipy griddata() module cannot extrapolate outside the convex hull of meshA.
+This leads to several problems. Whenever points on meshB lie outside the convex hull of meshA, griddata() gives NAN values.
+FiPY does not know what to do with NAN values and it will crash if any of it’s variables contain any NANs.
+This issue can be overcome by filling the NANs with some value, say 0.0, but that has it’s own set of problems. Another more subtle issue is that
+unless the border gridcells of meshA and meshB align in a favourable way, the borders may be filled with NANs also.
+This specific problem can be seen on the figure in the <a class="reference external" href="https://docs.scipy.org/doc/scipy/_images/scipy-interpolate-griddata-1.png">griddata() documentation</a>,
+notice the white border around the data for linear and cubic interpolation? This problem in particular made using griddata() unreliable.</p></li>
+</ol>
+<p>The <strong>meshA_to_meshB</strong> module solves both of these problems. The interpolator only computes the Delaunay triangularization once on initialization of the interpolator object.
+Then for each call of <strong>meshA_to_meshB.interpolate()</strong>, it will use the precomputed triangularizations to perform linear interpolation.
+Once linear interpolation is performed, the module checks the result for any NANs. If any are found, then it will perform
+nearest interpolation on only those points. Nearest interpolation can be used outside the convex hull of meshA, and as such we end up with a result with no ‘holes’.</p>
+</div>
+<div class="section" id="mesha-to-meshb-vs-scipy-interpolate-griddata">
+<h2>meshA_to_meshB** vs. scipy.interpolate.griddata()<a class="headerlink" href="#mesha-to-meshb-vs-scipy-interpolate-griddata" title="Permalink to this headline"></a></h2>
+<p>I have created an artificial scenario to showcase the power of <strong>meshA_to_meshB</strong>.
+We want to interpolate data defined on a random set of points onto a 100x100 grid. We compare interpolation accuracy and efficiency.
+The results are shown in the next two sections.</p>
+<div class="section" id="accuracy-comparison">
+<h3>Accuracy comparison<a class="headerlink" href="#accuracy-comparison" title="Permalink to this headline"></a></h3>
+<p>Figure on the left shows randomly placed points in the plane, each point is associated with a value [0,1] depicted by the hue.
+The red boundary line is the convex hull of the set of points.
+The middle-left figure shows the resultant linear interpolation of the data using <strong>scipy.interpolate.griddata()</strong> ,
+while the middle-right figure shows the resultant linear interpolation using <strong>meshA_to_meshB</strong>.
+The scipy interpolator cannot extrapolate values outside the convex hull.
+I have set <strong>extrap_nans = False</strong> for a fair apples-to-apples comparison.</p>
+<p>To ensure that <strong>meshA_to_meshB</strong> is indeed accurate, I also compute <strong>np.isclose()</strong> for every point on the interpolated grid, the result is shown on the rightmost figure.
+Yellow means the two solutions are the same while purple means there is a discrepancy.
+Here we see that the two interpolators do indeed produce the same results for every point.
+As such, we are confident that <strong>meshA_to_meshB</strong> produces the correct linear interpolation.</p>
+<blockquote>
+<div><div class="figure align-center">
+<a class="reference internal image-reference" href="_images/mA2mBvsScipy_no_extrapolation.png"><img alt="_images/mA2mBvsScipy_no_extrapolation.png" src="_images/mA2mBvsScipy_no_extrapolation.png" style="width: 90%;" /></a>
+</div>
+</div></blockquote>
+<p>If however, I set  <strong>extrap_nans = True</strong> in <strong>meshA_to_meshB</strong> we get:</p>
+<blockquote>
+<div><div class="figure align-center">
+<a class="reference internal image-reference" href="_images/mAmBvsScipy_with_extrapolation.png"><img alt="_images/mAmBvsScipy_with_extrapolation.png" src="_images/mAmBvsScipy_with_extrapolation.png" style="width: 90%;" /></a>
+</div>
+</div></blockquote>
+<p>Notice that <strong>meshA_to_meshB</strong> has now produced values outside of the convex hull. This is important for our case, because FiPY does not know what to do with NANs.
+If local grids ever poke outside the global velocity field, we want to extrapolate values such that we can still run simulations if we want to.
+On the rightmost figure, we see that the two interpolators now differ, but only outside the convex hull of the datapoints.
+This is because <strong>scipy-interpolate-griddata()</strong> only produce NANs outside the convex hull of points, while <strong>meshA_to_meshB</strong> utilizes
+nearest interpolation to compute values outside the convex hull.</p>
+</div>
+<div class="section" id="speed-comparison">
+<h3>Speed comparison<a class="headerlink" href="#speed-comparison" title="Permalink to this headline"></a></h3>
+<p>The main reason why <strong>meshA_to_meshB</strong> is preferred, is due to it’s incredible speed and efficient scaling. Thanks to <a class="reference external" href="https://stackoverflow.com/users/110026/jaime">Jamie’s</a> linear interpolator, we can interpolate
+data between two grids over several time-steps very rapidly. The following figure shows the average time taken to perform one interpolation with <strong>scipy-interpolate-griddata()</strong>,
+<strong>meshA_to_meshB without extrapolation</strong> and <strong>meshA_to_meshB with extrapolation</strong> over number of datapoints. We see that there is a clear speed benefit for using <strong>meshA_to_meshB</strong> in both cases.
+Moreover, the time average time taken for performing one interpolation with <strong>meshA_to_meshB</strong> does not seem to increase as we increase the number of datapoints, whereas with <strong>scipy-interpolate-griddata()</strong>,
+the time increases exponentially.</p>
+<blockquote>
+<div><div class="figure align-center">
+<a class="reference internal image-reference" href="_images/Times_comparison.png"><img alt="_images/Times_comparison.png" src="_images/Times_comparison.png" style="width: 90%;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/Speed_Comparison.png"><img alt="_images/Speed_Comparison.png" src="_images/Speed_Comparison.png" style="width: 30%;" /></a>
+</div>
+</div></blockquote>
+<p>However, the slowest part of the <strong>meshA_to_meshB</strong> interpolator is indeed the nearest interpolator function. This explains the constant width gap between <strong>meshA_to_meshB without extrapolation</strong> and <strong>meshA_to_meshB with extrapolation</strong>.
+So when performing interpolation, it is beneficial to try to set up scenario for which there is as little extrapolation needed as possible.
+But, the safest bet is still to set <strong>extrap_nans=True</strong> because, if no NANs are actually found, it will not waste time trying to extrapolate.
+I have made an example notebook that you can play with and confirm my findings. You can get it from my GitHub <a class="reference external" href="https://github.com/KetilFIversen/meshA_to_meshB-Interpolator">here (Work In Progress)</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>The <strong>meshA_to_meshB</strong> interpolator is only faster than the <strong>scipy.interpolate.griddata()</strong> for when interpolating between large grids. If the grids are relatively coarse (less than 500 points),
+then there is no benefit to <strong>meshA_to_meshB</strong>, aside from the extrapolation property</p></li>
+<li><p><strong>meshA_to_meshB</strong> is only beneficial for when interpolating between the same two meshes multiple times. If you are going to do an interpolation only once, then <strong>scipy.interpolate.griddata()</strong> is better.
+Also, if you want to do interpolation between two changing meshes, for example when implementing adaptively refined meshes, then do not use <strong>meshA_to_meshB</strong>.</p></li>
+<li><p>The nearest interpolator function is very slow, as such extrapolation is slow. When you want to perform rapid interpolation, try to make sure the convex hull of meshB fully contained
+within the convex hull of meshA such that extrapolation is either not needed or only needed for a small set of points.</p></li>
+<li><p>The <strong>extrap_from_A</strong> boolean determines if nearest extrapolation should be in respect to data defined on meshA or the interpolated data on meshB. The best results depends on the situation.
+Setting <strong>extrap_from_A = True</strong> is best for when the two meshes overlap well and contain the same order of magnitude number of points. However, if meshA is very coarse, and meshB is very fine,
+then setting <strong>extrap_from_A = False</strong> is usually the best.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="boundary_conditions.html" class="btn btn-neutral float-left" title="Boundary conditions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mesh_types.html" class="btn btn-neutral float-right" title="Different mesh-types" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, ACTOM.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
