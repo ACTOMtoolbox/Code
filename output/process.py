@@ -175,19 +175,18 @@ if os.path.isdir(filelocations+'Advdiff'):
 
   figstats=''
   if config['visualizer']['plot_stats']:
-    if 'stats' not in locals():
-       stats="With equal weight of 1.0 units/m<sup>2</sup>s "
     figure_count=figure_count+1
     AD1_figs=figure_count
-    stats=stats+"the map of the largest impacted regions from the "+str(sourcelen)+ " sources over the full simulation covering various tidal cycles are shown in Figure "+str(figure_count)+". "
+    stats="In Figure "+str(figure_count)+". we give an example of the worst case impact region from the "+str(sourcelen)+ " sources with equal weight of 1.0 units/m<sup>2</sup>s over the full simulation covering various tidal cycles.
+    
     figstats=figstats+'<p style=\"text-align:center\"><img src=\'Advdiff/Figures/statistics_max.png\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. Map of the largest impacted regions based on the sources provided and a release of 1.0 units/m<sup>2</sup>s, with the release sources as cricles and position of probes as stars.</p>'
   
   if config['visualizer']['plot_global_fields']:
+    figure_count=figure_count+1
     if 'stats' not in locals():
       stats="With equal weight of 1.0 units/m<sup>2</sup>s time"
     else:
       stats=stats+"Time"
-    figure_count=figure_count+1
     stats=stats+" series for the fluctuating concentrations are provided (when viewed in html format) in Figure "+str(figure_count)+". "
     figstats=figstats+'<p style=\"text-align:center\"><img src=\'Advdiff/Figures/Global_field/Cmovie.gif\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. Time series for the fluctuating concentrations (when viewed in html format) based on the sources provided and a release of 1.0 units/m<sup>2</sup>s, with the release sources as cricles and position of probes as stars.</p>'
 
