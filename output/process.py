@@ -177,7 +177,7 @@ if os.path.isdir(filelocations+'Advdiff'):
   if config['visualizer']['plot_stats']:
     figure_count=figure_count+1
     AD1_figs=figure_count
-    stats="In Figure "+str(figure_count)+". we give an example of the worst case impact region from the "+str(sourcelen)+ " sources with equal weight of 1.0 units/m<sup>2</sup>s over the full simulation covering various tidal cycles.
+    stats="In Figure "+str(figure_count)+". we give an example of the worst case impact region from the "+str(sourcelen)+ " sources with equal weight of 1.0 units/m<sup>2</sup>s over the full simulation covering various tidal cycles. "
     
     figstats=figstats+'<p style=\"text-align:center\"><img src=\'Advdiff/Figures/statistics_max.png\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. Map of the largest impacted regions based on the sources provided and a release of 1.0 units/m<sup>2</sup>s, with the release sources as cricles and position of probes as stars.</p>'
   
