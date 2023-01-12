@@ -3,4 +3,4 @@ Directory containing all the tools and related codes based on Python and Fortran
 
 Docker images can be found on Dockerhub: https://hub.docker.com/u/actomtoolbox
  
-To run the codes it is advised to use one of the methods that best fits your needs from the main GitHub page https://github.com/ACTOMtoolbox
+To run the codes it is advised to use one of the methods that best fits your needs from the main GitHub page https://github.com/ACTOMtoolbox, this github is designed to access the codes for editing and developing.
