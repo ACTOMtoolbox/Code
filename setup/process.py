@@ -440,7 +440,7 @@ if ThrdirBox2.get() !='':
 else:
     data = data.replace("\n          #insertrocinputhere", "")
     
-print(data)
+#print(data)
 
 if c4_v1.get()=='Yes':
    first_line="#!/bin/bash\noptions=\'\'\n"
