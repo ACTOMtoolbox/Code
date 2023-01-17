@@ -1,5 +1,5 @@
 # Code
-Directory containing all the tools and related codes based on Python and Fortran, built into containers for use via Docker
+Directory containing all the tools and related codes based on Python and Fortran, built into containers for use via Docker (https://docs.docker.com/engine/install/)
 
 Docker images can be found on Dockerhub: https://hub.docker.com/u/actomtoolbox
  
