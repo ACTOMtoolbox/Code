@@ -21,12 +21,12 @@ if __name__ == '__main__':
     ### READ MASTER CONFIG FILE ###
     masterconfig=configparser.ConfigParser(allow_no_value=True)
     masterconfig.optionxform = str  # preserve case for letters
-    masterconfig.read('Indata/setup.ini')
+    masterconfig.read('External-Indata/AdvDiff.ini')
 
     ### GET A COPY CONFIG FILE TO BE USED FOR EACH SCENARIO ###
     config=configparser.ConfigParser(allow_no_value=True)
     config.optionxform = str  # preserve case for letters
-    config.read('Indata/setup.ini')
+    config.read('External-Indata/AdvDiff.ini')
     
     ### DATA CLEANUP OF PREVIOUS RUNS ###
     data_cleanup(config=masterconfig) # Make sure this comes before anything is stored

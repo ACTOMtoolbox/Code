@@ -222,7 +222,7 @@ class plot_global_velocity_location:
         
         if config is None:
             config=configparser.ConfigParser(allow_no_value=True)
-            config.read('Indata/setup.ini')
+            config.read('External-Indata/AdvDiff.ini')
 
          ### LOAD SOURCES ###
         sources, *_ = load_sources(config=config)

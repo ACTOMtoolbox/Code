@@ -340,7 +340,7 @@ if __name__ == '__main__':
     ### READ CONFIG FILE ###
     config=configparser.ConfigParser(allow_no_value=True)
     config.optionxform = str  # preserve case for letters
-    config.read('/external/settings/AdvDiff.ini')
+    config.read('External-Indata/AdvDiff.ini')
     
     ### DATA CLEANUP OF PREVIOUS RUNS ###
     data_cleanup(config=config) # Make sure this comes before anything is stored

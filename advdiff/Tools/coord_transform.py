@@ -79,7 +79,7 @@ class coord_converter:
                        Whether or not to store the UTM_AreaOfInterest netcdf file whenever lonlatbounds are given.
         """
         config=configparser.ConfigParser(allow_no_value=True)
-        config.read('Indata/setup.ini')
+        config.read('External-Indata/AdvDiff.ini')
         self.datum  = config['coordinates']['datum']
 
         in_path  = config['paths']['indata_path'] + config['paths']['coord_path']

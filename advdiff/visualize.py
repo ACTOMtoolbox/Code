@@ -26,9 +26,7 @@ from Tools.parser_tools     import strtoBool
 from Tools.file_loader      import load_sources, load_velocity
 from Tools.coord_transform  import coord_converter as cc
 
-
-#%%
-def plot_riskmap(data_dir='Indata/Riskmaps/', prefix='risk_', variable='location_probability', 
+def plot_riskmap(data_dir='External-Indata/Riskmaps/", prefix='risk_', variable='location_probability', 
     out_dir='Figures/', dpi=200, filetype='jpg'):
     """
     Plots every riskmap contained in the given directory. 
@@ -66,7 +64,7 @@ def plot_riskmap(data_dir='Indata/Riskmaps/', prefix='risk_', variable='location
     
 
 
-def plot_sources(data_dir='Indata/Sources/', prefix='source_', variable='location_probability',
+def plot_sources(data_dir='External-Indata/Sources/', prefix='source_', variable='location_probability',
     out_dir='Figures/', dpi=200, filetype='jpg'):
     """
     Plot all sources found i the given directory.
@@ -673,7 +671,7 @@ def plot_mass(data_dir='Outdata/', prefix='mass', weight_source=True, plot_contr
     
 
 
-def plot_meshes(data_dir='Indata/', out_dir='Figures/', dpi=100, filetype='jpg'):
+def plot_meshes(data_dir='External-Indata/', out_dir='Figures/', dpi=100, filetype='jpg'):
     """
     Plot meshes and mesh quality.
 
@@ -692,7 +690,7 @@ def plot_meshes(data_dir='Indata/', out_dir='Figures/', dpi=100, filetype='jpg')
     logging.info(f'Plotting meshes')
     plt.close("all")
     config=configparser.ConfigParser(allow_no_value=True)
-    config.read(data_dir+'setup.ini')
+    config.read(data_dir+'AdvDiff.ini')
     
     logging.info('Generating meshes...\n')
     names    = ['mesh', 'mesh_out']
@@ -743,7 +741,7 @@ def plot_meshes(data_dir='Indata/', out_dir='Figures/', dpi=100, filetype='jpg')
     
 
 
-def plot_local_grids(data_dir='Indata/', out_dir='Figures/', variable='quiver', time=-1, dpi=200, figsize=(6.4,4.8), filetype='jpg', 
+def plot_local_grids(data_dir='External-Indata/', out_dir='Figures/', variable='quiver', time=-1, dpi=200, figsize=(6.4,4.8), filetype='jpg', 
                      markersize=10, fontsize=10, config=None):
     """
     Plot the locations of the local grids superimposed on the velocity locations.
@@ -776,7 +774,7 @@ def plot_local_grids(data_dir='Indata/', out_dir='Figures/', variable='quiver', 
     logging.info('Reading sources and velocity')
     if config is None:
         config=configparser.ConfigParser(allow_no_value=True)
-        config.read(data_dir+'setup.ini')
+        config.read(data_dir+'AdvDiff.ini')
 
     Lx = float(config['grid']['Lx'])
     Ly = float(config['grid']['Ly'])
@@ -893,7 +891,7 @@ def visualizer(config=None):
     """
     masterconfig=configparser.ConfigParser(allow_no_value=True)
     masterconfig.optionxform = str  # preserve case for letters
-    masterconfig.read('Indata/setup.ini')
+    masterconfig.read('External-Indata/AdvDiff.ini')
 
     levels = {'DEBUG': logging.DEBUG, 'INFO': logging.INFO, 'WARNING': logging.WARNING, 'CRITICAL': logging.CRITICAL}
     logging.basicConfig(format   = '[%(levelname)s] %(message)s', 
@@ -903,7 +901,7 @@ def visualizer(config=None):
     if config is None:
         config=configparser.ConfigParser(allow_no_value=True)
         config.optionxform = str  # preserve case for letters
-        config.read(masterconfig['paths']['outdata_path']+'setup.ini')
+        config.read(masterconfig['paths']['outdata_path']+'AdvDiff.ini')
 
     start_time = TIME.time()
     
@@ -936,16 +934,25 @@ def visualizer(config=None):
     pltGlobalStream = strtoBool(masterconfig['visualizer']['plot_global_stream'])
     
     variables   = 'All'
+    in_dir = config['paths']['indata_path']
     figures_dir = config['paths']['figures_path']
     data_dir    = config['paths']['outdata_path']
+    
+    riskmap_path    = config['paths']['riskmap_path']
+    sources_path    = config['paths']['sources_path']
+    probes_path    = config['paths']['probes_path']
+    velocity_path    = config['paths']['velocity_path']
+    well_path    = config['paths']['well_path']
+    coord_path    = config['paths']['coord_path']
+    
     make_directory(dir_name=figures_dir, verbose=True) # Ensure figures path exists.
 
-    plot_riskmap(out_dir=figures_dir, filetype=filetype)                                                                            if pltRiskmap    else None
-    plot_sources(out_dir=figures_dir, filetype=filetype)                                                                            if pltSources    else None 
+    plot_riskmap(data_dir=in_dir+riskmap_path, out_dir=figures_dir, filetype=filetype)                                                                            if pltRiskmap    else None
+    plot_sources(data_dir=in_dir+sources_path, out_dir=figures_dir, filetype=filetype)                                                                            if pltSources    else None 
     plot_probes(out_dir=figures_dir, data_dir=data_dir, plot_contrib=pltProbeContrib, filetype=filetype)                            if pltProbes     else None
     plot_mass(out_dir=figures_dir, data_dir=data_dir, plot_contrib=pltMassContrib, filetype=filetype)                               if pltMass       else None    
     plot_map(out_dir=figures_dir, config=config, filetype=filetype)                                                                 if pltMap        else None    
-    plot_local_grids(out_dir=figures_dir, variable='u', markersize=markersize, fontsize=fontsize, filetype=filetype, config=config) if pltLocalGrids else None   
+    plot_local_grids(data_dir=in_dir, out_dir=figures_dir, variable='u', markersize=markersize, fontsize=fontsize, filetype=filetype, config=config) if pltLocalGrids else None   
 
     if pltStatistics:
         plot_statistics(out_dir=figures_dir, data_dir=data_dir, prefix='statistics', variables=variables, logscale=logscale,
@@ -968,7 +975,7 @@ def visualizer(config=None):
         plot_global_stream(out_dir=figures_dir, data_dir=data_dir, prefix='fields', colorvariable='C', 
                            logscale=logscale, dpi=200, filetype=filetype, skip=3)
 
-    plot_meshes(out_dir=figures_dir, filetype=filetype) if pltMeshes else None # Keep this last. The FiPy plotters like to interfere with the other plotters for some reason...
+    plot_meshes(data_dir=in_dir, out_dir=figures_dir, filetype=filetype) if pltMeshes else None # Keep this last. The FiPy plotters like to interfere with the other plotters for some reason...
     
     plt.close('all')
 
@@ -981,7 +988,7 @@ if __name__ == '__main__':
 
     masterconfig=configparser.ConfigParser(allow_no_value=True)
     masterconfig.optionxform = str  # preserve case for letters
-    masterconfig.read('Indata/setup.ini')
+    masterconfig.read('External-Indata/AdvDiff.ini')
 
     suffix_list = [string.replace(masterconfig['paths']['outdata_path'].strip('/'),'').strip('\\')+str('/') for string in glob.glob(masterconfig['paths']['outdata_path']+'*/')]
     if len(suffix_list) > 0:
@@ -1000,5 +1007,5 @@ if __name__ == '__main__':
     for suffix in suffix_list:
         config=configparser.ConfigParser(allow_no_value=True)
         config.optionxform = str  # preserve case for letters
-        config.read(masterconfig['paths']['outdata_path']+suffix+'setup.ini')
+        config.read(masterconfig['paths']['outdata_path']+suffix+'AdvDiff.ini')
         visualizer(config)
