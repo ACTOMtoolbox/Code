@@ -132,7 +132,7 @@ lg.config(font=("Times New Roman (serif)", 12))
 lg.pack(side=tk.LEFT, anchor="w", padx=0)
 timechoices = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second']
 timeoptions = tk.StringVar(frameonep6)
-timeoptions.set('day')
+timeoptions.set('year')
 time = tk.OptionMenu(frameonep6, timeoptions, *timechoices)
 time.config(font=("Times New Roman (serif)", 12))
 time.pack(side=tk.LEFT, anchor="w", padx=2);
