@@ -6,22 +6,24 @@ echo '*                                                 *'
 echo '***************************************************'
 echo
 echo
+#1
 echo '***************************************************'
 echo '*         The Advection-Diffusion Module          *'
 echo '*          (Tracer Transport Simulator)           *'
 echo '***************************************************'
 echo
-mkdir -p Advdiff
-cd Advdiff
-cp ../../AdvDiff.ini AdvDiff.ini
+mkdir -p ../Advdiff
+cd ../Advdiff
+mv ../Setup.ini AdvDiff.ini
 mkdir -p Figures
 mkdir -p output
 docker run -it $options \
-          --mount type=bind,source="$(pwd)",target=/external/settings \
+          --mount type=bind,source="$(pwd)"/,target=/app/External-Indata \
           --mount type=bind,source="$(pwd)"/output,target=/app/Outdata \
           --mount type=bind,source="$(pwd)"/Figures,target=/app/Figures \
  actomtoolbox/adv-diff
 echo
+#2
 echo '***************************************************'
 echo '*         Anomaly Criteria Identification         *'
 echo '*                      Cseep                      *'
@@ -36,6 +38,7 @@ docker run -it $options \
           --mount type=bind,source="$(pwd)"/..,target=/external/settings \
  actomtoolbox/cseep
 echo
+#3
 echo '***************************************************'
 echo '*         Anomaly Criteria Identification         *'
 echo '*                  Rate of Change                 *'
@@ -50,6 +53,7 @@ docker run -it $options \
           --mount type=bind,source="$(pwd)"/..,target=/external/settings \
  actomtoolbox/actom-roc
 echo
+#4
 echo '***************************************************'
 echo '*              Deployment strategies              *'
 echo '*                  Optimal Cover                  *'
@@ -59,11 +63,12 @@ mkdir -p ../OptCover
 cd ../OptCover
 mkdir -p output
 docker run -it $options \
-          --mount type=bind,source="$(pwd)"/../Advdiff/output,target=/app/Input  \
+          #insertoptinputhere
           --mount type=bind,source="$(pwd)"/output,target=/app/Output \
           --mount type=bind,source="$(pwd)"/..,target=/external/settings \
  actomtoolbox/opt-cover-app
 echo
+#5
 echo '***************************************************'
 echo '*              The Carbonate System               *'
 echo '*                                                 *'
@@ -73,11 +78,12 @@ mkdir -p ../carbon
 cd ../carbon
 mkdir -p output
 docker run -it $options \
-          --mount type=bind,source="$(pwd)"/../Advdiff/output,target=/external/input \
+          #insertcarbinputhere
           --mount type=bind,source="$(pwd)"/output,target=/external/output \
           --mount type=bind,source="$(pwd)"/..,target=/external/settings \
  actomtoolbox/actom-co2
 echo
+#6
 echo '***************************************************'
 echo '*                 Impact Analysis                 *'
 echo '*                                                 *'
@@ -87,18 +93,19 @@ mkdir -p ../impacts
 cd ../impacts
 mkdir -p output
 docker run -it $options \
-          --mount type=bind,source="$(pwd)"/../carbon/output,target=/external/input \
+          #insertimpinputhere
           --mount type=bind,source="$(pwd)"/..,target=/external/settings \
           --mount type=bind,source="$(pwd)"/output,target=/external/output \
  actomtoolbox/actom-impacts
 echo
+#7
 echo '***************************************************'
 echo '*                 OUTPUT - Report                 *'
 echo '*                                                 *'
 echo '***************************************************'
 echo
  cd ../
- docker run -it $options --mount type=bind,source="$(pwd)",target=/srv/actom-output/input actomtoolbox/actom-output
+docker run -it $options --mount type=bind,source="$(pwd)",target=/srv/actom-output/input actomtoolbox/actom-output
 echo
 echo '***************************************************'
 echo '*     The Technical Summary can be found at:      *'
@@ -121,3 +128,4 @@ echo "*                 'sh Re-Run.sh'                  "
 echo '*                                                 *'
 echo '***************************************************'
 echo
+#########

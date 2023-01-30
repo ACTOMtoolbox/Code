@@ -26,8 +26,7 @@ from Tools.parser_tools     import strtoBool
 from Tools.file_loader      import load_sources, load_velocity
 from Tools.coord_transform  import coord_converter as cc
 
-def plot_riskmap(data_dir='External-Indata/Riskmaps/", prefix='risk_', variable='location_probability', 
-    out_dir='Figures/', dpi=200, filetype='jpg'):
+def plot_riskmap(data_dir='External-Indata/Riskmaps/', prefix='risk_', variable='location_probability', out_dir='Figures/', dpi=200, filetype='jpg'):
     """
     Plots every riskmap contained in the given directory. 
     The size of the scatterplot markers will be given by the variable of choice.

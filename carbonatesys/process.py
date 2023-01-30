@@ -21,6 +21,11 @@ if config.has_option('General', 'dic'):
     DICback = float(config['General']['dic'])
 else:
     DICback = float(config['CSEEP']['dic-mean'])
+    
+if config.has_option('General', 'dens'):
+    Dens = float(config['General']['dens'])
+else:
+    Dens = float(config['CSEEP']['dens-mean'])
 
 Rate = float(config['General']['rate'])
 RateUnits = config['General']['rate-units']

@@ -42,10 +42,20 @@ config.read('/external/settings/data.ini')
 q = float(config['General']['Rate']) # flux 
 qunits = config['General']['Rate-Units'] # flux units
 
-
-DICmean = float(config['CSEEP']['DIC-mean'])
-TAmean = float(config['CSEEP']['TA-mean'])
-dens = float(config['CSEEP']['DENS-mean'])   
+if config.has_option('General', 'ta'):
+    TAmean = float(config['General']['ta'])
+else:
+    TAmean = float(config['CSEEP']['ta-mean'])
+    
+if config.has_option('General', 'dic'):
+    DICmean = float(config['General']['dic'])
+else:
+    DICmean = float(config['CSEEP']['dic-mean'])
+    
+if config.has_option('General', 'dens'):
+    dens = float(config['General']['dens'])
+else:
+    dens = float(config['CSEEP']['dens-mean'])
     
 if config.has_option('General', 'threshold-pH'):
     th1=((config['General']['threshold-ph']).split(","))

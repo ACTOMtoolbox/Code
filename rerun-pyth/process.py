@@ -93,91 +93,67 @@ RateUnitsTime=rate_units.partition('/')
 rateTime=RateUnitsTime[2]
 rate = rate+' '+rate_units
 
-OUTPUTS='\nThe leakage rate set for this report was given as: '+rate+'.'
+OUTPUTS='\nThe leakage rate set for this report was given as: '+rate+'.\n'
 
 lg = tk.Label(frame.scrollable_frame, text = OUTPUTS, background="white", wraplength=984, justify="left")
 lg.config(font=("Times New Roman (serif)", 12))
 lg.pack(anchor="w", padx=12)
 
-OUTPUTS='\nEnter a new rate:\n'
-
-
+current_value = tk.DoubleVar()
+current_value1 = tk.StringVar()
+def get_current_value():
+    return '{: .2f}'.format(current_value.get())
+def slider_changed(event):
+    value_label.configure(text=get_current_value())
+    current_value1.set(str(get_current_value()))
+    rateBox.configure(textvariable=current_value1)
 frameone = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-
-lg = tk.Label(frameone, text = OUTPUTS, background="white", wraplength=984, justify="left")
-lg.config(font=("Times New Roman (serif)", 12, 'bold'))
-lg.pack(side=tk.LEFT, anchor="w", padx=2)
-
-if rate_units[0] == "k":
-   massvalue='kilograms'
-if rate_units[0] == "g":
-   massvalue='grams'
-if rate_units[0] == "t":
-   massvalue='tonnes'
-if rate_units[0] == "m":
-   massvalue='moles'
-   
-if rateTime[0] == "s":
-   timevalue='second'
-if rateTime[0:1] == "mi":
-   timevalue='minute'
-if rateTime[0] == "h":
-   timevalue='hour'
-if rateTime[0] == "d":
-   timevalue='day'
-if rateTime[0] == "w":
-   timevalue='week'
-if rateTime[0:1] == "mo":
-   timevalue='month'
-if rateTime[0] == "y":
-   timevalue='year'
-
-T = tk.StringVar()
-T.set(rateno)
-rateBox = tk.Entry(frameone,textvariable = T, width = 8)
+slider_label = tk.Label(frameone, text = '• Enter a new rate (from each source) using the slider, or override the value below:\n', background="white", wraplength=984, justify="left")
+slider_label.config(font=("Times New Roman (serif)", 12))
+slider_label.pack(side=tk.LEFT, anchor="w", padx=12)
+frameone.pack(anchor="w", padx=12)
+frameonep5 = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
+slider = ttk.Scale(frameonep5,from_=0,to=1000,orient='horizontal',command=slider_changed, variable=current_value, length=960)
+slider.pack(side=tk.LEFT, anchor="w", padx=12)
+value_label = ttk.Label(frameonep5,text=get_current_value())
+frameonep5.pack(anchor="w", padx=12)
+frameonep6 = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
+rateBox = ttk.Entry(frameonep6,textvariable=current_value1, width = 8)
 rateBox.config(font=("Times New Roman (serif)", 12))
 rateBox.pack(side=tk.LEFT, anchor="w", padx=2)
-
 masschoices = ['tonnes', 'kilograms', 'grams', 'moles']
-massoptions = tk.StringVar(frameone)
-massoptions.set(massvalue)
-mass = tk.OptionMenu(frameone, massoptions, *masschoices)
+massoptions = tk.StringVar(frameonep6)
+massoptions.set('tonnes')
+mass = tk.OptionMenu(frameonep6, massoptions, *masschoices)
 mass.config(font=("Times New Roman (serif)", 12))
 mass.pack(side=tk.LEFT, anchor="w", padx=2)
-
-lg = tk.Label(frameone, text = '/', background="white", wraplength=984, justify="left")
+lg = tk.Label(frameonep6, text = '/', background="white", wraplength=984, justify="left")
 lg.config(font=("Times New Roman (serif)", 12))
 lg.pack(side=tk.LEFT, anchor="w", padx=0)
-
 timechoices = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second']
-timeoptions = tk.StringVar(frameone)
-timeoptions.set(timevalue)
-time = tk.OptionMenu(frameone, timeoptions, *timechoices)
+timeoptions = tk.StringVar(frameonep6)
+timeoptions.set('day')
+time = tk.OptionMenu(frameonep6, timeoptions, *timechoices)
 time.config(font=("Times New Roman (serif)", 12))
 time.pack(side=tk.LEFT, anchor="w", padx=2);
+frameonep6.pack(expand=True)
 
-frameone.pack()
-
-OUTPUTS='The user set pH detection threholds for this report were given as: '+Thresgen+'.'
+OUTPUTS='\nThe user set pH detection threholds for this report were given as: '+Thresgen+'.'
 li = tk.Label(frame.scrollable_frame, text = OUTPUTS, background="white", wraplength=984, justify="left")
 li.config(font=("Times New Roman (serif)", 12))
 li.pack(anchor="w", padx=12)
 
 frametwo= tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-
-OUTPUTS='\nEnter new thresholds, seperated by a comma:\n'
-
-lg = tk.Label(frametwo, text = OUTPUTS, background="white", wraplength=984, justify="left")
-lg.config(font=("Times New Roman (serif)", 12, 'bold'))
-lg.pack(side=tk.LEFT, anchor="w", padx=2)
-
+OUTPUTS='\n• Enter new set pH detection thresholds, seperated by a comma:\n'
+lh = tk.Label(frametwo, text = OUTPUTS, background="white", wraplength=984, justify="left")
+lh.config(font=("Times New Roman (serif)", 12))
+lh.pack(side=tk.LEFT, anchor="w", padx=12)
 Thr = tk.StringVar()
 Thr.set(Thresgen)
 ThrBox = tk.Entry(frametwo,textvariable = Thr, width = 20)
 ThrBox.config(font=("Times New Roman (serif)", 12))
 ThrBox.pack(side=tk.LEFT, anchor="w", padx=2)
-
-frametwo.pack()
+frametwo.pack(anchor="w", padx=12)
 
 OUTPUTS='A new directory will be created for the updated run based on the start date and time.\n'
 lj = tk.Label(frame.scrollable_frame, text = OUTPUTS, background="white", wraplength=984, justify="left")
