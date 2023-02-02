@@ -15,12 +15,11 @@ def TTMframe():
     if ttmbut_v1.get() == "True":ttmbut["fg"] = on_color     # if (get current checkbutton state) is "1" then....
     else:ttmbut["fg"] = off_color
     if ttmbut_v1.get() == "True":
-       OUTPUTS='\nDue to the large number of settings within the Tracer Transport Model, a manual to adjust the settings is available from the following address:\n\nhttps://htmlpreview.github.io/?https://github.com/ACTOMtoolbox/Code/blob/main/advdiff/Doc/docs/_build/html/about.html\n\nPlease adjust all settings as required BEFORE clicking on \'Run\' below.\n\nThe Setup.ini file has been placed in your working directory that has been generated in the folder this program has run from, titled: \'RUN-\' and then date and time.\n'
+       OUTPUTS='\nDue to the large number of settings within the Tracer Transport Model, a manual to adjust the settings is available from the following address:\n\nhttps://htmlpreview.github.io/?https://github.com/ACTOMtoolbox/Code/blob/main/advdiff/Doc/docs/_build/html/about.html\n\nPlease adjust all settings as required BEFORE clicking on \'Run\' below.\n\nThe Setup.ini file has been placed in your working directory that has been generated in the folder this program has run from, titled: \'RUN-\' and then date and time.'
        lia21 = tk.Label(framefour51, text = OUTPUTS, background="white", wraplength=984, justify="left")
        lia21.config(font=("Times New Roman (serif)", 12))
        lia21.pack(anchor="w", padx=12)
-       ca1='False'
-       
+
        frametwofive22 = tk.Frame(framefour51, bg='white',width = 1008)
        OUTPUTS='\n• Enter the directory of input files (if not using built in data sets):\n'
        lia22 = tk.Label(frametwofive22, text = OUTPUTS, background="white", wraplength=984, justify="left")
@@ -653,10 +652,10 @@ if len(Densoutput)==1:
 
 #if ttm
 if ttmbut_v1.get() == "True":
-  if ThrdirBox22.get() !='':
-    OUTPUTS=OUTPUTS+'\n\nThe directory for Tracer Transport Model input data has been set as '+ThrdirBox22.get()+'.'
-    data = data.replace("#insertttminputhere", "--mount type=bind,source="+ThrdirBox22.get()+",target=/app/Indata \\")
-    data2 = data2.replace("#insertttminputhere", "--mount type=bind,source="+ThrdirBox22.get()+",target=/app/Indata")
+  if Thrdir22Box.get() !='':
+    OUTPUTS=OUTPUTS+'\n\nThe directory for Tracer Transport Model input data has been set as '+Thrdir22Box.get()+'.'
+    data = data.replace("#insertttminputhere", "--mount type=bind,source="+Thrdir22Box.get()+",target=/app/Indata \\")
+    data2 = data2.replace("#insertttminputhere", "--mount type=bind,source="+Thrdir22Box.get()+",target=/app/Indata")
   else:
     data = data.replace("\n          #insertttminputhere", "")
     data2 = data2.replace("#insertttminputhere", "")
