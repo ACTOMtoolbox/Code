@@ -14,4 +14,4 @@
 docker run -i -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=%Disp% --mount type=bind,source=%cd%,target=/srv/actom-rerun/input actomtoolbox/re-run
 
 @ .\Re-Run-Toolbox.bat
-@ move Re-Run-Toolbox.bat logs\Re-Run-Toolbox.bat
+@ move Re-Run-Toolbox.bat %cd%/logs >NUL
