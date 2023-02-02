@@ -88,11 +88,11 @@ docker run -it $options --mount type=bind,source=%cd%,target=/srv/actom-output/i
 @ echo ***************************************************
 @ echo *     The Technical Summary can be found at:      *
 @ echo *                                                 *
-@ echo * file://%cd%/Technical-Summary.html'
+@ echo * file://%cd%/Technical-Summary.html
 @ echo *                                                 *
 @ echo *         with the full report found at:          *
 @ echo *                                                 *
-@ echo * file://%cd%/Report.html'
+@ echo * file://%cd%/Report.html
 @ echo *                                                 *
 @ echo *          press Ctrl and click on link           *
 @ echo *     or Copy url into your favourite browser     *
