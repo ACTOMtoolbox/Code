@@ -18,6 +18,7 @@ mv ../Setup.ini AdvDiff.ini
 mkdir -p Figures
 mkdir -p output
 docker run -it $options \
+          #insertttminputhere
           --mount type=bind,source="$(pwd)"/,target=/app/External-Indata \
           --mount type=bind,source="$(pwd)"/output,target=/app/Outdata \
           --mount type=bind,source="$(pwd)"/Figures,target=/app/Figures \
@@ -106,6 +107,7 @@ echo '***************************************************'
 echo
  cd ../
 docker run -it $options --mount type=bind,source="$(pwd)",target=/srv/actom-output/input actomtoolbox/actom-output
+rm -r Re-Run.bat
 echo
 echo '***************************************************'
 echo '*     The Technical Summary can be found at:      *'
@@ -128,4 +130,4 @@ echo "*                 'sh Re-Run.sh'                  "
 echo '*                                                 *'
 echo '***************************************************'
 echo
-#########
+#8

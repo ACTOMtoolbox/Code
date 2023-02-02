@@ -132,7 +132,7 @@ lg.config(font=("Times New Roman (serif)", 12))
 lg.pack(side=tk.LEFT, anchor="w", padx=0)
 timechoices = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second']
 timeoptions = tk.StringVar(frameonep6)
-timeoptions.set('day')
+timeoptions.set('year')
 time = tk.OptionMenu(frameonep6, timeoptions, *timechoices)
 time.config(font=("Times New Roman (serif)", 12))
 time.pack(side=tk.LEFT, anchor="w", padx=2);
@@ -196,7 +196,7 @@ window.resizable(False, False)
 frame.pack()
 window.mainloop()
 
-print("Writing settings for re-run...\n")
+print("Writing settings for re-run...")
 
 rateun=''
 
@@ -237,10 +237,25 @@ OUTPUTS='\nThe leakage rate of '+rate+' has been replaced by: '+rateBox.get()+' 
 
 print(OUTPUTS)
 
-with open('input/logs/Run-All.sh', 'r') as runallfile: first_line = runallfile.readlines()[0:2]
-first_line=''.join(first_line)
-with open('storage/Re-Run-Toolbox.sh', 'r') as original: data = original.read()
-with open('input/Re-Run-Toolbox.sh', 'w') as modified: modified.write(first_line+data)
+config.read('input/data.ini')
+genopt=config['General']['options']
+
+if os.path.isfile('input/logs/Run-All.sh'):
+  with open('input/logs/Run-All.sh', 'r') as runallfile: first_line = runallfile.readlines()[0:1]
+  first_line=''.join(first_line)
+  with open('storage/Re-Run-Toolbox.sh', 'r') as original1: data = original1.read()
+  if genopt=='':
+    data=data.replace("$options","")
+  else:
+    data=data.replace("$options","-a STDERR")
+  with open('input/Re-Run-Toolbox.sh', 'w') as modified1: modified1.write(first_line+data)
+if os.path.isfile('input/logs/Run-All.bat'):
+  with open('storage/Re-Run-Toolbox.bat', 'r') as original2: data2 = original2.read()
+  if genopt=='':
+    data2=data2.replace("$options","")
+  else:
+    data2=data2.replace("$options","-a STDERR")
+  with open('input/Re-Run-Toolbox.bat', 'w') as modified2: modified2.write(data2)
 
 print('The re-run files have been generated')
 

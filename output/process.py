@@ -638,3 +638,4 @@ with open(filelocations+'Technical-Summary.html', 'w') as f:
   f.write(a)
   
 os.system('cp -r storage/Re-Run.sh '+filelocations+'Re-Run.sh')
+os.system('cp -r storage/Re-Run.bat '+filelocations+'Re-Run.bat')

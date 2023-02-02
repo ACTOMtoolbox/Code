@@ -20,6 +20,18 @@ def TTMframe():
        lia21.config(font=("Times New Roman (serif)", 12))
        lia21.pack(anchor="w", padx=12)
        ca1='False'
+       
+       frametwofive22 = tk.Frame(framefour51, bg='white',width = 1008)
+       OUTPUTS='\n• Enter the directory of input files (if not using built in data sets):\n'
+       lia22 = tk.Label(frametwofive22, text = OUTPUTS, background="white", wraplength=984, justify="left")
+       lia22.config(font=("Times New Roman (serif)", 12))
+       lia22.pack(side=tk.LEFT, anchor="w", padx=12)
+       Thrdir22 = tk.StringVar()
+       Thrdir22.set('')
+       Thrdir22Box = tk.Entry(frametwofive22,textvariable = Thrdir22, width = 20)
+       Thrdir22Box.config(font=("Times New Roman (serif)", 12))
+       Thrdir22Box.pack(side=tk.LEFT, anchor="w", padx=2)
+       frametwofive22.pack(anchor="w", padx=12)
     if ttmbut_v1.get()=='False':
        for widgets in framefour51.winfo_children():
            widgets.pack_forget()
@@ -361,7 +373,7 @@ lg.config(font=("Times New Roman (serif)", 12))
 lg.pack(side=tk.LEFT, anchor="w", padx=0)
 timechoices = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second']
 timeoptions = tk.StringVar(frameonep6)
-timeoptions.set('day')
+timeoptions.set('year')
 time = tk.OptionMenu(frameonep6, timeoptions, *timechoices)
 time.config(font=("Times New Roman (serif)", 12))
 time.pack(side=tk.LEFT, anchor="w", padx=2);
@@ -620,7 +632,8 @@ config.set('General', 'rate', rateBox.get())
 config.set('General', 'rate-units', rateun)
 config.set('General', 'threshold-ph', ThrBox.get())
 
-with open('storage/Run-All.sh', 'r') as original: data = original.read()
+with open('storage/Run-All.sh', 'r') as original1: data = original1.read()
+with open('storage/Run-All.bat', 'r') as original2: data2 = original2.read()
 
 OUTPUTS='The leakage rate of has been set as: '+rateBox.get()+' '+rateun+', and the user set pH detection thresholds have been set as: '+ThrBox.get()+'.'
 
@@ -640,10 +653,17 @@ if len(Densoutput)==1:
 
 #if ttm
 if ttmbut_v1.get() == "True":
-  #----------------------------------------------
+  if ThrdirBox22.get() !='':
+    OUTPUTS=OUTPUTS+'\n\nThe directory for Tracer Transport Model input data has been set as '+ThrdirBox22.get()+'.'
+    data = data.replace("#insertttminputhere", "--mount type=bind,source="+ThrdirBox22.get()+",target=/app/Indata \\")
+    data2 = data2.replace("#insertttminputhere", "--mount type=bind,source="+ThrdirBox22.get()+",target=/app/Indata")
+  else:
+    data = data.replace("\n          #insertttminputhere", "")
+    data2 = data2.replace("#insertttminputhere", "")
   OUTPUTS=OUTPUTS+''
 else:
   data=re.sub('#1[^>]+#2', '', data)
+  data2=re.sub('#1[^>]+#2', '', data2)
   OUTPUTS=OUTPUTS+'\n\nWARNING: TRACER TRANSPORT MODEL IS TURNED OFF...'
   OUTPUTS=OUTPUTS+'\nTHIS MAY AFFECT HOW OTHER TOOLS RUN!'
   
@@ -652,10 +672,13 @@ if cseepbut_v1.get() == "True":
   if ThrdirBox.get() !='':
     OUTPUTS=OUTPUTS+'\n\nThe directory for C\u209B\u2091\u2091\u209A input data has been set as '+ThrdirBox.get()+'.'
     data = data.replace("#insertcseepinputhere", "--mount type=bind,source="+ThrdirBox.get()+",target=/srv/actom-app/input/external \\")
+    data2 = data2.replace("#insertcseepinputhere", "--mount type=bind,source="+ThrdirBox.get()+",target=/srv/actom-app/input/external")
   else:
     data = data.replace("\n          #insertcseepinputhere", "")
+    data2 = data2.replace("#insertcseepinputhere", "")
 else:
   data=re.sub('#2[^>]+#3', '', data)
+  data2=re.sub('#2[^>]+#3', '', data2)
   OUTPUTS=OUTPUTS+'\n\nWARNING: C\u209B\u2091\u2091\u209A IS TURNED OFF...'
   OUTPUTS=OUTPUTS+'\nTHIS MAY AFFECT HOW OTHER TOOLS RUN!'
   
@@ -665,14 +688,17 @@ if rocbut_v1.get() == "True":
   if ThrdirBox2.get() !='':
     OUTPUTS=OUTPUTS+', with the directory for input data set as '+ThrdirBox2.get()
     data = data.replace("#insertrocinputhere", "--mount type=bind,source="+ThrdirBox2.get()+",target=/srv/actom-app/input/external \\")
+    data2 = data2.replace("#insertrocinputhere", "--mount type=bind,source="+ThrdirBox2.get()+",target=/srv/actom-app/input/external")
   else:
     data = data.replace("\n          #insertrocinputhere", "")
+    data2 = data2.replace("#insertrocinputhere", "")
   OUTPUTS=OUTPUTS+'.'
   config.add_section('RateOfChange')
   config.set('RateOfChange', 'Sampling_Frequency', sampfreq.get())
   config.set('RateOfChange', 'Sampling_Frequency_Units', sampfreqtimeoptions.get())
 else:
   data=re.sub('#3[^>]+#4', '', data)
+  data2=re.sub('#3[^>]+#4', '', data2)
   OUTPUTS=OUTPUTS+'\n\nWARNING: RATE OF CHANGE ANOMALY CRITERIA IS TURNED OFF!'
 
 #if opt
@@ -690,8 +716,10 @@ if optbut_v1.get() == "True":
   if ThrdirBox3.get() !='':
     OUTPUTS=OUTPUTS+', with the directory for input data set as '+ThrdirBox3.get()
     data = data.replace("#insertoptinputhere", "--mount type=bind,source="+ThrdirBox3.get()+",target=/app/Input \\")
+    data2 = data2.replace("#insertoptinputhere", "--mount type=bind,source="+ThrdirBox3.get()+",target=/app/Input")
   else:
     data = data.replace("#insertoptinputhere", "--mount type=bind,source=\"$(pwd)\"/../Advdiff/output,target=/app/Input \\")
+    data2 = data2.replace("#insertoptinputhere", "--mount type=bind,source=\"%cd%\"/../Advdiff/output,target=/app/Input")
   OUTPUTS=OUTPUTS+'.'
   config.add_section('OptCover')
   config.set('OptCover', 'include_cluster_points', c1_v1.get())
@@ -699,6 +727,7 @@ if optbut_v1.get() == "True":
   config.set('OptCover', 'time_limit', str(comptime))
 else:
   data=re.sub('#4[^>]+#5', '', data)
+  data2=re.sub('#4[^>]+#5', '', data2)
   OUTPUTS=OUTPUTS+'\n\nWARNING: OPTIMAL COVER TOOL IS TURNED OFF!'
    
 #if carb
@@ -706,10 +735,13 @@ if carbbut_v1.get() == "True":
   if ThrdirBox4.get() !='':
     OUTPUTS=OUTPUTS+'\n\nThe directory for the carbonate system input data has been set as '+ThrdirBox4.get()+'.'
     data = data.replace("#insertcarbinputhere", "--mount type=bind,source="+ThrdirBox4.get()+",target=/external/input \\")
+    data2 = data2.replace("#insertcarbinputhere", "--mount type=bind,source="+ThrdirBox4.get()+",target=/external/input")
   else:
     data = data.replace("#insertcarbinputhere", "--mount type=bind,source=\"$(pwd)\"/../Advdiff/output,target=/external/input \\")
+    data2 = data2.replace("#insertcarbinputhere", "--mount type=bind,source=\"%cd%\"/../Advdiff/output,target=/external/input")
 else:
   data=re.sub('#5[^>]+#6', '', data)
+  data2=re.sub('#5[^>]+#6', '', data2)
   OUTPUTS=OUTPUTS+'\n\nWARNING: CARBONATE SYSTEM IS TURNED OFF...'
   OUTPUTS=OUTPUTS+'\nTHIS MAY AFFECT HOW OTHER TOOLS RUN!'
      
@@ -731,24 +763,29 @@ if impbut_v1.get() == "True":
   if ThrdirBox5.get() !='':
     OUTPUTS=OUTPUTS+', with the directory for input data set as '+ThrdirBox5.get()
     data = data.replace("#insertimpinputhere", "--mount type=bind,source="+ThrdirBox5.get()+",target=/external/input \\")
+    data2 = data2.replace("#insertimpinputhere", "--mount type=bind,source="+ThrdirBox5.get()+",target=/external/input")
   else:
     data = data.replace("#insertimpinputhere", "--mount type=bind,source=\"$(pwd)\"/../carbon/output,target=/external/input \\")
+    data2 = data2.replace("#insertimpinputhere", "--mount type=bind,source=\"%cd%\"/../carbon/output,target=/external/input")
   OUTPUTS=OUTPUTS+'.'
   config.add_section('Impacts')
   config.set('Impacts', 'animation', anioptions.get())
   config.set('Impacts', 'local', c3_v1.get())
   config.set('Impacts', 'output', 'pH')
 else:
-  data=re.sub('#######[^>]+########', '', data)
+  data=re.sub('#6[^>]+#7', '', data)
+  data2=re.sub('#6[^>]+#7', '', data2)
   OUTPUTS=OUTPUTS+'\n\nWARNING: IMPACT ANALYSIS IS TURNED OFF!'
 
 #if report
 if repbut_v1.get() == "True":
   if ThrdirBox6.get() !='':
     OUTPUTS=OUTPUTS+'\n\nThe directory for the reporting input data has been set as '+ThrdirBox6.get()+'.'
-    data = data.replace("docker run -it $options --mount type=bind,source=\"$(pwd)\",target=/srv/actom-output/input", "docker run -it $options --mount type=bind,source="+ThrdirBox6.get()+",target=target=/srv/actom-output/input \\")
+    data = data.replace("docker run -it $options --mount type=bind,source=\"$(pwd)\",target=/srv/actom-output/input", "docker run -it $options --mount type=bind,source="+ThrdirBox6.get()+",target=target=/srv/actom-output/input")
+    data2 = data2.replace("docker run -it $options --mount type=bind,source=\"%cd%\",target=/srv/actom-output/input", "docker run -it $options --mount type=bind,source="+ThrdirBox6.get()+",target=target=/srv/actom-output/input")
 else:
-  data=re.sub('#6[^>]+#7', '', data)
+  data=re.sub('#7[^>]+#8', '', data)
+  data2=re.sub('#7[^>]+#8', '', data2)
   OUTPUTS=OUTPUTS+'\n\nREPORTING IS TURNED OFF!'
 
 print(OUTPUTS)
@@ -756,14 +793,29 @@ print(OUTPUTS)
 data=data.replace("mkdir -p ../","mkdir -p ",1)
 data=data.replace("cd ../","cd ",1)
 
+data2=data2.replace("mkdir ../","mkdir -p ",1)
+data2=data2.replace("cd ../","cd ",1)
+
+if c4=='Yes':
+   data=data.replace("$options","")
+   data2=data2.replace("$options","")
+   config.set('General', 'options', '')
+else:
+   data=data.replace("$options","-a STDERR")
+   data2=data2.replace("$options","-a STDERR")
+   config.set('General', 'options', '-a STDERR')
+
 with open('input/data.ini', 'w') as configfile:
     config.write(configfile)
 
-if c4=='Yes':
-   first_line="#!/bin/bash\noptions=\'\'\n"
-else:
-   first_line="#!/bin/bash\noptions=\'-a STDERR\'\n"
+data2=data2.replace("#","@ Rem ")
+data2=data2.replace("-p","")
+data2=data2.replace("$(pwd)","%cd%")
+data2=data2.replace("-it","-i")
+
+first_line="#!/bin/bash\n"
 with open('input/Run-All.sh', 'w') as modified: modified.write(first_line+data)
+with open('input/Run-All.bat', 'w') as modified2: modified2.write(data2)
 
 print('\nThe run files have been generated...\n\n')
 
