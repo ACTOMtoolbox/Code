@@ -107,3 +107,6 @@ docker run -it $options --mount type=bind,source=%cd%,target=/srv/actom-output/i
 @ echo ***************************************************
 @ echo.
 #8
+@ mkdir logs
+@ copy Run-All.bat logs >NUL
+@ del "%~f0" & exit
