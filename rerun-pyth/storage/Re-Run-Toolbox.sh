@@ -85,7 +85,7 @@ echo '*      To re-run the toolbox at a different       *'
 echo '*  leakage rate, or with different pH thresholds  *'
 echo '*             run the scripts below:              *'
 echo "* 'cd $(pwd)' "
-echo "*                 'sh Re-Run.sh'                  "
+echo "*                 './Re-Run.sh'                   *"
 echo '*                                                 *'
 echo '***************************************************'
 echo

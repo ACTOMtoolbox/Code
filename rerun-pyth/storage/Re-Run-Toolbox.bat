@@ -77,3 +77,5 @@ docker run -i $options --mount type=bind,source=%cd%,target=/srv/actom-output/in
 @ echo *                                                 *
 @ echo ***************************************************
 @ echo.
+@ copy Re-Run-Toolbox.bat logs >NUL
+@ del "%~f0" & exit
