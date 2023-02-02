@@ -31,6 +31,7 @@ def TTMframe():
        Thrdir22Box.config(font=("Times New Roman (serif)", 12))
        Thrdir22Box.pack(side=tk.LEFT, anchor="w", padx=2)
        frametwofive22.pack(anchor="w", padx=12)
+       globals().update(locals())
     if ttmbut_v1.get()=='False':
        for widgets in framefour51.winfo_children():
            widgets.pack_forget()
@@ -493,7 +494,7 @@ optbut.deselect()
 optbut.pack(side=tk.LEFT)
 framefour8.pack(anchor="w", padx=12)
 frametwofivec = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-frametwofivec.pack(anchor="w", padx=12)
+frametwofivec.pack(anchor="w", padx=24)
 
 framefour9 = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
 carbbut='False'
