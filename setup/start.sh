@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python3 process.py
+python3 process.py $systemOS

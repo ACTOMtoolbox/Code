@@ -5,6 +5,7 @@ import jinja2
 import os
 import glob
 import csv
+import sys
 from termcolor import colored, cprint
 import configparser
 
@@ -636,6 +637,10 @@ template = env.get_template('storage/template-ts.html')
 a = template.render(Documentation=': Technical Summary',OUTPUTS=OUTPUT2)
 with open(filelocations+'Technical-Summary.html', 'w') as f:
   f.write(a)
-  
-os.system('cp -r storage/Re-Run.sh '+filelocations+'Re-Run.sh')
-os.system('cp -r storage/Re-Run.bat '+filelocations+'Re-Run.bat')
+
+if sys.argv[1] == "lin":
+  os.system('cp -r storage/Re-Run-lin.sh '+filelocations+'Re-Run.sh')
+elif sys.argv[1] == "mac":
+  os.system('cp -r storage/Re-Run-mac.sh '+filelocations+'Re-Run.sh')
+elif sys.argv[1] == "win":
+  os.system('cp -r storage/Re-Run.bat '+filelocations+'Re-Run.bat')

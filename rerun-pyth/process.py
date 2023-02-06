@@ -1,6 +1,7 @@
 import jinja2
 import configparser
 import os
+import sys
 import tkinter as tk
 from tkinter import ttk
 from PIL import ImageTk,Image
@@ -248,13 +249,22 @@ if os.path.isfile('input/logs/Run-All.sh'):
     data=data.replace("$options","")
   else:
     data=data.replace("$options","-a STDERR")
+  if sys.argv[1] == "lin":
+    data=data.replace("$systemOS","lin")
+  elif sys.argv[1] == "mac":
+    data=data.replace("$systemOS","mac")
+    data=data.replace("  press Ctrl and click on link           *'\necho '*     or ","")
   with open('input/Re-Run-Toolbox.sh', 'w') as modified1: modified1.write(first_line+data)
+
+
 if os.path.isfile('input/logs/Run-All.bat'):
   with open('storage/Re-Run-Toolbox.bat', 'r') as original2: data2 = original2.read()
   if genopt=='':
     data2=data2.replace("$options","")
   else:
     data2=data2.replace("$options","-a STDERR")
+  if sys.argv[1] == "win":
+    data=data2.replace("$systemOS","win")
   with open('input/Re-Run-Toolbox.bat', 'w') as modified2: modified2.write(data2)
 
 print('The re-run files have been generated')

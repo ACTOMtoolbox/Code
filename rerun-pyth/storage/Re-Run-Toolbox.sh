@@ -65,8 +65,7 @@ echo '*                                                 *'
 echo '***************************************************'
 echo
 cd ../
-docker run -it $options --mount type=bind,source="$(pwd)",target=/srv/actom-output/input actomtoolbox/actom-output
-rm -r Re-Run.bat
+docker run -it $options -e systemOS=$systemOS --mount type=bind,source="$(pwd)",target=/srv/actom-output/input actomtoolbox/actom-output
 echo
 echo '***************************************************'
 echo '*     The Technical Summary can be found at:      *'
@@ -83,9 +82,8 @@ echo '*                                                 *'
 echo '*                                                 *'
 echo '*      To re-run the toolbox at a different       *'
 echo '*  leakage rate, or with different pH thresholds  *'
-echo '*             run the scripts below:              *'
-echo "* 'cd $(pwd)' "
-echo "*                 './Re-Run.sh'                   *"
+echo '*              run the script below:              *'
+echo "*                 'sh Re-Run.sh'                  *"
 echo '*                                                 *'
 echo '***************************************************'
 echo

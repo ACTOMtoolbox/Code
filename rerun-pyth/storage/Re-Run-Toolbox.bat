@@ -53,8 +53,7 @@ docker run -i $options --mount type=bind,source="%cd%"/../carbon/output,target=/
 @ echo ***************************************************
 @ echo.
 @ cd ../
-docker run -i $options --mount type=bind,source=%cd%,target=/srv/actom-output/input actomtoolbox/actom-output
-@ DEL Re-Run.sh
+docker run -i $options -e systemOS=$systemOS --mount type=bind,source=%cd%,target=/srv/actom-output/input actomtoolbox/actom-output
 @ echo.
 @ echo ***************************************************
 @ echo *     The Technical Summary can be found at:      *
@@ -72,7 +71,6 @@ docker run -i $options --mount type=bind,source=%cd%,target=/srv/actom-output/in
 @ echo *      To re-run the toolbox at a different       *
 @ echo *  leakage rate, or with different pH thresholds  *
 @ echo *             run the scripts below:              *
-@ echo * 'cd %cd%'
 @ echo *                 '.\Re-Run.bat'                  *
 @ echo *                                                 *
 @ echo ***************************************************
