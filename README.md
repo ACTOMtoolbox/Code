@@ -17,4 +17,5 @@ NL: Stefan Carpentier stefan.carpentier@tno.nl
 
 USA: Katherine Romanak, katherine.romanak@beg.utexas.edu and/or Rajesh Pawar, rajesh@lanl.gov 
 
-We strongly encourage everyone downloading and using the DST code to register as a user by filling a short registration form. We’d love to get a better understanding of who is using the DST and for what applications, as it will help us to provide the best support to the user community and allows us to demonstrate (anonymised) use metrics to our funders. It will also allow you to receive information and news on any updates. 
+We strongly encourage everyone downloading and using the DST code to register as a user by filling a short registration form here: https://forms.office.com/e/ZJcDquaxGi.
+We’d love to get a better understanding of who is using the DST and for what applications, as it will help us to provide the best support to the user community and allows us to demonstrate (anonymised) use metrics to our funders. It will also allow you to receive information and news on any updates.
