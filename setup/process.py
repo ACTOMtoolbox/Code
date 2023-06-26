@@ -820,7 +820,7 @@ if sys.argv[1] == "lin":
   with open('input/Run-All.sh', 'w') as modified: modified.write(first_line+data)
 elif sys.argv[1] == "mac":
   data=data.replace("$systemOS","mac")
-    data=data.replace("press Ctrl and click on link           *'\necho '*     or ","")
+  data=data.replace("press Ctrl and click on link           *'\necho '*     or ","")
   with open('input/Run-All.sh', 'w') as modified: modified.write(first_line+data)
 elif sys.argv[1] == "win":
   data=data2.replace("$systemOS","win")
