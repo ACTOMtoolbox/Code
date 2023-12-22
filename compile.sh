@@ -1,5 +1,5 @@
 #!/bin/bash
-docker system prune -a
+#docker system prune -a
 cd advdiff
 docker build . -t actomtoolbox/adv-diff
 cd ../carbonatesys

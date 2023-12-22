@@ -13,6 +13,11 @@ env = jinja2.Environment(loader=jinja2.FileSystemLoader(searchpath=''))
 
 filelocations="input/"
 
+config=configparser.ConfigParser(allow_no_value=True)
+config.read(filelocations+"data.ini")
+
+mode = config['General']['run'] # brine?
+
 print("\n******************************************************")
 print("\nProcessing Outputs\n")
 print("******************************************************\n")
@@ -24,6 +29,7 @@ os.system('cp -r storage/files/ input/')
 tool_list=''
 tool_list2=''
 OUTPUTS=''
+RISKMAP=''
 REF=[]
 
 #print('checking for the Sub-Surface CO₂ Seep and Rate Mapping Tool:')
@@ -46,35 +52,36 @@ else:
   tool_list=tool_list+'<font color="red"><li>The Tracer Transport Model</li></font>'
   tool_list2=tool_list2+'<font color="red"><br><br>The Tracer Transport Model</font>'
 
-print('checking for Cseep:')
-if os.path.isdir(filelocations+'Cseep'):
-  print('found')
-  tool_list=tool_list+'<b><li>C<sub>seep</sub></li></b>'
-  tool_list2=tool_list2+'<b><br><br>C<sub>seep</sub></b>'
-else:
-  cprint("Missing!", 'red', attrs=['bold'])
-  tool_list=tool_list+'<font color="red"><li>C<sub>seep</sub></li></font>'
-  tool_list2=tool_list2+'<font color="red"><br><br>C<sub>seep</sub></font>'
+if mode != "Brine":
+   print('checking for Cseep:')
+   if os.path.isdir(filelocations+'Cseep'):
+      print('found')
+      tool_list=tool_list+'<b><li>C<sub>seep</sub></li></b>'
+      tool_list2=tool_list2+'<b><br><br>C<sub>seep</sub></b>'
+   else:
+      cprint("Missing!", 'red', attrs=['bold'])
+      tool_list=tool_list+'<font color="red"><li>C<sub>seep</sub></li></font>'
+      tool_list2=tool_list2+'<font color="red"><br><br>C<sub>seep</sub></font>'
   
-print('checking for the Rate of Change Anomaly Criteria:')
-if os.path.isdir(filelocations+'ROC'):
-  print('found')
-  tool_list=tool_list+'<b><li>The Rate of Change Anomaly Criteria</li></b>'
-  tool_list2=tool_list2+'<b><br><br>The Rate of Change Anomaly Criteria</b>'
-else:
-  cprint("Missing!", 'red', attrs=['bold'])
-  tool_list=tool_list+'<font color="red"><li>The Rate of Change Anomaly Criteria</li></font>'
-  tool_list2=tool_list2+'<font color="red"><br><br>The Rate of Change Anomaly CriteriaTool</font>'
+   print('checking for the Rate of Change Anomaly Criteria:')
+   if os.path.isdir(filelocations+'ROC'):
+      print('found')
+      tool_list=tool_list+'<b><li>The Rate of Change Anomaly Criteria</li></b>'
+      tool_list2=tool_list2+'<b><br><br>The Rate of Change Anomaly Criteria</b>'
+   else:
+      cprint("Missing!", 'red', attrs=['bold'])
+      tool_list=tool_list+'<font color="red"><li>The Rate of Change Anomaly Criteria</li></font>'
+      tool_list2=tool_list2+'<font color="red"><br><br>The Rate of Change Anomaly CriteriaTool</font>'
   
-print('checking for the Carbonate System:')
-if os.path.isdir(filelocations+'carbon'):
-  print('found')
-  tool_list=tool_list+'<b><li>The Carbonate System</li></b>'
-  tool_list2=tool_list2+'<b><br><br>The Carbonate System</b>'
-else:
-  cprint("Missing!", 'red', attrs=['bold'])
-  tool_list=tool_list+'<font color="red"><li>The Carbonate System</li></font>'
-  tool_list2=tool_list2+'<font color="red"><br><br>The Carbonate System</font>'
+   print('checking for the Carbonate System:')
+   if os.path.isdir(filelocations+'carbon'):
+      print('found')
+      tool_list=tool_list+'<b><li>The Carbonate System</li></b>'
+      tool_list2=tool_list2+'<b><br><br>The Carbonate System</b>'
+   else:
+      cprint("Missing!", 'red', attrs=['bold'])
+      tool_list=tool_list+'<font color="red"><li>The Carbonate System</li></font>'
+      tool_list2=tool_list2+'<font color="red"><br><br>The Carbonate System</font>'
 
 print('checking for Impact Analysis:')
 if os.path.isdir(filelocations+'impacts'):
@@ -86,15 +93,16 @@ else:
   tool_list=tool_list+'<font color="red"><li>Impact Analysis</li></font>'
   tool_list2=tool_list2+'<font color="red"><br><br>Impact Analysis</font>'
   
+
 print('checking for the Optimal Cover Tool:')
 if os.path.isdir(filelocations+'OptCover'):
-  print('found')
-  tool_list=tool_list+'<b><li>The Optimal Cover Tool</li></b>'
-  tool_list2=tool_list2+'<b><br><br>The Optimal Cover Tool</b>'
+   print('found')
+   tool_list=tool_list+'<b><li>The Optimal Cover Tool</li></b>'
+   tool_list2=tool_list2+'<b><br><br>The Optimal Cover Tool</b>'
 else:
-  cprint("Missing!", 'red', attrs=['bold'])
-  tool_list=tool_list+'<font color="red"><li>The Optimal Cover Tool</li></font>'
-  tool_list2=tool_list2+'<font color="red"><br><br>The Optimal Cover Tool</font>'
+   cprint("Missing!", 'red', attrs=['bold'])
+   tool_list=tool_list+'<font color="red"><li>The Optimal Cover Tool</li></font>'
+   tool_list2=tool_list2+'<font color="red"><br><br>The Optimal Cover Tool</font>'
 
 template = env.get_template('storage/template.html')
 a = template.render(Tool_List=tool_list,Documentation=': Monitoring Plan',OUTPUTS='{{ OUTPUTS }}',RISKMAP='{{ RISKMAP }}',HYDRODYNAMICS='{{ HYDRODYNAMICS }}',REF='{{ REF }}')
@@ -102,6 +110,11 @@ with open('storage/template-wt.html', 'w') as f:
   f.write(a)
 
 figure_count = 1
+
+if mode != "Brine":
+   RISKMAP=RISKMAP+"Locations of wells are often publicly available through web portals, like <a href=\"https://factpages.npd.no/en\" target=\"_blank\">The Norwegian Petroleum Directorate</a>, <a href=\"https://www.nlog.nl/en\" target=\"_blank\">The Dutch oil and gas portal</a>, and <a href=\"https://www.rrc.texas.gov/resource-center/research/gis-viewer/\" target=\"_blank\">The Railroad Commission of Texas</a>. Other sources, such as designated CO<sub>2</sub> storage atlases, e.g. <a href=\"https://www.npd.no/en/facts/publications/co2-atlases/co2-atlas-for-the-norwegian-continental-shelf/\" target=\"_blank\">CO<sub>2</sub> atlas for the Norwegian Continental Shelf</a>, and <a href=\"https://co2datashare.org/\" target=\"_blank\">open datasets</a>, may provide information about regional faults relevant to the storage site. These wells and faults can be used as a first, readily available, risk map.<br><br>"
+   OUTPUTS=OUTPUTS+"<h4>Local biochemical characteristics.</h4>CO<sub>2</sub> is naturally present in the marine environment and the concentration varies naturally; increased CO<sub>2</sub> concentrations might lead to impact on the local biota (<a href=\"#References\">Blackford et al., 2014</a>). Some of the regional general circulation models also contain biochemical modules (<a href=\"#References\">Artioli et al., 2012</a>). The DST uses the C<sub>seep</sub></li> (<a href=\"#References\">Botnen et al., 2015</a> and <a href=\"#References\">Omar et al., 2021</a>) and Rate of Change (RoC) (<a href=\"#References\">Blackford et al., 2017</a>) methods to distinguish a seep signal from natural variability. Most biochemical surveys are done to study air-sea interactions; hence it can be a challenge to secure such data close to the seafloor, gathering such data could be obtained during site characterization and selection."
+
 
 # -- fill template with text if geo data from AdvDiff exisit --#
 if os.path.isdir(filelocations+'Advdiff'):
@@ -114,8 +127,8 @@ if os.path.isdir(filelocations+'Advdiff'):
       sourcelen=sourcelen+1
       
   RISKMAP2="<h2>Site Specific Input</h2>"
-  
-  RISKMAP="The riskmap for the study area is built upon "
+
+  RISKMAP=RISKMAP+"The riskmap for the study area is built upon "
   
   config=configparser.ConfigParser(allow_no_value=True)
   #config.read('/external/settings/Advdiff/AdvDiff.ini')
@@ -203,14 +216,15 @@ if os.path.isdir(filelocations+'Advdiff'):
   
   with open('storage/AdvDiff.html') as f:
     add = f.read()
-    
+
   OUTPUT2=OUTPUT2+stats+figstats
     
   OUTPUTS=OUTPUTS+add+stats+figstats
 
-with open('storage/AC.html', 'r') as f:
-  AC = f.read()    
-OUTPUTS=OUTPUTS+AC
+if mode != "Brine":
+   with open('storage/AC.html', 'r') as f:
+      AC = f.read()    
+   OUTPUTS=OUTPUTS+AC
   
 if os.path.isdir(filelocations+'Cseep'):    
   with open('storage/CSEEP.html', 'r') as f:
@@ -287,176 +301,85 @@ if os.path.isdir(filelocations+'impacts'):
   
   with open(filelocations+'impacts/output/Impact.txt') as f:
     lines = f.readlines()
-  
-  sub1 = [sub1.replace('Max Change in pH from C fields_global.nc - ', '') for sub1 in lines]
-  sub2 = [sub2.replace('Impact-Area fields_global.nc pH from C ', '') for sub2 in sub1]
-  sub3 = [sub3.replace('\n', '') for sub3 in sub2]
 
-  impacts15='Setting each release to a rate of '+rate+', we find that the maximum pH change predicted by the combined leakages is '+sub3[0][0:5]+'. '
-  
-  sub4 = sub3[1:]
+  sub1=''
+  sub3=''
+  for line in lines:
+     if mode != "Brine":
+        if 'Max Change in pH from C fields_global.nc - ' in line:
+           sub1 = line
+           sub1 = sub1.replace('Max Change in pH from C fields_global.nc - ', '')
+        if 'Impact-Area fields_global.nc pH from C ' in line:
+           sub2 = line
+           sub2 = sub2.replace('Impact-Area fields_global.nc pH from C ', '')
+           sub3=sub3+sub2
+     else:
+        if 'Impact-Area fields_global.nc C ' in line:
+           sub2 = line
+           sub2 = sub2.replace('Impact-Area fields_global.nc C ', '')
+           sub3=sub3+sub2
+  sub3 = sub3.split()
+
+  if mode != "Brine" or sub1 != '':
+
+     impacts15='Setting each release to a rate of '+rate+', we find that the maximum pH change predicted by the combined leakages is '+sub1+'. '
   
   
   if config.has_option('General', 'threshold-ph'):
     Thres=((config['General']['threshold-ph']).split(","))
     Thres=sorted(Thres, key=float, reverse=True)
        
-  
-  
   Impactarea=''
   impacts2=''
   if config.has_option('General', 'threshold-ph'):
-    impacts2='With pH change thresholds based on user set values'
-    init=0
+    if mode != "Brine":
+       impacts2='With pH change thresholds based on user set values'
+    else:
+       impacts2='With dilution factor thresholds based on user set values'
+
+    if config.has_option('CSEEP', 'threshold-ph'):
+      if impacts2=='':
+        impacts2='With pH change thresholds from <i>C<sub>seep</sub></i>'
+      else:
+        if config.has_option('RateOfChange', 'threshold-ph'):
+           impacts2=impacts2+', <i>C<sub>seep</sub></i>'
+        else:
+           impacts2=impacts2+' and <i>C<sub>seep</sub></i>'
+
+    if config.has_option('RateOfChange', 'threshold-ph'):
+      if impacts2=='':
+        impacts2='With pH change thresholds the Rate of Change Anomaly Criteria'
+      else:
+        if config.has_option('CSEEP', 'threshold-ph'):
+           impacts2=impacts2+', and from the Rate of Change Anomaly Criteria'
+        else
+           impacts2=impacts2+' and from the Rate of Change Anomaly Criteria'
+
+
     Thres1=((config['General']['threshold-ph']).split(","))
     Thres=[Thres.replace(' ', '') for Thres in Thres1]
     Thres=sorted(Thres, key=float, reverse=True)
     impacts2=impacts2+': '
-    if len(Thres)>1:
-      for x in range(len(Thres)):
-            
-        for y in range(len(sub4)):
-          text=sub4[y]
-          text=text.split(' ')
-          if text[0]==Thres[x]:
-            outtext=text[1]
-            outtext=outtext.split('.')
-            if len(sub4)>1 and len(Thres)>1:
-              if x+1<len(Thres):
-                Impactarea=Impactarea+outtext[0]+', '
-              else:
-                Impactarea=Impactarea[:-2]+' and '+outtext[0]+' m<sup>2</sup>'
-            else:
-              Impactarea=Impactarea+outtext[0]+' m<sup>2</sup>'
-      
-        if x+1<len(Thres):
-          impacts2=impacts2+Thres[x][0:5]+', '
-        else:
-          impacts2=impacts2[:-2]+' and '+Thres[x][0:5]
+    
+    if len(sub3)>2 and len(Thres)>1:
+       subthres = sub3[::2]
+       sub3.pop(0)
+       sub4 = sub3[::2]
+    
+       for x in range(len(subthres)):
+          if x+1<len(subthres):
+             Impactarea=Impactarea+sub4[x]+', '
+             impacts2=impacts2+subthres[x]+', '
+          else:
+             Impactarea=Impactarea[:-2]+' and '+sub4[x]+' m<sup>2</sup>'
+             impacts2=impacts2[:-2]+' and '+subthres[x]
     else:
-      impacts2=impacts2+Thres[0][0:5]
-      
-      for y in range(len(sub4)):
-        text=sub4[y]
-        text=text.split(' ')
-        if text[0]==Thres[0]:
-          outtext=text[1]
-          outtext=outtext.split('.')
-          Impactarea=Impactarea+outtext[0]+' m<sup>2</sup>'
-          
-    if init==0:
-       impacts2=impacts2+', the total area impacted is '+Impactarea
-    else:
-       impacts2=impacts2+', where the total area impacted is '+Impactarea
+       Impactarea=Impactarea+sub3[1]+' m<sup>2</sup>'
+       impacts2=impacts2+sub3[0]
+              
+    impacts2=impacts2+', the total area impacted is '+Impactarea
     if len(Thres)>1:
       impacts2=impacts2+', respectively. '
-    else:
-      impacts2=impacts2+'. '
-
-  Impactarea='' 
-  if config.has_option('CSEEP', 'threshold-ph'):
-    Thres=((config['CSEEP']['threshold-ph']).split(","))
-    Thres=sorted(Thres, key=float, reverse=True)
-    if impacts2=='':
-      impacts2=impacts2+'With pH change thresholds from <i>C<sub>seep</sub></i>'
-      init=0
-    else:
-      impacts2=impacts2+'Along with pH change thresholds from <i>C<sub>seep</sub></i>'
-      init=1
-    impacts2=impacts2+': '
-    if len(Thres)>1:
-      for x in range(len(Thres)):
-      
-        for y in range(len(sub4)):
-          text=sub4[y]
-          text=text.split(' ')
-          
-          print(text[0])
-          print(Thres[x])
-          if text[0]==Thres[x]:
-            outtext=text[1]
-            outtext=outtext.split('.')
-            if len(sub4)>1 and len(Thres)>1:
-              if x+1<len(Thres):
-                Impactarea=Impactarea+outtext[0]+', '
-              else:
-                Impactarea=Impactarea[:-2]+' and '+outtext[0]+' m<sup>2</sup>'
-            else:
-              Impactarea=Impactarea+outtext[0]+' m<sup>2</sup>'
-      
-        if x+1<len(Thres):
-          impacts2=impacts2+Thres[x][0:5]+', '
-        else:
-          impacts2=impacts2[:-2]+' and '+Thres[x][0:5]
-    else:
-      impacts2=impacts2+Thres[0][0:5]
-      
-      for y in range(len(sub4)):
-        text=sub4[y]
-        text=text.split(' ')
-        if text[0]==Thres[0]:
-          outtext=text[1]
-          outtext=outtext.split('.')
-          Impactarea=Impactarea+outtext[0]+' m<sup>2</sup>'
-    
-    if init==0:
-       impacts2=impacts2+', the total area impacted is '+Impactarea
-    else:
-       impacts2=impacts2+', where the total area impacted is '+Impactarea
-    if len(Thres)>1:
-      impacts2=impacts2+' respectively. '
-    else:
-      impacts2=impacts2+'. '
-      
-  Impactarea=''
-  if config.has_option('RateOfChange', 'threshold-ph'):
-    Thres=((config['RateOfChange']['threshold-ph']).split(","))
-    Thres=sorted(Thres, key=float, reverse=True)
-    if impacts2=='':
-      impacts2=impacts2+'With pH change thresholds the Rate of Change Anomaly Criteria'
-      init=0
-    else:  
-      impacts2=impacts2+'And pH change thresholds from the Rate of Change Anomaly Criteria'
-      init=1
-    impacts2=impacts2+': '
-    if len(Thres)>1:
-      for x in range(len(Thres)):
-      
-        for y in range(len(sub4)):
-          text=sub4[y]
-          text=text.split(' ')
-          if text[0]==Thres[x]:
-            outtext=text[1]
-            outtext=outtext.split('.')
-            if len(sub4)>1 and len(Thres)>1:
-              if x+1<len(Thres):
-                Impactarea=Impactarea+outtext[0]+', '
-              else:
-                Impactarea=Impactarea[:-2]+' and '+outtext[0]+' m<sup>2</sup>'
-            else:
-              Impactarea=Impactarea+outtext[0]+' m<sup>2</sup>'
-
-        if x+1<len(Thres):
-          impacts2=impacts2+Thres[x][0:5]+', '
-        else:
-          impacts2=impacts2[:-2]+' and '+Thres[x][0:5]
-    else:
-      impacts2=impacts2+Thres[0][0:5]
-      
-      for y in range(len(sub4)):
-        text=sub4[y]
-        text=text.split(' ')
-        if text[0]==Thres[0]:
-          outtext=text[1]
-          outtext=outtext.split('.')
-          Impactarea=Impactarea+outtext[0]+' m<sup>2</sup>'
-      
-    if init==0:
-       impacts2=impacts2+', the total area impacted is '+Impactarea
-    else:
-       impacts2=impacts2+', where the total area impacted is '+Impactarea
-    if len(Thres)>1:
-      impacts2=impacts2+' respectively. '
     else:
       impacts2=impacts2+'. '
   
@@ -468,23 +391,38 @@ if os.path.isdir(filelocations+'impacts'):
   impactstats=''
 
   figure_count=figure_count+1
-  impacts2=impacts2+'<br><br>The map of the largest impacted regions from the '+str(sourcelen)+ " sources in terms of pH changes over the full simulation are shown in Figure "+str(figure_count)+", "
-  impactstats=impactstats+'<p style=\"text-align:center\"><img src=\'impacts/output/statistics_globalpH from max.png\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. Map of the largest impacted regions as pH changes at a release of '+rate+'.</p>'
+  impacts2=impacts2+'<br><br>The map of the largest impacted regions from the '+str(sourcelen)+ " sources over the full simulation are shown in Figure "+str(figure_count)+", "
+  if mode != "Brine":
+     impactstats=impactstats+'<p style=\"text-align:center\"><img src=\'impacts/output/statistics_globalpH from max.png\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. Map of the largest impacted regions at a release of '+rate+'.</p>'
+  else:
+     impactstats=impactstats+'<p style=\"text-align:center\"><img src=\'impacts/output/statistics_globalmax.png\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. Map of the largest impacted regions.</p>'
   
   figure_count=figure_count+1
   impacts2=impacts2+'with the impact exceeding each threshold shown in Figure '+str(figure_count)+'. '
-  impactstats=impactstats+'<p style=\"text-align:center\"><img src=\'impacts/output/fields_globalpH from CThresholds.png\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. Map of the largest impacted regions exceeding each pH change threshold at a release rate of '+rate+'.</p>'
+  if mode != "Brine":  
+     impactstats=impactstats+'<p style=\"text-align:center\"><img src=\'impacts/output/statistics_globalpH from maxThresholds.png\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. Map of the largest impacted regions exceeding each threshold at a release rate of '+rate+'.</p>'
+  else:
+     impactstats=impactstats+'<p style=\"text-align:center\"><img src=\'impacts/output/statistics_globalmaxThresholds.png\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. Map of the largest impacted regions exceeding each threshold.</p>'
 
   figure_count=figure_count+1
-  impacts2=impacts2+' The time series for the fluctuating pH changes are also provided (when viewed in html format) in Figure '+str(figure_count)
-  impactstats=impactstats+'<p style=\"text-align:center\"><img src=\'impacts/output/fields_globalpH from C.gif\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. Time series for the fluctuating pH changes (when viewed in html format) based on the sources provided and a release rate of '+rate+'.</p>'
+  impacts2=impacts2+' The time series for the fluctuating changes are also provided (when viewed in html format) in Figure '+str(figure_count)
+  if mode != "Brine":
+     impactstats=impactstats+'<p style=\"text-align:center\"><img src=\'impacts/output/fields_globalpH from C.gif\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. Time series for the fluctuating changes (when viewed in html format) based on the sources provided and a release rate of '+rate+'.</p>'
+  else:
+     impactstats=impactstats+'<p style=\"text-align:center\"><img src=\'impacts/output/fields_globalC.gif\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. Time series for the fluctuating changes (when viewed in html format) based on the sources provided.</p>'
   
   figure_count=figure_count+1
-  impacts2=impacts2+' and probes provided at various locations, such as potential monitoring stations can detect varying levels of fluctuations from the releases at '+rate+' over time as shown in Figure '+str(figure_count)+'. '
+  if mode != "Brine":
+     impactstats=impactstats+'<p style=\"text-align:center\"><img src=\'impacts/output/probe_cumulativepH from C.png\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. Time series for detecting fluctuation levels at each probe based on the sources provided and a release of '+rate+'.</p>'
+     impacts2=impacts2+' and probes provided at various locations, such as potential monitoring stations can detect varying levels of fluctuations from the releases at '+rate+' over time as shown in Figure '+str(figure_count)+'. '
+  else:
+     impactstats=impactstats+'<p style=\"text-align:center\"><img src=\'impacts/output/probe_cumulativeC.png\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. Time series for detecting fluctuation levels at each probe based on the sources provided.</p>'
+     impacts2=impacts2+' and probes provided at various locations, such as potential monitoring stations can detect varying levels of fluctuations from the release over time as shown in Figure '+str(figure_count)+'. '
   
-  impactstats=impactstats+'<p style=\"text-align:center\"><img src=\'impacts/output/probe_cumulativepH from C.png\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. Time series for detecting fluctuation carbon levels at each probe based on the sources provided and a release of '+rate+'.</p>'
 
-  OUTPUTS=OUTPUTS+impacts15+impacts2+impactstats
+  if mode != "Brine":
+     OUTPUTS=OUTPUTS+impacts15
+  OUTPUTS=OUTPUTS+impacts2+impactstats
   
   OUTPUT2=OUTPUT2+"<h2>Impact Potential</h2>"+impacts2+impactstats
 
@@ -506,7 +444,24 @@ if os.path.isdir(filelocations+'OptCover'):
   OptCover3=''
 
 
-  
+  if mode == "Brine":
+     if config.has_option('General', 'threshold-ph'):
+       file1=glob.glob(filelocations+'OptCover/output/*.nc')
+       file1.sort(reverse=True)
+       Thres=((config['General']['threshold-ph']).split(","))
+       Thres=sorted(Thres, key=float, reverse=True)
+       for x in range(len(file1)):
+          ncfile = nc.Dataset(file1[x])
+          numberofsensors=ncfile.dimensions['sensor'].size
+          if x == 0:
+             OptCover2=OptCover2+'With a user set dilution threshold of '+ Thres[x][:5]
+          else:
+             OptCover2=OptCover2+'With another user set dilution threshold of '+ Thres[x][:5]
+          figure_count=figure_count+1
+          OptCover2=OptCover2+', Figure '+str(figure_count)+'. shows the best locations to place sensors (and the areas that they cover) to maximise the detection, using a minimum number of sensors: '+str(numberofsensors)+'. '
+      
+          OptCover3=OptCover3+'<p style=\"text-align:center\"><img src=\''+file1[x][6:-19]+'map2.png\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. The best locations to place sensors (and the areas that they cover) to maximise detection from a user set dilution threshold of '+Thres[x][:5]+', using a minimum number of sensors: '+str(numberofsensors)+'.</p>'
+
   if config.has_option('General', 'threshold-ph'):
     file1=glob.glob(filelocations+'OptCover/output/USER*.nc')
     file1.sort(reverse=True)
@@ -584,10 +539,16 @@ with open('storage/template-all.html', 'w') as f:
 
 # -- References -- #
 
-with open('storage/Scenarios_REF.html', 'r') as f:
-  ref=f.readlines()
-ref = [x.strip() for x in ref] 
-REF=REF+ref
+if mode != "Brine":
+   with open('storage/Scenarios_REF.html', 'r') as f:
+      ref=f.readlines()
+   ref = [x.strip() for x in ref] 
+   REF=REF+ref
+else:
+   with open('storage/Scenarios_REF2.html', 'r') as f:
+      ref=f.readlines()
+   ref = [x.strip() for x in ref] 
+   REF=REF+ref
 
 if os.path.isdir(filelocations+'geo'):
   with open('storage/GEO_REF.html', 'r') as f:

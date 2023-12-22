@@ -1,7 +1,0 @@
-numpy
-matplotlib
-mip
-netCDF4
-xarray
-configparser
-PyCO2SYS

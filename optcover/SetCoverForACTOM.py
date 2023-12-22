@@ -39,93 +39,104 @@ thtit=[]
 config=configparser.ConfigParser(allow_no_value=True)
 config.read('/external/settings/data.ini')
 
+mode = config['General']['run'] # brine? 
+
 q = float(config['General']['Rate']) # flux 
 qunits = config['General']['Rate-Units'] # flux units
 
-if config.has_option('General', 'ta'):
-    TAmean = float(config['General']['ta'])
-else:
-    TAmean = float(config['CSEEP']['ta-mean'])
+if mode == 'CO2':
+    if config.has_option('General', 'ta'):
+        TAmean = float(config['General']['ta'])
+    else:
+        TAmean = float(config['CSEEP']['ta-mean'])
     
-if config.has_option('General', 'dic'):
-    DICmean = float(config['General']['dic'])
-else:
-    DICmean = float(config['CSEEP']['dic-mean'])
+    if config.has_option('General', 'dic'):
+        DICmean = float(config['General']['dic'])
+    else:
+        DICmean = float(config['CSEEP']['dic-mean'])
     
-if config.has_option('General', 'dens'):
-    dens = float(config['General']['dens'])
-else:
-    dens = float(config['CSEEP']['dens-mean'])
+    if config.has_option('General', 'dens'):
+        dens = float(config['General']['dens'])
+    else:
+        dens = float(config['CSEEP']['dens-mean'])
     
-if config.has_option('General', 'threshold-pH'):
-    th1=((config['General']['threshold-ph']).split(","))
-    for i in range(len(th1)):
-      kwargs = dict(
-        par1 = DICmean,
-        par2 = TAmean,
-        par1_type = 2,
-        par2_type = 1,
-        )
-      outpH=pyco2.sys(**kwargs)
-      phthres=outpH["pH_total"]
-      phthres=phthres+float(th1[i])
-      kwargs = dict(
-        par1 = phthres,
-        par2 = TAmean,
-        par1_type = 3,
-        par2_type = 1,
-        )
-      outDIC=pyco2.sys(**kwargs)
-      DICthres=outDIC["dic"] 
-      DICthres=abs(DICthres-DICmean)
-      DICthres=DICthres*dens*0.0440095/1000000 
-      thtit=thtit+['USER']
-      th.append(DICthres)
+    if config.has_option('General', 'threshold-pH'):
+        th1=((config['General']['threshold-ph']).split(","))
+        for i in range(len(th1)):
+          kwargs = dict(
+            par1 = DICmean,
+            par2 = TAmean,
+            par1_type = 2,
+            par2_type = 1,
+            )
+          outpH=pyco2.sys(**kwargs)
+          phthres=outpH["pH_total"]
+          phthres=phthres+float(th1[i])
+          kwargs = dict(
+            par1 = phthres,
+            par2 = TAmean,
+            par1_type = 3,
+            par2_type = 1,
+            )
+          outDIC=pyco2.sys(**kwargs)
+          DICthres=outDIC["dic"] 
+          DICthres=abs(DICthres-DICmean)
+          DICthres=DICthres*dens*0.0440095/1000000 
+          thtit=thtit+['USER']
+          th.append(DICthres)
+    
+    if config.has_option('RateOfChange', 'threshold'):
+        th1=((config['RateOfChange']['threshold']).split(","))
+        for i in range(len(th1)):
+            thtit=thtit+['ROC']
+            th.append(float(th1[i]))
 
-if config.has_option('RateOfChange', 'threshold'):
-    th1=((config['RateOfChange']['threshold']).split(","))
-    for i in range(len(th1)):
-        thtit=thtit+['ROC']
-        th.append(float(th1[i]))
+    if config.has_option('CSEEP', 'threshold'):
+        th1=((config['CSEEP']['threshold']).split(","))
+        for i in range(len(th1)):
+            thtit=thtit+['CSEEP']
+            th.append(float(th1[i]))
+            
+#Rate Conversion
 
-if config.has_option('CSEEP', 'threshold'):
-    th1=((config['CSEEP']['threshold']).split(","))
+    RateUnitsTimeIn=qunits.partition('/')
+    TimeIn=RateUnitsTimeIn[2]
+    MassIn=RateUnitsTimeIn[0]
+       
+    if MassIn[0] == "k":
+       q = q
+    if MassIn[0] == "g":
+       q = q/1000
+    if MassIn[0] == "t":
+       q = q*1000
+    if MassIn[0] == "m":
+       q = q*0.04401
+    
+    if TimeIn[0] == "m":
+        if TimeIn[1] == "i":
+            q = q/60
+        if TimeIn[1] == "o":
+            q = q/2629800
+    if TimeIn[0] == "h":
+        q = q/3600
+    if TimeIn[0] == "d":
+        q = q/86400
+    if TimeIn[0] == "w":
+        q = q/604800
+    if TimeIn[0] == "y":
+        q = q/31557600            
+            
+elif mode == 'Brine':
+    th1=((config['General']['threshold-pH']).split(","))
     for i in range(len(th1)):
-        thtit=thtit+['CSEEP']
-        th.append(float(th1[i]))
+        thtit=thtit+['Brine']
+        th.append(1.0/float(th1[i]))
+        
+        
 
 include_cluster_points = bool(strtobool(config['OptCover']['include_cluster_points']))
 Timelim = int(config['OptCover']['Time_limit']) # optimization Time in seconds
 cost_function = int(config['OptCover']['cost_function'])
-
-#Rate Conversion
-
-RateUnitsTimeIn=qunits.partition('/')
-TimeIn=RateUnitsTimeIn[2]
-MassIn=RateUnitsTimeIn[0]
-   
-if MassIn[0] == "k":
-   q = q
-if MassIn[0] == "g":
-   q = q/1000
-if MassIn[0] == "t":
-   q = q*1000
-if MassIn[0] == "m":
-   q = q*0.04401
-
-if TimeIn[0] == "m":
-    if TimeIn[1] == "i":
-        q = q/60
-    if TimeIn[1] == "o":
-        q = q/2629800
-if TimeIn[0] == "h":
-    q = q/3600
-if TimeIn[0] == "d":
-    q = q/86400
-if TimeIn[0] == "w":
-    q = q/604800
-if TimeIn[0] == "y":
-    q = q/31557600
 
 #%%
 
@@ -197,13 +208,13 @@ Yflat=Y.flatten();
 
 #S=np.swapaxes(Sin,1,2)
 
-print(S.shape)
-print(xx.shape)
-print(yy.shape)
-print(x_source.shape)
-print(y_source.shape)
-print(pvec.shape)
-print(X.shape)
+#print(S.shape)
+#print(xx.shape)
+#print(yy.shape)
+#print(x_source.shape)
+#print(y_source.shape)
+#print(pvec.shape)
+#print(X.shape)
 
 for thres in range(len(th)):
 
@@ -213,8 +224,11 @@ for thres in range(len(th)):
     (Nl,Nx,Ny)=Sets.shape;
     
 #    th2 = [elem[:6] for elem in th]
-    
-    titl=' '.join([thtit[thres],'-',str(round(th[thres], 6)),'kg/m^2'])
+
+    if mode == 'Brine':
+       titl=' '.join([thtit[thres],'- dilution factor of',str(1/th[thres])])
+    if mode == 'CO2':    
+       titl=' '.join([thtit[thres],'-',str(round(th[thres], 6)),'kg/m^2'])
     
     print(titl)
     
@@ -372,7 +386,12 @@ for thres in range(len(th)):
                     bbox=given)
 
 
-        titl=''.join([thtit[thres],'-',str(round(th[thres], 6))])
+        
+        
+        if mode == 'Brine':
+           titl=' '.join([thtit[thres],'-',str(1/th[thres])])
+        if mode == 'CO2':    
+           titl=''.join([thtit[thres],'-',str(round(th[thres], 6))])
         output=''.join(['Output/',titl,'-map.png'])
         output.replace(" ", "")     
         plt.savefig(output)
@@ -403,7 +422,10 @@ for thres in range(len(th)):
         ax.set_xlabel('x (km)')
         ax.set_ylabel('y (km)')
         
-        titl=''.join([thtit[thres],'-',str(round(th[thres], 6))])
+        if mode == 'Brine':
+           titl=' '.join([thtit[thres],'-',str(1/th[thres])])
+        if mode == 'CO2':    
+           titl=''.join([thtit[thres],'-',str(round(th[thres], 6))])
         output=''.join(['Output/',titl,'-map2.png'])
         output.replace(" ", "")     
         plt.savefig(output)

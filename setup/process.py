@@ -11,6 +11,306 @@ os.system('cp storage/Setup.ini input/Setup.ini')
 
 off_color = "red"
 on_color = "black"
+NA_color = "grey"
+
+Leakagetype = 'default'
+       
+def TTMframenew1():
+    if ttmbut_v1new.get() == 1:
+       for widgets in framefour51new.winfo_children():
+           widgets.pack_forget()
+       framefour51new.config(height=0)
+       for widgets in framefour52new.winfo_children():
+           widgets.pack_forget()
+       framefour52new.config(height=0)
+       Leakagetype='CO2'
+       current_value = tk.DoubleVar()
+       current_value1 = tk.StringVar()
+       def get_current_value():
+           return '{: .2f}'.format(current_value.get())
+       def slider_changed(event):
+           value_label.configure(text=get_current_value())
+           current_value1.set(str(get_current_value()))
+           rateBox.configure(textvariable=current_value1)
+
+       #need to add link to discliamer on values#---------------------------------
+
+       frameone = tk.Frame(framefour51new, bg='white',width = 984)
+       slider_label = tk.Label(frameone, text = '\nThe leakage rate from each source and any detection thresholds are required to be set (beyond those predicted within the DST itself). Optional background values may be added, especially if not using C\u209B\u2091\u2091\u209A to process biogeochemical data.\n\n• Select a chosen leakage rate (from each source) using the slider, or override the value below:\n', background="white", wraplength=960, justify="left")
+       slider_label.config(font=("Times New Roman (serif)", 12))
+       slider_label.pack(side=tk.LEFT, anchor="w", padx=0)
+       frameone.pack(anchor="w", padx=12)
+       frameonep5 = tk.Frame(framefour51new, bg='white',width = 984)
+       slider = ttk.Scale(frameonep5,from_=0,to=1000,orient='horizontal',command=slider_changed, variable=current_value, length=960)
+       slider.pack(side=tk.LEFT, anchor="w", padx=12)
+       value_label = ttk.Label(frameonep5,text=get_current_value())
+       frameonep5.pack(anchor="w", padx=12)
+       frameonep6 = tk.Frame(framefour51new, bg='white',width = 984)
+       rateBox = ttk.Entry(frameonep6,textvariable=current_value1, width = 8)
+       rateBox.config(font=("Times New Roman (serif)", 12))
+       rateBox.pack(side=tk.LEFT, anchor="w", padx=2)
+       masschoices = ['tonnes', 'kilograms', 'grams', 'moles']
+       massoptions = tk.StringVar(frameonep6)
+       massoptions.set('tonnes')
+       mass = tk.OptionMenu(frameonep6, massoptions, *masschoices)
+       mass.config(font=("Times New Roman (serif)", 12))
+       mass.pack(side=tk.LEFT, anchor="w", padx=2)
+       lg = tk.Label(frameonep6, text = '/', background="white", wraplength=984, justify="left")
+       lg.config(font=("Times New Roman (serif)", 12))
+       lg.pack(side=tk.LEFT, anchor="w", padx=0)
+       timechoices = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second']
+       timeoptions = tk.StringVar(frameonep6)
+       timeoptions.set('year')
+       time = tk.OptionMenu(frameonep6, timeoptions, *timechoices)
+       time.config(font=("Times New Roman (serif)", 12))
+       time.pack(side=tk.LEFT, anchor="w", padx=2);
+       frameonep6.pack(expand=True)
+
+       frametwo= tk.Frame(framefour51new, bg='white',width = 984)
+       OUTPUTS='\n• Enter any set pH detection thresholds, seperated by a comma:\n'
+       lh = tk.Label(frametwo, text = OUTPUTS, background="white", wraplength=984, justify="left")
+       lh.config(font=("Times New Roman (serif)", 12))
+       lh.pack(side=tk.LEFT, anchor="w", padx=12)
+       Thr = tk.StringVar()
+       Thr.set('')
+       ThrBox = tk.Entry(frametwo,textvariable = Thr, width = 20)
+       ThrBox.config(font=("Times New Roman (serif)", 12))
+       ThrBox.pack(side=tk.LEFT, anchor="w", padx=2)
+       frametwo.pack(anchor="w", padx=12)
+       frametwoaa= tk.Frame(framefour51new, bg='white',width = 984, highlightbackground="grey", highlightthickness=1)
+       frametwoa= tk.Frame(frametwoaa, bg='white',width = 984)
+       OUTPUTS='\n• Enter background values for TA, DIC and seawater density*:'
+       lha = tk.Label(frametwoa, text = OUTPUTS, background="white", wraplength=984, justify="left")
+       lha.config(font=("Times New Roman (serif)", 12))
+       lha.pack(side=tk.LEFT, anchor="w", padx=12)
+       frametwoa.pack(anchor="w")
+       frametwoc= tk.Frame(frametwoaa, bg='white',width = 984)
+       OUTPUTS='     *optional and overrides background data values, but is required if C\u209B\u2091\u2091\u209A is not in use.\n'
+       lhb = tk.Label(frametwoc, text = OUTPUTS, background="white", wraplength=984, justify="left")
+       lhb.config(font=("Times New Roman (serif)", 8))
+       lhb.pack(side=tk.LEFT, anchor="w", padx=12)
+       frametwoc.pack(anchor="w")
+       frametwob= tk.Frame(frametwoaa, bg='white',width = 984)
+       ThrTA = tk.StringVar()
+       ThrTA.set('TA')
+       ThrTABox = tk.Entry(frametwob,textvariable = ThrTA, width = 8)
+       ThrTABox.config(font=("Times New Roman (serif)", 12))
+       ThrTABox.pack(side=tk.LEFT, anchor="w", padx=2)
+       lhb1 = tk.Label(frametwob, text = 'µmol/kg   ', background="white", wraplength=984, justify="left")
+       lhb1.config(font=("Times New Roman (serif)", 12))
+       lhb1.pack(side=tk.LEFT, anchor="w", padx=2)
+       ThrDIC = tk.StringVar()
+       ThrDIC.set('DIC')
+       ThrDICBox = tk.Entry(frametwob,textvariable = ThrDIC, width = 8)
+       ThrDICBox.config(font=("Times New Roman (serif)", 12))
+       ThrDICBox.pack(side=tk.LEFT, anchor="w", padx=2)
+       lhb2 = tk.Label(frametwob, text = 'µmol/kg   ', background="white", wraplength=984, justify="left")
+       lhb2.config(font=("Times New Roman (serif)", 12))
+       lhb2.pack(side=tk.LEFT, anchor="w", padx=2)
+       frametwob.pack(expand=True)
+       ThrDens = tk.StringVar()
+       ThrDens.set('Density')
+       ThrDensBox = tk.Entry(frametwob,textvariable = ThrDens, width = 8)
+       ThrDensBox.config(font=("Times New Roman (serif)", 12))
+       ThrDensBox.pack(side=tk.LEFT, anchor="w", padx=2)
+       lhb3 = tk.Label(frametwob, text = 'kg/m\u00B3   ', background="white", wraplength=984, justify="left")
+       lhb3.config(font=("Times New Roman (serif)", 12))
+       lhb3.pack(side=tk.LEFT, anchor="w", padx=2)
+       frametwob.pack(expand=True)
+       framefour4a = tk.Frame(frametwoaa, bg='white',width = 984)
+       output='                                                                                                                                                                                              '
+       loh = tk.Label(framefour4a, text = output, background="white", wraplength=984, justify="left")
+       loh.config(font=("Times New Roman (serif)", 12))
+       loh.pack(side=tk.LEFT, anchor="w", padx=12)
+       framefour4a.pack()
+       frametwoaa.pack(anchor="w", padx=12)
+       
+       le2 = tk.Label(framefour52new, text = "\nPlease Select ACTOM tools and Settings:", background="white")
+       le2.pack(side=tk.TOP, anchor="w", padx=12)
+       le2.config(font=("Times New Roman (serif)", 18, 'bold'))
+       li3 = tk.Label(framefour52new, text = '', background="white", wraplength=984, justify="left")
+       li3.config(font=("Times New Roman (serif)", 12))
+       li3.pack()
+
+       framefour5 = tk.Frame(framefour52new, bg='white',width = 984)
+       ttmbut='False'
+       ttmbut_v1=tk.StringVar()
+       ttmbut = tk.Checkbutton(framefour5, text='The Tracer Transport Model', variable=ttmbut_v1,
+	onvalue='True',offvalue='False',bg="white",highlightthickness=0,bd=0,command=TTMframe,fg=off_color)
+       ttmbut.config(font=("Times New Roman (serif)", 14, 'bold'))
+       ttmbut.deselect()
+       ttmbut.pack(side=tk.LEFT)
+       framefour5.pack(anchor="w", padx=12)
+       framefour51 = tk.Frame(framefour52new, bg='white',width = 984)
+       framefour51.pack(anchor="w", padx=12)
+
+       framefour6 = tk.Frame(framefour52new, bg='white',width = 984)
+       cseepbut='False'
+       cseepbut_v1=tk.StringVar()
+       cseepbut = tk.Checkbutton(framefour6, text="C\u209B\u2091\u2091\u209A", variable=cseepbut_v1,
+	onvalue='True',offvalue='False',bg="white",highlightthickness=0,bd=0,command=cseepframe,fg=off_color)
+       cseepbut.config(font=("Times New Roman (serif)", 14, 'bold'))
+       cseepbut.deselect()
+       cseepbut.pack(side=tk.LEFT)
+       framefour6.pack(anchor="w", padx=12)
+       frametwofivea = tk.Frame(framefour52new, bg='white',width = 984)
+       frametwofivea.pack(anchor="w", padx=12)
+
+       framefour7 = tk.Frame(framefour52new, bg='white',width = 984)   
+       rocbut='False'
+       rocbut_v1=tk.StringVar()
+       rocbut = tk.Checkbutton(framefour7, text="Rate of Change Anomaly Criteria", variable=rocbut_v1,
+	onvalue='True',offvalue='False',bg="white",highlightthickness=0,bd=0,command=rocframe,fg=off_color)
+       rocbut.config(font=("Times New Roman (serif)", 14, 'bold'))
+       rocbut.deselect()
+       rocbut.pack(side=tk.LEFT)
+       framefour7.pack(anchor="w", padx=12)
+       frametwofiveb = tk.Frame(framefour52new, bg='white',width = 984)
+       frametwofiveb.pack(anchor="w", padx=12)
+
+       framefour8 = tk.Frame(framefour52new, bg='white',width = 984)
+       optbut='False'
+       optbut_v1=tk.StringVar()
+       optbut = tk.Checkbutton(framefour8, text="Optimal Cover Tool", variable=optbut_v1,
+	onvalue='True',offvalue='False',bg="white",highlightthickness=0,bd=0,command=optframe,fg=off_color)
+       optbut.config(font=("Times New Roman (serif)", 14, 'bold'))
+       optbut.deselect()
+       optbut.pack(side=tk.LEFT)
+       framefour8.pack(anchor="w", padx=12)
+       frametwofivec = tk.Frame(framefour52new, bg='white',width = 984)
+       frametwofivec.pack(anchor="w", padx=12)
+
+       framefour9 = tk.Frame(framefour52new, bg='white',width = 984)
+       carbbut='False'
+       carbbut_v1=tk.StringVar()
+       carbbut = tk.Checkbutton(framefour9, text="Carbonate System", variable=carbbut_v1,
+	onvalue='True',offvalue='False',bg="white",highlightthickness=0,bd=0,command=carbframe,fg=off_color)
+       carbbut.config(font=("Times New Roman (serif)", 14, 'bold'))
+       carbbut.deselect()
+       carbbut.pack(side=tk.LEFT)
+       framefour9.pack(anchor="w", padx=12)
+       frametwofived = tk.Frame(framefour52new, bg='white',width = 984)
+       frametwofived.pack(anchor="w", padx=12)
+
+       framefour10 = tk.Frame(framefour52new, bg='white',width = 984)
+       impbut='False'
+       impbut_v1=tk.StringVar()
+       impbut = tk.Checkbutton(framefour10, text="Impact Analysis", variable=impbut_v1,
+	onvalue='True',offvalue='False',bg="white",highlightthickness=0,bd=0,command=impframe,fg=off_color)
+       impbut.config(font=("Times New Roman (serif)", 14, 'bold'))
+       impbut.deselect()
+       impbut.pack(side=tk.LEFT)
+       framefour10.pack(anchor="w", padx=12)
+       frametwofivee = tk.Frame(framefour52new, bg='white',width = 984)
+       frametwofivee.pack(anchor="w", padx=12)
+
+       framefour11 = tk.Frame(framefour52new, bg='white',width = 984)
+       repbut='False'
+       repbut_v1=tk.StringVar()
+       repbut = tk.Checkbutton(framefour11, text="Reporting", variable=repbut_v1,
+	onvalue='True',offvalue='False',bg="white",highlightthickness=0,bd=0,command=repframe,fg=off_color)
+       repbut.config(font=("Times New Roman (serif)", 14, 'bold'))
+       repbut.deselect()
+       repbut.pack(side=tk.LEFT)
+       framefour11.pack(anchor="w", padx=12)
+       frametwofivef = tk.Frame(framefour52new, bg='white',width = 984)
+       frametwofivef.pack(anchor="w", padx=12)
+       globals().update(locals())
+       
+    elif ttmbut_v1new.get() == 2:
+       for widgets in framefour51new.winfo_children():
+           widgets.pack_forget()
+       framefour51new.config(height=0)
+       for widgets in framefour52new.winfo_children():
+           widgets.pack_forget()
+       framefour52new.config(height=0)
+       Leakagetype='Brine'
+
+       frameone = tk.Frame(framefour51new, bg='white',width = 984)
+       OUTPUTS='\nTo determine thresholds for hypersaline brine release we need to set detection thresholds based dilution factors (what is the point where no impact is expected, e.g. a dilution factor of 5000 will show the plume until it has dissolved by 5000 times the initial concentration).\n'
+       lh = tk.Label(frameone, text = OUTPUTS, background="white", wraplength=960, justify="left")
+       lh.config(font=("Times New Roman (serif)", 12))
+       lh.pack(side=tk.LEFT, anchor="w", padx=0)
+       frameone.pack(anchor="w", padx=12)
+       
+       frametwo = tk.Frame(framefour51new, bg='white',width = 984)
+       OUTPUTS='\n• Enter selected dilution factors, seperated by a comma:\n'
+       lh = tk.Label(frametwo, text = OUTPUTS, background="white", wraplength=960, justify="left")
+       lh.config(font=("Times New Roman (serif)", 12))
+       lh.pack(side=tk.LEFT, anchor="w", padx=12)
+       frametwo.pack(anchor="w", padx=12)
+       
+       Thr = tk.StringVar()
+       Thr.set('')
+       ThrBox = tk.Entry(frametwo,textvariable = Thr, width = 20)
+       ThrBox.config(font=("Times New Roman (serif)", 12))
+       ThrBox.pack(side=tk.LEFT, anchor="w", padx=2)
+       frameone.pack(anchor="w", padx=12)
+       
+       le2 = tk.Label(framefour52new, text = "\nPlease Select ACTOM tools and Settings:", background="white")
+       le2.pack(side=tk.TOP, anchor="w", padx=12)
+       le2.config(font=("Times New Roman (serif)", 18, 'bold'))
+       li3 = tk.Label(framefour52new, text = '', background="white", wraplength=984, justify="left")
+       li3.config(font=("Times New Roman (serif)", 12))
+       li3.pack()
+
+       framefour5 = tk.Frame(framefour52new, bg='white',width = 984)
+       ttmbut='False'
+       ttmbut_v1=tk.StringVar()
+       ttmbut = tk.Checkbutton(framefour5, text='The Tracer Transport Model', variable=ttmbut_v1,
+	onvalue='True',offvalue='False',bg="white",highlightthickness=0,bd=0,command=TTMframe,fg=off_color)
+       ttmbut.config(font=("Times New Roman (serif)", 14, 'bold'))
+       ttmbut.deselect()
+       ttmbut.pack(side=tk.LEFT)
+       framefour5.pack(anchor="w", padx=12)
+       framefour51 = tk.Frame(framefour52new, bg='white',width = 984)
+       framefour51.pack(anchor="w", padx=12)
+
+       framefour8 = tk.Frame(framefour52new, bg='white',width = 984)
+       optbut='False'
+       optbut_v1=tk.StringVar()
+       optbut = tk.Checkbutton(framefour8, text="Optimal Cover Tool", variable=optbut_v1,
+	onvalue='True',offvalue='False',bg="white",highlightthickness=0,bd=0,command=optframe,fg=off_color)
+       optbut.config(font=("Times New Roman (serif)", 14, 'bold'))
+       optbut.deselect()
+       optbut.pack(side=tk.LEFT)
+       framefour8.pack(anchor="w", padx=12)
+       frametwofivec = tk.Frame(framefour52new, bg='white',width = 984)
+       frametwofivec.pack(anchor="w", padx=12)
+
+       framefour10 = tk.Frame(framefour52new, bg='white',width = 984)
+       impbut='False'
+       impbut_v1=tk.StringVar()
+       impbut = tk.Checkbutton(framefour10, text="Impact Analysis", variable=impbut_v1,
+	onvalue='True',offvalue='False',bg="white",highlightthickness=0,bd=0,command=impframe,fg=off_color)
+       impbut.config(font=("Times New Roman (serif)", 14, 'bold'))
+       impbut.deselect()
+       impbut.pack(side=tk.LEFT)
+       framefour10.pack(anchor="w", padx=12)
+       frametwofivee = tk.Frame(framefour52new, bg='white',width = 984)
+       frametwofivee.pack(anchor="w", padx=12)
+
+       framefour11 = tk.Frame(framefour52new, bg='white',width = 984)
+       repbut='False'
+       repbut_v1=tk.StringVar()
+       repbut = tk.Checkbutton(framefour11, text="Reporting", variable=repbut_v1,
+	onvalue='True',offvalue='False',bg="white",highlightthickness=0,bd=0,command=repframe,fg=off_color)
+       repbut.config(font=("Times New Roman (serif)", 14, 'bold'))
+       repbut.deselect()
+       repbut.pack(side=tk.LEFT)
+       framefour11.pack(anchor="w", padx=12)
+       frametwofivef = tk.Frame(framefour52new, bg='white',width = 984)
+       frametwofivef.pack(anchor="w", padx=12)
+       globals().update(locals())
+       
+    else:
+       Leakagetype = 'default'
+       for widgets in framefour51new.winfo_children():
+           widgets.pack_forget()
+       framefour51new.config(height=0)
+       for widgets in framefour52new.winfo_children():
+           widgets.pack_forget()
+       framefour52new.config(height=0)
 
 def TTMframe():
     if ttmbut_v1.get() == "True":ttmbut["fg"] = on_color     # if (get current checkbutton state) is "1" then....
@@ -19,9 +319,9 @@ def TTMframe():
        OUTPUTS='\nDue to the large number of settings within the Tracer Transport Model, a manual to adjust the settings is available from the following address:\n\nhttps://htmlpreview.github.io/?https://github.com/ACTOMtoolbox/Code/blob/main/advdiff/Doc/docs/_build/html/about.html\n\nPlease adjust all settings as required BEFORE clicking on \'Run\' below.\n\nThe Setup.ini file has been placed in your working directory that has been generated in the folder this program has run from, titled: \'RUN-\' and then date and time.'
        lia21 = tk.Label(framefour51, text = OUTPUTS, background="white", wraplength=984, justify="left")
        lia21.config(font=("Times New Roman (serif)", 12))
-       lia21.pack(anchor="w", padx=12)
+       lia21.pack(anchor="w", padx=0)
 
-       frametwofive22 = tk.Frame(framefour51, bg='white',width = 1008)
+       frametwofive22 = tk.Frame(framefour51, bg='white',width = 984)
        OUTPUTS='\n• Enter the directory of input files (if not using built in data sets):\n'
        lia22 = tk.Label(frametwofive22, text = OUTPUTS, background="white", wraplength=984, justify="left")
        lia22.config(font=("Times New Roman (serif)", 12))
@@ -33,17 +333,19 @@ def TTMframe():
        Thrdir22Box.pack(side=tk.LEFT, anchor="w", padx=2)
        frametwofive22.pack(anchor="w", padx=12)
        globals().update(locals())
-    if ttmbut_v1.get()=='False':
+    else:
        for widgets in framefour51.winfo_children():
            widgets.pack_forget()
        framefour51.config(height=0)
-       
-              
+         
 def cseepframe():
-    if cseepbut_v1.get() == "True":cseepbut["fg"] = on_color     # if (get current checkbutton state) is "1" then....
+    if Leakagetype=='Brine':
+       cseepbut.deselect()
+       cseepbut["fg"] = NA_color
+    elif cseepbut_v1.get() == "True":cseepbut["fg"] = on_color     # if (get current checkbutton state) is "1" then....
     else:cseepbut["fg"] = off_color
-    if cseepbut_v1.get()=='True':
-       frametwofive = tk.Frame(frametwofivea, bg='white',width = 1008)
+    if cseepbut_v1.get()=='True' and not Leakagetype=='Brine':
+       frametwofive = tk.Frame(frametwofivea, bg='white',width = 984)
        OUTPUTS='\n• Enter the directory of input files (if not using built in data sets):\n'
        lia = tk.Label(frametwofive, text = OUTPUTS, background="white", wraplength=984, justify="left")
        lia.config(font=("Times New Roman (serif)", 12))
@@ -55,21 +357,24 @@ def cseepframe():
        ThrdirBox.pack(side=tk.LEFT, anchor="w", padx=2)
        frametwofive.pack(anchor="w", padx=12)
        globals().update(locals())
-    if cseepbut_v1.get()=='False':
+    if cseepbut_v1.get()=='False' or Leakagetype=='Brine':
        for widgets in frametwofivea.winfo_children():
            widgets.pack_forget()
        frametwofivea.config(height=0)
        
 def rocframe():
-    if rocbut_v1.get() == "True":rocbut["fg"] = on_color     # if (get current checkbutton state) is "1" then....
+    if Leakagetype=='Brine':
+       rocbut.deselect()
+       rocbut["fg"] = NA_color
+    elif rocbut_v1.get() == "True":rocbut["fg"] = on_color     # if (get current checkbutton state) is "1" then....
     else:rocbut["fg"] = off_color
-    if rocbut_v1.get()=='True':       
+    if rocbut_v1.get()=='True' and not Leakagetype=='Brine':
        OUTPUTS='\nFor the Rate of Change Anomaly Criteria, the time between pH measurements in a single location is required.'
        lf = tk.Label(frametwofiveb, text = OUTPUTS, background="white", wraplength=984, justify="left")
        lf.config(font=("Times New Roman (serif)", 12))
-       lf.pack(anchor="w", padx=12)
+       lf.pack(anchor="w", padx=0)
 
-       framethree = tk.Frame(frametwofiveb, bg='white',width = 1008)
+       framethree = tk.Frame(frametwofiveb, bg='white',width = 984)
        OUTPUTS='\n• Enter a sensor sampling frequency:\n'
        li = tk.Label(framethree, text = OUTPUTS, background="white", wraplength=984, justify="left")
        li.config(font=("Times New Roman (serif)", 12))
@@ -87,7 +392,7 @@ def rocframe():
        sampfreqtime.config(font=("Times New Roman (serif)", 12))
        sampfreqtime.pack(side=tk.LEFT, anchor="w", padx=2);
        framethree.pack(anchor="w", padx=12)
-       framethreepfive = tk.Frame(frametwofiveb, bg='white',width = 1008)
+       framethreepfive = tk.Frame(frametwofiveb, bg='white',width = 984)
        OUTPUTS='\n• Enter the directory of input files (if not using built in data sets):\n'
        lia = tk.Label(framethreepfive, text = OUTPUTS, background="white", wraplength=984, justify="left")
        lia.config(font=("Times New Roman (serif)", 12))
@@ -99,7 +404,7 @@ def rocframe():
        ThrdirBox2.pack(side=tk.LEFT, anchor="w", padx=2)
        framethreepfive.pack(anchor="w", padx=12)
        globals().update(locals())
-    if rocbut_v1.get()=='False':
+    if rocbut_v1.get()=='False' or Leakagetype=='Brine':
        for widgets in frametwofiveb.winfo_children():
            widgets.pack_forget()
        frametwofiveb.config(height=0)
@@ -111,9 +416,9 @@ def optframe():
        OUTPUTS='\nFor the Optimal Cover tool, we need to know if we are looking at all points in a leakage cluster, or just a single point at the leakage source. Are we looking at the maximum total number of leaks detected, or detect those the leaks with higher probability proportionally many times, and the maximum computational time we allow to compute the data.\n'
        lj = tk.Label(frametwofivec, text = OUTPUTS, background="white", wraplength=984, justify="left")
        lj.config(font=("Times New Roman (serif)", 12))
-       lj.pack(anchor="w", padx=12)
+       lj.pack(anchor="w", padx=0)
        c1='False'
-       framefour = tk.Frame(frametwofivec, bg='white',width = 1008)
+       framefour = tk.Frame(frametwofivec, bg='white',width = 984)
        c1_v1=tk.StringVar()
        c1 = tk.Checkbutton(framefour, text='Include leakage clusters?', variable=c1_v1,
 	onvalue='True',offvalue='False',bg="white",highlightthickness=0,bd=0)
@@ -126,7 +431,7 @@ def optframe():
        li1.config(font=("Times New Roman (serif)", 12))
        li1.pack()
        c2='0'
-       framefour1 = tk.Frame(frametwofivec, bg='white',width = 1008)
+       framefour1 = tk.Frame(frametwofivec, bg='white',width = 984)
        c2_v1=tk.StringVar()
        c2 = tk.Checkbutton(framefour1, text='Detect leaks with higher probability proportionally many more times?', variable=c2_v1,
 	onvalue='1',offvalue='0',bg="white",highlightthickness=0,bd=0)
@@ -156,10 +461,13 @@ def optframe():
        frametwofivec.config(height=0)
 
 def carbframe():
-    if carbbut_v1.get() == "True":carbbut["fg"] = on_color     # if (get current checkbutton state) is "1" then....
+    if Leakagetype=='Brine':
+       carbbut.deselect()
+       carbbut["fg"] = NA_color
+    elif carbbut_v1.get() == "True":carbbut["fg"] = on_color     # if (get current checkbutton state) is "1" then....
     else:carbbut["fg"] = off_color
-    if carbbut_v1.get()=='True':
-       frametwofivenew = tk.Frame(frametwofived, bg='white',width = 1008)
+    if carbbut_v1.get()=='True' and not Leakagetype=='Brine':
+       frametwofivenew = tk.Frame(frametwofived, bg='white',width = 984)
        OUTPUTS='\n• Enter the directory of input files (if not using the Tracer Transport Model):\n'
        lia4 = tk.Label(frametwofivenew, text = OUTPUTS, background="white", wraplength=984, justify="left")
        lia4.config(font=("Times New Roman (serif)", 12))
@@ -171,7 +479,7 @@ def carbframe():
        ThrdirBox4.pack(side=tk.LEFT, anchor="w", padx=2)
        frametwofivenew.pack(anchor="w", padx=12)
        globals().update(locals())
-    if carbbut_v1.get()=='False':
+    if carbbut_v1.get()=='False' or Leakagetype=='Brine':
        for widgets in frametwofived.winfo_children():
            widgets.pack_forget()
        frametwofived.config(height=0)
@@ -180,12 +488,12 @@ def impframe():
     if impbut_v1.get() == "True":impbut["fg"] = on_color     # if (get current checkbutton state) is "1" then....
     else:impbut["fg"] = off_color
     if impbut_v1.get()=='True':
-       OUTPUTS='\nFor the impact analysis, we need to know if we want to analyse local or global data, for example local data is usually higher resolution data surrounding each leakage source, but this slows down the toolbox, so is only for detailed analysis and testing. In the same aspect, are animations required for the global findings, all findings or none? Only the global results are analysed in the report.\n'
+       OUTPUTS='\nFor the impact analysis, we need to know if we want to analyse local or global data, for example local data is usually higher resolution data surrounding each leakage source, but this slows down the DST, so is only for detailed analysis and testing. In the same aspect, are animations required for the global findings, all findings or none? Only the global results are analysed in the report.\n'
        lja = tk.Label(frametwofivee, text = OUTPUTS, background="white", wraplength=984, justify="left")
        lja.config(font=("Times New Roman (serif)", 12))
-       lja.pack(anchor="w", padx=12)
+       lja.pack(anchor="w", padx=0)
        c3='Global'
-       framefour2 = tk.Frame(frametwofivee, bg='white',width = 1008)
+       framefour2 = tk.Frame(frametwofivee, bg='white',width = 984)
        c3_v1=tk.StringVar()
        c3 = tk.Checkbutton(framefour2, text='Do we want to compute localised data not analysed in the report?', variable=c3_v1,
 	onvalue='All',offvalue='Global',bg="white",highlightthickness=0,bd=0)
@@ -194,7 +502,7 @@ def impframe():
        c3.pack(side=tk.LEFT)
        framefour2.pack(anchor="w", padx=12)
 
-       frameseven = tk.Frame(frametwofivee, bg='white',width = 1008)
+       frameseven = tk.Frame(frametwofivee, bg='white',width = 984)
        OUTPUTS='\n• Do we also want animations?\n'
        lp = tk.Label(frameseven, text = OUTPUTS, background="white", wraplength=984, justify="left")
        lp.config(font=("Times New Roman (serif)", 12))
@@ -207,7 +515,7 @@ def impframe():
        ani.pack(side=tk.LEFT, anchor="w", padx=12);
        frameseven.pack(anchor="w", padx=12)
        
-       frameseven1 = tk.Frame(frametwofivee, bg='white',width = 1008)
+       frameseven1 = tk.Frame(frametwofivee, bg='white',width = 984)
        OUTPUTS='\n• Enter the directory of input files (if not using the Carbonate System):\n'
        lia2 = tk.Label(frameseven1, text = OUTPUTS, background="white", wraplength=984, justify="left")
        lia2.config(font=("Times New Roman (serif)", 12))
@@ -229,7 +537,7 @@ def repframe():
     if repbut_v1.get() == "True":repbut["fg"] = on_color     # if (get current checkbutton state) is "1" then....
     else:repbut["fg"] = off_color
     if repbut_v1.get()=='True':
-       frametwofivenew1 = tk.Frame(frametwofivef, bg='white',width = 1008)
+       frametwofivenew1 = tk.Frame(frametwofivef, bg='white',width = 984)
        OUTPUTS='\n• Enter the directory of input files (if only reporting old datasets):\n'
        lia6 = tk.Label(frametwofivenew1, text = OUTPUTS, background="white", wraplength=984, justify="left")
        lia6.config(font=("Times New Roman (serif)", 12))
@@ -271,14 +579,14 @@ class ScrollableFrame(tk.Frame):
         scrollbar.pack(side="right", fill="y")         
 
 print("\n******************************************************")
-print("\nRequesting inputs for ACTOM Toolbox Setup\n")
+print("\nRequesting inputs for ACTOM Decision Support Tool (DST) Setup\n")
 print("******************************************************\n")
 
 Cseepdir=''
 ROCdir=''
 
 window=tk.Tk()
-window.title('ACTOM Toolbox')
+window.title('ACTOM Decision Support Tool (DST)')
 window.geometry("1024x800")
 window.configure(bg='white')
 
@@ -289,11 +597,11 @@ canvas.pack()
 img = ImageTk.PhotoImage(Image.open("storage/ACTOM.png"))  
 canvas.create_image(0,0, anchor=tk.NW, image=img)
 
-la = tk.Label(frame.scrollable_frame, text = "\nAct on Offshore Monitoring Toolbox Setup", background="white")
+la = tk.Label(frame.scrollable_frame, text = "\nACTOM Decision Support Tool Setup", background="white")
 la.pack(side=tk.TOP, anchor="w", padx=12)
 la.config(font=("Times New Roman (serif)", 24, 'bold'))
 
-OUTPUTS='\nThe research in ACTOM works for the advancement of offshore monitoring to ensure alignment of CO\u2082 storage projects with national and international regulations and societal concerns. The ACTOM toolbox (shown in Figure 1.) equips operators with the ability to plan strategies under site-specific conditions and provides regulators a reliable and independent assessment of proposed monitoring strategies from license applicants. In addition to the tool assisting in the technical design of monitoring programs, it can be used to enhance communication with governments and the public in view of Marine Spatial Planning and Responsible Research and Innovation.\n\nThe toolbox is designed to provide value over a range of field cases with diverse subsurface geology and environmental marine characteristics. The end-product of the toolbox is to aid users in defining a monitoring plan that will satisfy local stakeholders.\n\nThe ACTOM toolbox contains algorithms for determining how the main monitoring aims required by guidance and regulations can be achieved at each site. Namely the algorithm optimizes approaches for detecting anomalies that could signal leakage in the marine environment, and then determining if these anomalies represent leakage. This is not an easy task because CO\u2082 is already an integral and dynamic part of the marine environment. Which is already undergoing shifts due to climate change. Through using geophysical data on shallow features such as chimneys or fractures, the likely areas where leakage would emanate can be predicted. Knowing the hydrodynamics and bio-chemical processes in marine sediments and seawater allow strategies for location and attribution, setting trigger points for when more action is needed and what instruments can be used for measurements, can be optimized for finding and attributing leakage emissions accounting and environmental protection.\n\n'
+OUTPUTS='\nThe research in ACTOM works for the advancement of offshore monitoring to ensure alignment of CO\u2082 storage projects with national and international regulations and societal concerns. The ACTOM Decision Support Tool (DST, shown in Figure 1.) equips operators with the ability to plan strategies under site-specific conditions and provides regulators a reliable and independent assessment of proposed monitoring strategies from license applicants. In addition to the tool assisting in the technical design of monitoring programs, it can be used to enhance communication with governments and the public in view of Marine Spatial Planning and Responsible Research and Innovation.\n\nThe DST is designed to provide value over a range of field cases with diverse subsurface geology and environmental marine characteristics. The end-product of the DST is to aid users in defining a monitoring plan that will satisfy local stakeholders.\n\nThe ACTOM DST contains algorithms for determining how the main monitoring aims required by guidance and regulations can be achieved at each site. Namely the algorithm optimizes approaches for detecting anomalies that could signal leakage in the marine environment, and then determining if these anomalies represent leakage. This is not an easy task because CO\u2082 is already an integral and dynamic part of the marine environment. Which is already undergoing shifts due to climate change. Through using geophysical data on shallow features such as chimneys or fractures, the likely areas where leakage would emanate can be predicted. Knowing the hydrodynamics and bio-chemical processes in marine sediments and seawater allow strategies for location and attribution, setting trigger points for when more action is needed and what instruments can be used for measurements, can be optimized for finding and attributing leakage emissions accounting and environmental protection.\n\nThe DST has recently been updated to allow the impact tracking of hypersaline brine water releases or disposal on the seabed as part of reservoir pressure management for Carbon Capture and Storage (CCS). Some of the tools are dedicated to CO\u2082 only, such as the carbonate system and C\u209B\u2091\u2091\u209A. Therefore, these will not be possible to select in hypersaline brine mode.\n\n'
 
 lb = tk.Label(frame.scrollable_frame, text = OUTPUTS, background="white", wraplength=984, justify="left")
 lb.config(font=("Times New Roman (serif)", 12,))
@@ -304,11 +612,11 @@ img2 = ImageTk.PhotoImage(Image.open("storage/toolbox.png"))
 canvas2.create_image(400,217,image=img2,anchor=tk.CENTER)
 canvas2.pack(anchor='center')
 
-lb2 = tk.Label(frame.scrollable_frame, text = 'Figure 1. Schematic of the toolbox, with tools interacting along with the site specific and user programmable information.', background="white", wraplength=984, justify="center")
+lb2 = tk.Label(frame.scrollable_frame, text = 'Figure 1. Schematic of the ACTOM Decision Support Tool (DST), with tools interacting along with the site specific and user programmable information.', background="white", wraplength=960, justify="center")
 lb2.config(font=("Times New Roman (serif)", 12,))
 lb2.pack(anchor='center', padx=12)
 
-lc = tk.Label(frame.scrollable_frame, text = "\nThe ACTOM toolbox:", background="white")
+lc = tk.Label(frame.scrollable_frame, text = "\nThe ACTOM Decision Support Tool (DST):", background="white")
 lc.pack(side=tk.TOP, anchor="w", padx=12)
 lc.config(font=("Times New Roman (serif)", 18, 'bold'))
 
@@ -322,7 +630,7 @@ le = tk.Label(frame.scrollable_frame, text = "\nSetup:", background="white")
 le.pack(side=tk.TOP, anchor="w", padx=12)
 le.config(font=("Times New Roman (serif)", 18, 'bold'))
 
-OUTPUTS='\nThe ACTOM Toolbox has been designed so that with a few settings and input files it can run for a specifc region. Any settings surrounded by a box are optional in certain cases. However, please read the instructions carefully.'
+OUTPUTS='\nThe DST has been designed so that with a few settings and input files it can run for a specifc region. Any settings surrounded by a box are optional in certain cases. However, please read the instructions carefully.'
 
 lf = tk.Label(frame.scrollable_frame, text = OUTPUTS, background="white", wraplength=984, justify="left")
 lf.config(font=("Times New Roman (serif)", 12))
@@ -332,208 +640,36 @@ le = tk.Label(frame.scrollable_frame, text = "\nGeneral:", background="white")
 le.pack(side=tk.TOP, anchor="w", padx=12)
 le.config(font=("Times New Roman (serif)", 18, 'bold'))
 
-OUTPUTS='\nFor general settings used by many of the tools.\n\nThe leakage rate from each source and any detection thresholds are required to be set (beyond those predicted within the toolbox itself). Optional background values may be added, especially if not using C\u209B\u2091\u2091\u209A to process biogeochemical data.\n'
+OUTPUTS='\nFor general settings used by many of the tools.\n\nThe first choice is whether the DST is to be used for a CO\u2082 release, or a hypersaline release. This will determine the tools that are available to be used.\n'
 
 lf = tk.Label(frame.scrollable_frame, text = OUTPUTS, background="white", wraplength=984, justify="left")
 lf.config(font=("Times New Roman (serif)", 12))
 lf.pack(anchor="w", padx=12)
 
-current_value = tk.DoubleVar()
-current_value1 = tk.StringVar()
-def get_current_value():
-    return '{: .2f}'.format(current_value.get())
-def slider_changed(event):
-    value_label.configure(text=get_current_value())
-    current_value1.set(str(get_current_value()))
-    rateBox.configure(textvariable=current_value1)
+framefour5new = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
+ttmbut_v1new=tk.IntVar()
+ttmbutnew = tk.Radiobutton(framefour5new, text="CO\u2082", variable=ttmbut_v1new, value=1,
+                  command=TTMframenew1)
+ttmbutnew.config(font=("Times New Roman (serif)", 14, 'bold'))
+ttmbutnew.pack(side=tk.LEFT)
+ttmbutnew1 = tk.Radiobutton(framefour5new, text="Hypersaline Brine Waters", variable=ttmbut_v1new, value=2,
+                  command=TTMframenew1)
+ttmbutnew1.config(font=("Times New Roman (serif)", 14, 'bold'))
+ttmbutnew1.pack(side=tk.LEFT)
 
-#need to add link to discliamer on values#---------------------------------
+framefour5new.pack(anchor="n", padx=12)
+framefour51new = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
+framefour51new.pack(anchor="w", padx=0)
 
-frameone = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-slider_label = tk.Label(frameone, text = '• Select a chosen leakage rate (from each source) using the slider, or override the value below:\n', background="white", wraplength=984, justify="left")
-slider_label.config(font=("Times New Roman (serif)", 12))
-slider_label.pack(side=tk.LEFT, anchor="w", padx=12)
-frameone.pack(anchor="w", padx=12)
-frameonep5 = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-slider = ttk.Scale(frameonep5,from_=0,to=1000,orient='horizontal',command=slider_changed, variable=current_value, length=960)
-slider.pack(side=tk.LEFT, anchor="w", padx=12)
-value_label = ttk.Label(frameonep5,text=get_current_value())
-frameonep5.pack(anchor="w", padx=12)
-frameonep6 = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-rateBox = ttk.Entry(frameonep6,textvariable=current_value1, width = 8)
-rateBox.config(font=("Times New Roman (serif)", 12))
-rateBox.pack(side=tk.LEFT, anchor="w", padx=2)
-masschoices = ['tonnes', 'kilograms', 'grams', 'moles']
-massoptions = tk.StringVar(frameonep6)
-massoptions.set('tonnes')
-mass = tk.OptionMenu(frameonep6, massoptions, *masschoices)
-mass.config(font=("Times New Roman (serif)", 12))
-mass.pack(side=tk.LEFT, anchor="w", padx=2)
-lg = tk.Label(frameonep6, text = '/', background="white", wraplength=984, justify="left")
-lg.config(font=("Times New Roman (serif)", 12))
-lg.pack(side=tk.LEFT, anchor="w", padx=0)
-timechoices = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second']
-timeoptions = tk.StringVar(frameonep6)
-timeoptions.set('year')
-time = tk.OptionMenu(frameonep6, timeoptions, *timechoices)
-time.config(font=("Times New Roman (serif)", 12))
-time.pack(side=tk.LEFT, anchor="w", padx=2);
-frameonep6.pack(expand=True)
+framefour5new.pack(anchor="n", padx=12)
+framefour52new = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
+framefour52new.pack(anchor="w", padx=0)
 
-frametwo= tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-OUTPUTS='\n• Enter any set pH detection thresholds, seperated by a comma:\n'
-lh = tk.Label(frametwo, text = OUTPUTS, background="white", wraplength=984, justify="left")
-lh.config(font=("Times New Roman (serif)", 12))
-lh.pack(side=tk.LEFT, anchor="w", padx=12)
-Thr = tk.StringVar()
-Thr.set('')
-ThrBox = tk.Entry(frametwo,textvariable = Thr, width = 20)
-ThrBox.config(font=("Times New Roman (serif)", 12))
-ThrBox.pack(side=tk.LEFT, anchor="w", padx=2)
-frametwo.pack(anchor="w", padx=12)
 
-c4='Yes'
 
-frametwoaa= tk.Frame(frame.scrollable_frame, bg='white',width = 1008, highlightbackground="grey", highlightthickness=1)
-frametwoa= tk.Frame(frametwoaa, bg='white',width = 1008)
-OUTPUTS='\n• Enter background values for TA, DIC and seawater density*:'
-lha = tk.Label(frametwoa, text = OUTPUTS, background="white", wraplength=984, justify="left")
-lha.config(font=("Times New Roman (serif)", 12))
-lha.pack(side=tk.LEFT, anchor="w", padx=12)
-frametwoa.pack(anchor="w")
-frametwoc= tk.Frame(frametwoaa, bg='white',width = 1008)
-OUTPUTS='     *optional and overrides background data values, but is required if C\u209B\u2091\u2091\u209A is not in use.\n'
-lhb = tk.Label(frametwoc, text = OUTPUTS, background="white", wraplength=984, justify="left")
-lhb.config(font=("Times New Roman (serif)", 8))
-lhb.pack(side=tk.LEFT, anchor="w", padx=12)
-frametwoc.pack(anchor="w")
-frametwob= tk.Frame(frametwoaa, bg='white',width = 984)
-ThrTA = tk.StringVar()
-ThrTA.set('TA')
-ThrTABox = tk.Entry(frametwob,textvariable = ThrTA, width = 8)
-ThrTABox.config(font=("Times New Roman (serif)", 12))
-ThrTABox.pack(side=tk.LEFT, anchor="w", padx=2)
-lhb1 = tk.Label(frametwob, text = 'µmol/kg   ', background="white", wraplength=984, justify="left")
-lhb1.config(font=("Times New Roman (serif)", 12))
-lhb1.pack(side=tk.LEFT, anchor="w", padx=2)
-ThrDIC = tk.StringVar()
-ThrDIC.set('DIC')
-ThrDICBox = tk.Entry(frametwob,textvariable = ThrDIC, width = 8)
-ThrDICBox.config(font=("Times New Roman (serif)", 12))
-ThrDICBox.pack(side=tk.LEFT, anchor="w", padx=2)
-lhb2 = tk.Label(frametwob, text = 'µmol/kg   ', background="white", wraplength=984, justify="left")
-lhb2.config(font=("Times New Roman (serif)", 12))
-lhb2.pack(side=tk.LEFT, anchor="w", padx=2)
-frametwob.pack(expand=True)
-ThrDens = tk.StringVar()
-ThrDens.set('Density')
-ThrDensBox = tk.Entry(frametwob,textvariable = ThrDens, width = 8)
-ThrDensBox.config(font=("Times New Roman (serif)", 12))
-ThrDensBox.pack(side=tk.LEFT, anchor="w", padx=2)
-lhb3 = tk.Label(frametwob, text = 'kg/m\u00B3   ', background="white", wraplength=984, justify="left")
-lhb3.config(font=("Times New Roman (serif)", 12))
-lhb3.pack(side=tk.LEFT, anchor="w", padx=2)
-frametwob.pack(expand=True)
-framefour4a = tk.Frame(frametwoaa, bg='white',width = 1008)
-output='                                                                                                                                                                                              '
-loh = tk.Label(framefour4a, text = output, background="white", wraplength=984, justify="left")
-loh.config(font=("Times New Roman (serif)", 12))
-loh.pack(side=tk.LEFT, anchor="w", padx=12)
-framefour4a.pack()
-frametwoaa.pack(anchor="w", padx=12)
 
-le2 = tk.Label(frame.scrollable_frame, text = "\nPlease Select ACTOM Tools and Settings:", background="white")
-le2.pack(side=tk.TOP, anchor="w", padx=12)
-le2.config(font=("Times New Roman (serif)", 18, 'bold'))
-li3 = tk.Label(frame.scrollable_frame, text = '', background="white", wraplength=984, justify="left")
-li3.config(font=("Times New Roman (serif)", 12))
-li3.pack()
 
-framefour5 = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-ttmbut='False'
-ttmbut_v1=tk.StringVar()
-ttmbut = tk.Checkbutton(framefour5, text='The Tracer Transport Model', variable=ttmbut_v1,
-	onvalue='True',offvalue='False',bg="white",highlightthickness=0,bd=0,command=TTMframe,fg=off_color)
-ttmbut.config(font=("Times New Roman (serif)", 14, 'bold'))
-ttmbut.deselect()
-ttmbut.pack(side=tk.LEFT)
-framefour5.pack(anchor="w", padx=12)
-framefour51 = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-framefour51.pack(anchor="w", padx=12)
-
-framefour6 = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-cseepbut='False'
-cseepbut_v1=tk.StringVar()
-cseepbut = tk.Checkbutton(framefour6, text="C\u209B\u2091\u2091\u209A", variable=cseepbut_v1,
-	onvalue='True',offvalue='False',bg="white",highlightthickness=0,bd=0,command=cseepframe,fg=off_color)
-cseepbut.config(font=("Times New Roman (serif)", 14, 'bold'))
-cseepbut.deselect()
-cseepbut.pack(side=tk.LEFT)
-framefour6.pack(anchor="w", padx=12)
-frametwofivea = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-frametwofivea.pack(anchor="w", padx=12)
-
-framefour7 = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-rocbut='False'
-rocbut_v1=tk.StringVar()
-rocbut = tk.Checkbutton(framefour7, text="Rate of Change Anomaly Criteria", variable=rocbut_v1,
-	onvalue='True',offvalue='False',bg="white",highlightthickness=0,bd=0,command=rocframe,fg=off_color)
-rocbut.config(font=("Times New Roman (serif)", 14, 'bold'))
-rocbut.deselect()
-rocbut.pack(side=tk.LEFT)
-framefour7.pack(anchor="w", padx=12)
-frametwofiveb = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-frametwofiveb.pack(anchor="w", padx=12)
-
-framefour8 = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-optbut='False'
-optbut_v1=tk.StringVar()
-optbut = tk.Checkbutton(framefour8, text="Optimal Cover Tool", variable=optbut_v1,
-	onvalue='True',offvalue='False',bg="white",highlightthickness=0,bd=0,command=optframe,fg=off_color)
-optbut.config(font=("Times New Roman (serif)", 14, 'bold'))
-optbut.deselect()
-optbut.pack(side=tk.LEFT)
-framefour8.pack(anchor="w", padx=12)
-frametwofivec = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-frametwofivec.pack(anchor="w", padx=24)
-
-framefour9 = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-carbbut='False'
-carbbut_v1=tk.StringVar()
-carbbut = tk.Checkbutton(framefour9, text="Carbonate System", variable=carbbut_v1,
-	onvalue='True',offvalue='False',bg="white",highlightthickness=0,bd=0,command=carbframe,fg=off_color)
-carbbut.config(font=("Times New Roman (serif)", 14, 'bold'))
-carbbut.deselect()
-carbbut.pack(side=tk.LEFT)
-framefour9.pack(anchor="w", padx=12)
-frametwofived = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-frametwofived.pack(anchor="w", padx=12)
-
-framefour10 = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-impbut='False'
-impbut_v1=tk.StringVar()
-impbut = tk.Checkbutton(framefour10, text="Impact Analysis", variable=impbut_v1,
-	onvalue='True',offvalue='False',bg="white",highlightthickness=0,bd=0,command=impframe,fg=off_color)
-impbut.config(font=("Times New Roman (serif)", 14, 'bold'))
-impbut.deselect()
-impbut.pack(side=tk.LEFT)
-framefour10.pack(anchor="w", padx=12)
-frametwofivee = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-frametwofivee.pack(anchor="w", padx=12)
-
-framefour11 = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-repbut='False'
-repbut_v1=tk.StringVar()
-repbut = tk.Checkbutton(framefour11, text="Reporting", variable=repbut_v1,
-	onvalue='True',offvalue='False',bg="white",highlightthickness=0,bd=0,command=repframe,fg=off_color)
-repbut.config(font=("Times New Roman (serif)", 14, 'bold'))
-repbut.deselect()
-repbut.pack(side=tk.LEFT)
-framefour11.pack(anchor="w", padx=12)
-frametwofivef = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-frametwofivef.pack(anchor="w", padx=12)
-
-OUTPUTS='\nA new directory will be created for the toolbox run data based on the start date and time.\n'
+OUTPUTS='\nA new directory will be created for the DST run data based on the start date and time.\n'
 lm = tk.Label(frame.scrollable_frame, text = OUTPUTS, background="white", wraplength=984, justify="left")
 lm.config(font=("Times New Roman (serif)", 12))
 lm.pack(anchor="w", padx=12)
@@ -576,81 +712,97 @@ window.mainloop()
 
 # debugging inputs
 
-if rateBox.get() == '':
-   print('Leakage rate is missing, please restart.')
-   quit()
-try:
-    float(rateBox.get())
-except ValueError:
-   print('Leakage rate value ('+rateBox.get()+') is not a number, please restart.')
-   quit()
-   
-if rocbut_v1.get()=='True':
-   if sampfreq.get() == '':
-      print('Rate of Change sensor sampling frequency is missing, please restart.')
+if Leakagetype=='CO2':
+   if rateBox.get() == '':
+      print('Leakage rate is missing, please restart.')
       quit()
    try:
-      float(sampfreq.get())
+      float(rateBox.get())
    except ValueError:
-      print('Rate of Change sensor sampling frequency ('+sampfreq.get()+') is not a number, please re-run.')
+      print('Leakage rate value ('+rateBox.get()+') is not a number, please restart.')
       quit()
+   
+   if rocbut_v1.get()=='True':
+      if sampfreq.get() == '':
+         print('Rate of Change sensor sampling frequency is missing, please restart.')
+         quit()
+      try:
+         float(sampfreq.get())
+      except ValueError:
+         print('Rate of Change sensor sampling frequency ('+sampfreq.get()+') is not a number, please re-run.')
+         quit()
 
+if Leakagetype=='Brine':
+    if ThrBox.get() == '':
+       print('Threshold value is missing, please restart.')
+       quit()
 
-
-print("Writing settings for toolbox run...\n")
+print("Writing settings for ACTOM Decision Support Tool (DST) run...\n")
 
 rateun=''
-
-if massoptions.get() == "kilograms":
-   rateun='kg'
-if massoptions.get() == "grams":
-   rateun='g'
-if massoptions.get() == "tonnes":
-   rateun='t'
-if massoptions.get() == "moles":
-   rateun='m'
+if Leakagetype=='CO2':
+   if massoptions.get() == "kilograms":
+      rateun='kg'
+   if massoptions.get() == "grams":
+      rateun='g'
+   if massoptions.get() == "tonnes":
+      rateun='t'
+   if massoptions.get() == "moles":
+      rateun='m'
    
-rateun=rateun+'/'
+   rateun=rateun+'/'
 
-if timeoptions.get() == "second":
-   rateun=rateun+'s'
-if timeoptions.get() == "minute":
-   rateun=rateun+'min'
-if timeoptions.get() == "hour":
-   rateun=rateun+'hr'
-if timeoptions.get() == "day":
-   rateun=rateun+'day'
-if timeoptions.get() == "week":
-   rateun=rateun+'week'
-if timeoptions.get() == "month":
-   rateun=rateun+'mon'
-if timeoptions.get() == "year":
-   rateun=rateun+'year'
+   if timeoptions.get() == "second":
+      rateun=rateun+'s'
+   if timeoptions.get() == "minute":
+      rateun=rateun+'min'
+   if timeoptions.get() == "hour":
+      rateun=rateun+'hr'
+   if timeoptions.get() == "day":
+      rateun=rateun+'day'
+   if timeoptions.get() == "week":
+      rateun=rateun+'week'
+   if timeoptions.get() == "month":
+      rateun=rateun+'mon'
+   if timeoptions.get() == "year":
+      rateun=rateun+'year'
 
 config = configparser.ConfigParser()
 config.add_section('General')
-config.set('General', 'rate', rateBox.get())
-config.set('General', 'rate-units', rateun)
+
+config.set('General', 'Run', Leakagetype)
+if Leakagetype=='CO2':
+   config.set('General', 'rate', rateBox.get())
+   config.set('General', 'rate-units', rateun)
+else:
+   config.set('General', 'rate', '1')
+   config.set('General', 'rate-units', 'kg/m^2/s')
+
 config.set('General', 'threshold-ph', ThrBox.get())
 
 with open('storage/Run-All.sh', 'r') as original1: data = original1.read()
 with open('storage/Run-All.bat', 'r') as original2: data2 = original2.read()
 
-OUTPUTS='The leakage rate of has been set as: '+rateBox.get()+' '+rateun+', and the user set pH detection thresholds have been set as: '+ThrBox.get()+'.'
+if Leakagetype=='CO2':
+    OUTPUTS='The leakage rate of has been set as: '+rateBox.get()+' '+rateun+', and the user set pH detection thresholds have been set as: '+ThrBox.get()+'.'
+else:
+    OUTPUTS='The hypersaline brine detection thresholds based dilution factors have been set as: '+ThrBox.get()+'.'
 
-TAoutput=re.findall(r"[-+]?(?:\d*\.*\d+)",ThrTABox.get())
-DICoutput=re.findall(r"[-+]?(?:\d*\.*\d+)",ThrDICBox.get())
-Densoutput=re.findall(r"[-+]?(?:\d*\.*\d+)",ThrDensBox.get())
+if Leakagetype=='CO2':
+   TAoutput=re.findall(r"[-+]?(?:\d*\.*\d+)",ThrTABox.get())
+   DICoutput=re.findall(r"[-+]?(?:\d*\.*\d+)",ThrDICBox.get())
+   Densoutput=re.findall(r"[-+]?(?:\d*\.*\d+)",ThrDensBox.get())
 
-if len(TAoutput)==1:
-  config.set('General', 'ta', TAoutput[0])
-  OUTPUTS=OUTPUTS+'The Total Alkalinity has been set as '+TAoutput+'µmol/kg.'
-if len(DICoutput)==1:
-  config.set('General', 'dic', DICoutput[0])
-  OUTPUTS=OUTPUTS+'The Background Dissolved Inorganic Carbon has been set as '+DICoutput+'µmol/kg.'
-if len(Densoutput)==1:
-  config.set('General', 'dens', Densoutput[0])
-  OUTPUTS=OUTPUTS+'The Background Seawater Density has been set as '+Densoutput+'kg/m\u00B3.'
+   if len(TAoutput)==1:
+     config.set('General', 'ta', TAoutput[0])
+     OUTPUTS=OUTPUTS+'The Total Alkalinity has been set as '+TAoutput+'µmol/kg.'
+   if len(DICoutput)==1:
+     config.set('General', 'dic', DICoutput[0])
+     OUTPUTS=OUTPUTS+'The Background Dissolved Inorganic Carbon has been set as '+DICoutput+'µmol/kg.'
+   if len(Densoutput)==1:
+     config.set('General', 'dens', Densoutput[0])
+     OUTPUTS=OUTPUTS+'The Background Seawater Density has been set as '+Densoutput+'kg/m\u00B3.'
+
 
 #if ttm
 if ttmbut_v1.get() == "True":
@@ -669,39 +821,45 @@ else:
   OUTPUTS=OUTPUTS+'\nTHIS MAY AFFECT HOW OTHER TOOLS RUN!'
   
 #if cseep
-if cseepbut_v1.get() == "True":
-  if ThrdirBox.get() !='':
-    OUTPUTS=OUTPUTS+'\n\nThe directory for C\u209B\u2091\u2091\u209A input data has been set as '+ThrdirBox.get()+'.'
-    data = data.replace("#insertcseepinputhere", "--mount type=bind,source="+ThrdirBox.get()+",target=/srv/actom-app/input/external \\")
-    data2 = data2.replace("#insertcseepinputhere", "--mount type=bind,source="+ThrdirBox.get()+",target=/srv/actom-app/input/external")
-  else:
-    data = data.replace("\n          #insertcseepinputhere", "")
-    data2 = data2.replace("#insertcseepinputhere", "")
-else:
-  data=re.sub('#2[^>]+#3', '', data)
-  data2=re.sub('#2[^>]+#3', '', data2)
-  OUTPUTS=OUTPUTS+'\n\nWARNING: C\u209B\u2091\u2091\u209A IS TURNED OFF...'
-  OUTPUTS=OUTPUTS+'\nTHIS MAY AFFECT HOW OTHER TOOLS RUN!'
+if Leakagetype=='CO2':
+   if cseepbut_v1.get() == "True":
+     if ThrdirBox.get() !='':
+       OUTPUTS=OUTPUTS+'\n\nThe directory for C\u209B\u2091\u2091\u209A input data has been set as '+ThrdirBox.get()+'.'
+       data = data.replace("#insertcseepinputhere", "--mount type=bind,source="+ThrdirBox.get()+",target=/srv/actom-app/input/external \\")
+       data2 = data2.replace("#insertcseepinputhere", "--mount type=bind,source="+ThrdirBox.get()+",target=/srv/actom-app/input/external")
+     else:
+       data = data.replace("\n          #insertcseepinputhere", "")
+       data2 = data2.replace("#insertcseepinputhere", "")
+   else:
+     data=re.sub('#2[^>]+#3', '', data)
+     data2=re.sub('#2[^>]+#3', '', data2)
+     OUTPUTS=OUTPUTS+'\n\nWARNING: C\u209B\u2091\u2091\u209A IS TURNED OFF...'
+     OUTPUTS=OUTPUTS+'\nTHIS MAY AFFECT HOW OTHER TOOLS RUN!'
   
 #if roc
-if rocbut_v1.get() == "True":
-  OUTPUTS=OUTPUTS+'\n\nThe Rate of Change Anomaly Criteria sampling frequency has been set as: '+sampfreq.get()+' '+sampfreqtimeoptions.get()
-  if ThrdirBox2.get() !='':
-    OUTPUTS=OUTPUTS+', with the directory for input data set as '+ThrdirBox2.get()
-    data = data.replace("#insertrocinputhere", "--mount type=bind,source="+ThrdirBox2.get()+",target=/srv/actom-app/input/external \\")
-    data2 = data2.replace("#insertrocinputhere", "--mount type=bind,source="+ThrdirBox2.get()+",target=/srv/actom-app/input/external")
-  else:
-    data = data.replace("\n          #insertrocinputhere", "")
-    data2 = data2.replace("#insertrocinputhere", "")
-  OUTPUTS=OUTPUTS+'.'
-  config.add_section('RateOfChange')
-  config.set('RateOfChange', 'Sampling_Frequency', sampfreq.get())
-  config.set('RateOfChange', 'Sampling_Frequency_Units', sampfreqtimeoptions.get())
+   if rocbut_v1.get() == "True":
+     OUTPUTS=OUTPUTS+'\n\nThe Rate of Change Anomaly Criteria sampling frequency has been set as: '+sampfreq.get()+' '+sampfreqtimeoptions.get()
+     if ThrdirBox2.get() !='':
+       OUTPUTS=OUTPUTS+', with the directory for input data set as '+ThrdirBox2.get()
+       data = data.replace("#insertrocinputhere", "--mount type=bind,source="+ThrdirBox2.get()+",target=/srv/actom-app/input/external \\")
+       data2 = data2.replace("#insertrocinputhere", "--mount type=bind,source="+ThrdirBox2.get()+",target=/srv/actom-app/input/external")
+     else:
+       data = data.replace("\n          #insertrocinputhere", "")
+       data2 = data2.replace("#insertrocinputhere", "")
+     OUTPUTS=OUTPUTS+'.'
+     config.add_section('RateOfChange')
+     config.set('RateOfChange', 'Sampling_Frequency', sampfreq.get())
+     config.set('RateOfChange', 'Sampling_Frequency_Units', sampfreqtimeoptions.get())
+   else:
+     data=re.sub('#3[^>]+#4', '', data)
+     data2=re.sub('#3[^>]+#4', '', data2)
+     if Leakagetype=='CO2':
+        OUTPUTS=OUTPUTS+'\n\nWARNING: RATE OF CHANGE ANOMALY CRITERIA IS TURNED OFF!'
 else:
-  data=re.sub('#3[^>]+#4', '', data)
-  data2=re.sub('#3[^>]+#4', '', data2)
-  OUTPUTS=OUTPUTS+'\n\nWARNING: RATE OF CHANGE ANOMALY CRITERIA IS TURNED OFF!'
-
+     data=re.sub('#2[^>]+#4', '', data)
+     data2=re.sub('#2[^>]+#4', '', data2)
+     data=re.sub('#5[^>]+#6', '', data)
+     data2=re.sub('#5[^>]+#6', '', data2)
 #if opt
 if optbut_v1.get() == "True":
   OUTPUTS=OUTPUTS+'\n\nThe Optimal Cover tool has been set to '
@@ -732,19 +890,20 @@ else:
   OUTPUTS=OUTPUTS+'\n\nWARNING: OPTIMAL COVER TOOL IS TURNED OFF!'
    
 #if carb
-if carbbut_v1.get() == "True":
-  if ThrdirBox4.get() !='':
-    OUTPUTS=OUTPUTS+'\n\nThe directory for the carbonate system input data has been set as '+ThrdirBox4.get()+'.'
-    data = data.replace("#insertcarbinputhere", "--mount type=bind,source="+ThrdirBox4.get()+",target=/external/input \\")
-    data2 = data2.replace("#insertcarbinputhere", "--mount type=bind,source="+ThrdirBox4.get()+",target=/external/input")
-  else:
-    data = data.replace("#insertcarbinputhere", "--mount type=bind,source=\"$(pwd)\"/../Advdiff/output,target=/external/input \\")
-    data2 = data2.replace("#insertcarbinputhere", "--mount type=bind,source=\"%cd%\"/../Advdiff/output,target=/external/input")
-else:
-  data=re.sub('#5[^>]+#6', '', data)
-  data2=re.sub('#5[^>]+#6', '', data2)
-  OUTPUTS=OUTPUTS+'\n\nWARNING: CARBONATE SYSTEM IS TURNED OFF...'
-  OUTPUTS=OUTPUTS+'\nTHIS MAY AFFECT HOW OTHER TOOLS RUN!'
+if Leakagetype=='CO2':
+   if carbbut_v1.get() == "True":
+     if ThrdirBox4.get() !='':
+       OUTPUTS=OUTPUTS+'\n\nThe directory for the carbonate system input data has been set as '+ThrdirBox4.get()+'.'
+       data = data.replace("#insertcarbinputhere", "--mount type=bind,source="+ThrdirBox4.get()+",target=/external/input \\")
+       data2 = data2.replace("#insertcarbinputhere", "--mount type=bind,source="+ThrdirBox4.get()+",target=/external/input")
+     else:
+       data = data.replace("#insertcarbinputhere", "--mount type=bind,source=\"$(pwd)\"/../Advdiff/output,target=/external/input \\")
+       data2 = data2.replace("#insertcarbinputhere", "--mount type=bind,source=\"%cd%\"/../Advdiff/output,target=/external/input")
+   else:
+     data=re.sub('#5[^>]+#6', '', data)
+     data2=re.sub('#5[^>]+#6', '', data2)
+     OUTPUTS=OUTPUTS+'\n\nWARNING: CARBONATE SYSTEM IS TURNED OFF...'
+     OUTPUTS=OUTPUTS+'\nTHIS MAY AFFECT HOW OTHER TOOLS RUN!'
      
 #if Imp
 if impbut_v1.get() == "True":
@@ -765,7 +924,10 @@ if impbut_v1.get() == "True":
     OUTPUTS=OUTPUTS+', with the directory for input data set as '+ThrdirBox5.get()
     data = data.replace("#insertimpinputhere", "--mount type=bind,source="+ThrdirBox5.get()+",target=/external/input \\")
     data2 = data2.replace("#insertimpinputhere", "--mount type=bind,source="+ThrdirBox5.get()+",target=/external/input")
-  else:
+  elif Leakagetype=='Brine':
+    data = data.replace("#insertimpinputhere", "--mount type=bind,source=\"$(pwd)\"/../Advdiff/output,target=/external/input \\")
+    data2 = data2.replace("#insertimpinputhere", "--mount type=bind,source=\"%cd%\"/../Advdiff/output,target=/external/input")
+  elif Leakagetype=='CO2':
     data = data.replace("#insertimpinputhere", "--mount type=bind,source=\"$(pwd)\"/../carbon/output,target=/external/input \\")
     data2 = data2.replace("#insertimpinputhere", "--mount type=bind,source=\"%cd%\"/../carbon/output,target=/external/input")
   OUTPUTS=OUTPUTS+'.'
@@ -796,6 +958,8 @@ data=data.replace("cd ../","cd ",1)
 
 data2=data2.replace("mkdir ../","mkdir -p ",1)
 data2=data2.replace("cd ../","cd ",1)
+
+c4='Yes'
 
 if c4=='Yes':
    data=data.replace("$options","")

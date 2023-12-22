@@ -49,7 +49,7 @@ la = tk.Label(frame.scrollable_frame, text = "\nAct on Offshore Monitoring Toolb
 la.pack(side=tk.TOP, anchor="w", padx=12)
 la.config(font=("Times New Roman (serif)", 24, 'bold'))
 
-OUTPUTS='\nThe research in ACTOM works for the advancement of offshore monitoring to ensure alignment of CO\u2082 storage projects with national and international regulations and societal concerns. The ACTOM toolbox (shown in Figure 1.) equips operators with the ability to plan strategies under site-specific conditions and provides regulators a reliable and independent assessment of proposed monitoring strategies from license applicants. In addition to the tool assisting in the technical design of monitoring programs, it can be used to enhance communication with governments and the public in view of Marine Spatial Planning and Responsible Research and Innovation.\n\nThe toolbox is designed to provide value over a range of field cases with diverse subsurface geology and environmental marine characteristics. The end-product of the toolbox is to aid users in defining a monitoring plan that will satisfy local stakeholders.\n\nThe ACTOM toolbox contains algorithms for determining how the main monitoring aims required by guidance and regulations can be achieved at each site. Namely the algorithm optimizes approaches for detecting anomalies that could signal leakage in the marine environment, and then determining if these anomalies represent leakage. This is not an easy task because CO\u2082 is already an integral and dynamic part of the marine environment. Which is already undergoing shifts due to climate change. Through using geophysical data on shallow features such as chimneys or fractures, the likely areas where leakage would emanate can be predicted. Knowing the hydrodynamics and bio-chemical processes in marine sediments and seawater allow strategies for location and attribution, setting trigger points for when more action is needed and what instruments can be used for measurements, can be optimized for finding and attributing leakage emissions accounting and environmental protection.\n\n'
+OUTPUTS='\nThe research in ACTOM works for the advancement of offshore monitoring to ensure alignment of CO\u2082 storage projects with national and international regulations and societal concerns. The ACTOM Decision Support Tool (DST, shown in Figure 1.) equips operators with the ability to plan strategies under site-specific conditions and provides regulators a reliable and independent assessment of proposed monitoring strategies from license applicants. In addition to the tool assisting in the technical design of monitoring programs, it can be used to enhance communication with governments and the public in view of Marine Spatial Planning and Responsible Research and Innovation.\n\nThe DST is designed to provide value over a range of field cases with diverse subsurface geology and environmental marine characteristics. The end-product of the DST is to aid users in defining a monitoring plan that will satisfy local stakeholders.\n\nThe ACTOM DST contains algorithms for determining how the main monitoring aims required by guidance and regulations can be achieved at each site. Namely the algorithm optimizes approaches for detecting anomalies that could signal leakage in the marine environment, and then determining if these anomalies represent leakage. This is not an easy task because CO\u2082 is already an integral and dynamic part of the marine environment. Which is already undergoing shifts due to climate change. Through using geophysical data on shallow features such as chimneys or fractures, the likely areas where leakage would emanate can be predicted. Knowing the hydrodynamics and bio-chemical processes in marine sediments and seawater allow strategies for location and attribution, setting trigger points for when more action is needed and what instruments can be used for measurements, can be optimized for finding and attributing leakage emissions accounting and environmental protection.\n\nThe DST has recently been updated to allow the impact tracking of hypersaline brine water releases or disposal on the seabed as part of reservoir pressure management for Carbon Capture and Storage (CCS). Some of the tools are dedicated to CO\u2082 only, such as the carbonate system and C\u209B\u2091\u2091\u209A. Therefore, these will not be possible to select in hypersaline brine mode.\n\n'
 
 lb = tk.Label(frame.scrollable_frame, text = OUTPUTS, background="white", wraplength=984, justify="left")
 lb.config(font=("Times New Roman (serif)", 12,))
@@ -64,7 +64,7 @@ lb2 = tk.Label(frame.scrollable_frame, text = 'Figure 1. Schematic of the toolbo
 lb2.config(font=("Times New Roman (serif)", 12,))
 lb2.pack(anchor='center', padx=12)
 
-lc = tk.Label(frame.scrollable_frame, text = "\nThe ACTOM toolbox:", background="white")
+lc = tk.Label(frame.scrollable_frame, text = "\nThe ACTOM Decision Support Tool (DST):", background="white")
 lc.pack(side=tk.TOP, anchor="w", padx=12)
 lc.config(font=("Times New Roman (serif)", 18, 'bold'))
 
@@ -78,7 +78,7 @@ le = tk.Label(frame.scrollable_frame, text = "\nRe-Run:", background="white")
 le.pack(side=tk.TOP, anchor="w", padx=12)
 le.config(font=("Times New Roman (serif)", 18, 'bold'))
 
-OUTPUTS='\nThe ACTOM Toolbox has been designed so that the Tracer Transport Model, C\u209B\u2091\u2091\u209A and the Rate of Change Anomaly Criteria tools all only require to be run once for a specific region which speeds up the process dramatically when anlysing different releases. Therefore to re-run the analysis with different leakage rates or detection thresholds, set these below. Submitting these details will re-run the required tools automatically.'
+OUTPUTS='\nThe ACTOM DST has been designed so that the a number of tools only require to be run once for a specific region which speeds up the process dramatically when anlysing different releases. Therefore to re-run the analysis with different leakage rates or detection/dilution thresholds, set these below. Submitting these details will re-run the required tools automatically.'
 
 lf = tk.Label(frame.scrollable_frame, text = OUTPUTS, background="white", wraplength=984, justify="left")
 lf.config(font=("Times New Roman (serif)", 12))
@@ -86,6 +86,10 @@ lf.pack(anchor="w", padx=12)
 
 config=configparser.ConfigParser(allow_no_value=True)
 config.read('input/data.ini')
+
+mode = config['General']['run'] # brine? 
+
+
 Thresgen=config['General']['threshold-ph']
 rate = config['General']['rate']
 rateno=rate
@@ -94,58 +98,67 @@ RateUnitsTime=rate_units.partition('/')
 rateTime=RateUnitsTime[2]
 rate = rate+' '+rate_units
 
-OUTPUTS='\nThe leakage rate set for this report was given as: '+rate+'.\n'
+if mode != 'Brine':
+    OUTPUTS='\nThe leakage rate set for this report was given as: '+rate+'.\n'
 
-lg = tk.Label(frame.scrollable_frame, text = OUTPUTS, background="white", wraplength=984, justify="left")
-lg.config(font=("Times New Roman (serif)", 12))
-lg.pack(anchor="w", padx=12)
+    lg = tk.Label(frame.scrollable_frame, text = OUTPUTS, background="white", wraplength=984, justify="left")
+    lg.config(font=("Times New Roman (serif)", 12))
+    lg.pack(anchor="w", padx=12)
 
-current_value = tk.DoubleVar()
-current_value1 = tk.StringVar()
-def get_current_value():
-    return '{: .2f}'.format(current_value.get())
-def slider_changed(event):
-    value_label.configure(text=get_current_value())
-    current_value1.set(str(get_current_value()))
-    rateBox.configure(textvariable=current_value1)
-frameone = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-slider_label = tk.Label(frameone, text = '• Enter a new rate (from each source) using the slider, or override the value below:\n', background="white", wraplength=984, justify="left")
-slider_label.config(font=("Times New Roman (serif)", 12))
-slider_label.pack(side=tk.LEFT, anchor="w", padx=12)
-frameone.pack(anchor="w", padx=12)
-frameonep5 = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-slider = ttk.Scale(frameonep5,from_=0,to=1000,orient='horizontal',command=slider_changed, variable=current_value, length=960)
-slider.pack(side=tk.LEFT, anchor="w", padx=12)
-value_label = ttk.Label(frameonep5,text=get_current_value())
-frameonep5.pack(anchor="w", padx=12)
-frameonep6 = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-rateBox = ttk.Entry(frameonep6,textvariable=current_value1, width = 8)
-rateBox.config(font=("Times New Roman (serif)", 12))
-rateBox.pack(side=tk.LEFT, anchor="w", padx=2)
-masschoices = ['tonnes', 'kilograms', 'grams', 'moles']
-massoptions = tk.StringVar(frameonep6)
-massoptions.set('tonnes')
-mass = tk.OptionMenu(frameonep6, massoptions, *masschoices)
-mass.config(font=("Times New Roman (serif)", 12))
-mass.pack(side=tk.LEFT, anchor="w", padx=2)
-lg = tk.Label(frameonep6, text = '/', background="white", wraplength=984, justify="left")
-lg.config(font=("Times New Roman (serif)", 12))
-lg.pack(side=tk.LEFT, anchor="w", padx=0)
-timechoices = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second']
-timeoptions = tk.StringVar(frameonep6)
-timeoptions.set('year')
-time = tk.OptionMenu(frameonep6, timeoptions, *timechoices)
-time.config(font=("Times New Roman (serif)", 12))
-time.pack(side=tk.LEFT, anchor="w", padx=2);
-frameonep6.pack(expand=True)
+    current_value = tk.DoubleVar()
+    current_value1 = tk.StringVar()
+    def get_current_value():
+       return '{: .2f}'.format(current_value.get())
+    def slider_changed(event):
+       value_label.configure(text=get_current_value())
+       current_value1.set(str(get_current_value()))
+       rateBox.configure(textvariable=current_value1)
+    frameone = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
+    slider_label = tk.Label(frameone, text = '• Enter a new rate (from each source) using the slider, or override the value below:\n', background="white", wraplength=984, justify="left")
+    slider_label.config(font=("Times New Roman (serif)", 12))
+    slider_label.pack(side=tk.LEFT, anchor="w", padx=12)
+    frameone.pack(anchor="w", padx=12)
+    frameonep5 = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
+    slider = ttk.Scale(frameonep5,from_=0,to=1000,orient='horizontal',command=slider_changed, variable=current_value, length=960)
+    slider.pack(side=tk.LEFT, anchor="w", padx=12)
+    value_label = ttk.Label(frameonep5,text=get_current_value())
+    frameonep5.pack(anchor="w", padx=12)
+    frameonep6 = tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
+    rateBox = ttk.Entry(frameonep6,textvariable=current_value1, width = 8)
+    rateBox.config(font=("Times New Roman (serif)", 12))
+    rateBox.pack(side=tk.LEFT, anchor="w", padx=2)
+    masschoices = ['tonnes', 'kilograms', 'grams', 'moles']
+    massoptions = tk.StringVar(frameonep6)
+    massoptions.set('tonnes')
+    mass = tk.OptionMenu(frameonep6, massoptions, *masschoices)
+    mass.config(font=("Times New Roman (serif)", 12))
+    mass.pack(side=tk.LEFT, anchor="w", padx=2)
+    lg = tk.Label(frameonep6, text = '/', background="white", wraplength=984, justify="left")
+    lg.config(font=("Times New Roman (serif)", 12))
+    lg.pack(side=tk.LEFT, anchor="w", padx=0)
+    timechoices = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second']
+    timeoptions = tk.StringVar(frameonep6)
+    timeoptions.set('year')
+    time = tk.OptionMenu(frameonep6, timeoptions, *timechoices)
+    time.config(font=("Times New Roman (serif)", 12))
+    time.pack(side=tk.LEFT, anchor="w", padx=2);
+    frameonep6.pack(expand=True)
 
-OUTPUTS='\nThe user set pH detection threholds for this report were given as: '+Thresgen+'.'
+if mode != 'Brine':
+   OUTPUTS='\nThe user set pH detection threholds for this report were given as: '+Thresgen+'.'
+else:
+   OUTPUTS='\nThe user set dilution factor for this report were given as: '+Thresgen+'.'
+
+
 li = tk.Label(frame.scrollable_frame, text = OUTPUTS, background="white", wraplength=984, justify="left")
 li.config(font=("Times New Roman (serif)", 12))
 li.pack(anchor="w", padx=12)
 
 frametwo= tk.Frame(frame.scrollable_frame, bg='white',width = 1008)
-OUTPUTS='\n• Enter new set pH detection thresholds, seperated by a comma:\n'
+if mode != 'Brine':
+   OUTPUTS='\n• Enter new pH detection thresholds, seperated by a comma:\n'
+else:
+   OUTPUTS='\n• Enter new dilution factors, seperated by a comma:\n'
 lh = tk.Label(frametwo, text = OUTPUTS, background="white", wraplength=984, justify="left")
 lh.config(font=("Times New Roman (serif)", 12))
 lh.pack(side=tk.LEFT, anchor="w", padx=12)
@@ -200,41 +213,50 @@ window.mainloop()
 print("Writing settings for re-run...")
 
 rateun=''
-
-if massoptions.get() == "kilograms":
-   rateun='kg'
-if massoptions.get() == "grams":
-   rateun='g'
-if massoptions.get() == "tonnes":
-   rateun='t'
-if massoptions.get() == "moles":
-   rateun='m'
+if mode=='CO2':
+   if massoptions.get() == "kilograms":
+      rateun='kg'
+   if massoptions.get() == "grams":
+      rateun='g'
+   if massoptions.get() == "tonnes":
+      rateun='t'
+   if massoptions.get() == "moles":
+      rateun='m'
    
-rateun=rateun+'/'
+   rateun=rateun+'/'
 
-if timeoptions.get() == "second":
-   rateun=rateun+'s'
-if timeoptions.get() == "minute":
-   rateun=rateun+'min'
-if timeoptions.get() == "hour":
-   rateun=rateun+'hr'
-if timeoptions.get() == "day":
-   rateun=rateun+'day'
-if timeoptions.get() == "week":
-   rateun=rateun+'week'
-if timeoptions.get() == "month":
-   rateun=rateun+'mon'
-if timeoptions.get() == "year":
-   rateun=rateun+'year'
-
-config.set('General', 'rate', rateBox.get())
-config.set('General', 'rate-units', rateun)
+   if timeoptions.get() == "second":
+      rateun=rateun+'s'
+   if timeoptions.get() == "minute":
+      rateun=rateun+'min'
+   if timeoptions.get() == "hour":
+      rateun=rateun+'hr'
+   if timeoptions.get() == "day":
+      rateun=rateun+'day'
+   if timeoptions.get() == "week":
+      rateun=rateun+'week'
+   if timeoptions.get() == "month":
+      rateun=rateun+'mon'
+   if timeoptions.get() == "year":
+      rateun=rateun+'year'
+      
+   config.set('General', 'rate', rateBox.get())
+   config.set('General', 'rate-units', rateun)
+else:
+   config.set('General', 'rate', '1')
+   config.set('General', 'rate-units', 'kg/m^2/s')
+   
 config.set('General', 'threshold-ph', ThrBox.get())
+
+
 
 with open('input/data.ini', 'w') as configfile:
     config.write(configfile)
 
-OUTPUTS='\nThe leakage rate of '+rate+' has been replaced by: '+rateBox.get()+' '+rateun+'.\nThe user set pH detection threholds of '+Thresgen+' have been replaced by: '+ThrBox.get()+'.'
+if mode=='CO2':
+    OUTPUTS='The leakage rate of has been set as: '+rateBox.get()+' '+rateun+', and the user set pH detection thresholds have been set as: '+ThrBox.get()+'.'
+else:
+    OUTPUTS='The hypersaline brine detection thresholds based dilution factors have been set as: '+ThrBox.get()+'.'
 
 print(OUTPUTS)
 
