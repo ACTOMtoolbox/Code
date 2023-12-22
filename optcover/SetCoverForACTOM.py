@@ -81,9 +81,12 @@ if mode == 'CO2':
           outDIC=pyco2.sys(**kwargs)
           DICthres=outDIC["dic"] 
           DICthres=abs(DICthres-DICmean)
-          DICthres=DICthres*dens*0.0440095/1000000 
+          DICthres=DICthres*dens*0.0440095/1000000
           thtit=thtit+['USER']
           th.append(DICthres)
+        config.set('General', 'threshold', ','.join(str(x) for x in th))
+        with open('/external/settings/data.ini', 'w') as configfile:
+           config.write(configfile)
     
     if config.has_option('RateOfChange', 'threshold'):
         th1=((config['RateOfChange']['threshold']).split(","))

@@ -352,7 +352,7 @@ if os.path.isdir(filelocations+'impacts'):
       else:
         if config.has_option('CSEEP', 'threshold-ph'):
            impacts2=impacts2+', and from the Rate of Change Anomaly Criteria'
-        else
+        else:
            impacts2=impacts2+' and from the Rate of Change Anomaly Criteria'
 
 
@@ -442,83 +442,106 @@ if os.path.isdir(filelocations+'OptCover'):
   numberofsensors=0
   OptCover2=''
   OptCover3=''
-
-
-  if mode == "Brine":
-     if config.has_option('General', 'threshold-ph'):
-       file1=glob.glob(filelocations+'OptCover/output/*.nc')
-       file1.sort(reverse=True)
-       Thres=((config['General']['threshold-ph']).split(","))
-       Thres=sorted(Thres, key=float, reverse=True)
-       for x in range(len(file1)):
-          ncfile = nc.Dataset(file1[x])
-          numberofsensors=ncfile.dimensions['sensor'].size
-          if x == 0:
-             OptCover2=OptCover2+'With a user set dilution threshold of '+ Thres[x][:5]
-          else:
-             OptCover2=OptCover2+'With another user set dilution threshold of '+ Thres[x][:5]
-          figure_count=figure_count+1
-          OptCover2=OptCover2+', Figure '+str(figure_count)+'. shows the best locations to place sensors (and the areas that they cover) to maximise the detection, using a minimum number of sensors: '+str(numberofsensors)+'. '
-      
-          OptCover3=OptCover3+'<p style=\"text-align:center\"><img src=\''+file1[x][6:-19]+'map2.png\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. The best locations to place sensors (and the areas that they cover) to maximise detection from a user set dilution threshold of '+Thres[x][:5]+', using a minimum number of sensors: '+str(numberofsensors)+'.</p>'
-
-  if config.has_option('General', 'threshold-ph'):
-    file1=glob.glob(filelocations+'OptCover/output/USER*.nc')
-    file1.sort(reverse=True)
-    Thres=((config['General']['threshold-ph']).split(","))
-    Thres=sorted(Thres, key=float, reverse=True)
-    for x in range(len(file1)):
-      ncfile = nc.Dataset(file1[x])
-      numberofsensors=ncfile.dimensions['sensor'].size
-      if x == 0:
-        OptCover2=OptCover2+'With a user set pH change threshold of '+ Thres[x][:5]
-      else:
-        OptCover2=OptCover2+'With another user set pH change threshold of '+ Thres[x][:5]
-      figure_count=figure_count+1
-      OptCover2=OptCover2+', Figure '+str(figure_count)+'. shows the best locations to place sensors (and the areas that they cover) to maximise the detection, using a minimum number of sensors: '+str(numberofsensors)+'. '
-      
-      OptCover3=OptCover3+'<p style=\"text-align:center\"><img src=\''+file1[x][6:-19]+'map2.png\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. The best locations to place sensors (and the areas that they cover) to maximise detection from a user set pH change threshold of '+Thres[x][:5]+', using a minimum number of sensors: '+str(numberofsensors)+'.</p>'
-      
-  if config.has_option('RateOfChange', 'threshold-ph'):
   
-    file1=glob.glob(filelocations+'OptCover/output/ROC*.nc')
-    file1.sort(reverse=True)
-    Thres=((config['RateOfChange']['threshold-ph']).split(","))
-    Thres=sorted(Thres, key=float, reverse=True)
-    for x in range(len(file1)):
-      ncfile = nc.Dataset(file1[x])
-      numberofsensors=ncfile.dimensions['sensor'].size
-      if x == 0:
-        if OptCover2=='':       
-          OptCover2=OptCover2+'With a pH change threshold from the Rate of Change Anomaly Criteria of '+ Thres[x][:5]
-        else:
-          OptCover2=OptCover2+'Finally looking at a pH change threshold from the Rate of Change Anomaly Criteria of '+ Thres[x][:5]
-      else:
-        OptCover2=OptCover2+'With another pH change threshold from the Rate of Change Anomaly Criteria of '+ Thres[x][:5]
-      figure_count=figure_count+1
-      OptCover2=OptCover2+', Figure '+str(figure_count)+'. shows the best locations to place sensors (and the areas that they cover) to maximise the detection, using a minimum number of sensors: '+str(numberofsensors)+'. '
-      OptCover3=OptCover3+'<p style=\"text-align:center\"><img src=\''+file1[x][6:-19]+'map2.png\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. The best locations to place sensors (and the areas that they cover) to maximise detection from a Rate of Change Anomaly Criteria pH change threshold of '+Thres[x][:5]+', using a minimum number of sensors: '+str(numberofsensors)+'.</p>' 
-     
-  if config.has_option('CSEEP', 'threshold-ph'):
-    
-    file1=glob.glob(filelocations+'OptCover/output/CSEEP*.nc')
-    file1.sort(reverse=True)
-    Thres=((config['CSEEP']['threshold-ph']).split(","))
-    Thres=sorted(Thres, key=float, reverse=True)
-    for x in range(len(file1)):
-      ncfile = nc.Dataset(file1[x])
-      numberofsensors=ncfile.dimensions['sensor'].size
-      if x == 0:
-        if OptCover2=='':       
-          OptCover2=OptCover2+'With a pH change threshold from <i>C<sub>seep</sub></i> of '+ Thres[x][:5]
-        else:
-          OptCover2=OptCover2+'Then looking at a pH change threshold from <i>C<sub>seep</sub></i> of '+ Thres[x][:5]
-      else:
-        OptCover2=OptCover2+'With another pH change threshold from <i>C<sub>seep</sub></i> of '+ Thres[x][:5]
-      figure_count=figure_count+1
-      OptCover2=OptCover2+', Figure '+str(figure_count)+'. shows the best locations to place sensors (and the areas that they cover) to maximise the detection, using a minimum number of sensors: '+str(numberofsensors)+'. '
-      OptCover3=OptCover3+'<p style=\"text-align:center\"><img src=\''+file1[x][6:-19]+'map2.png\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. The best locations to place sensors (and the areas that they cover) to maximise detection from a <i>C<sub>seep</sub></i> pH change threshold of '+Thres[x][:5]+', using a minimum number of sensors: '+str(numberofsensors)+'.</p>'
-    
+  if mode == "Brine":
+     init=0
+     if config.has_option('General', 'threshold-ph'):
+        file1=glob.glob(filelocations+'OptCover/output/*.nc')
+        Thres=((config['General']['threshold-ph']).split(","))
+        Thres=sorted(Thres, key=float, reverse=True)
+        for x in Thres:
+           for y in file1:
+              if x in y:
+                 ncfile = nc.Dataset(y)
+                 numberofsensors=ncfile.dimensions['sensor'].size
+                 if init == 0:
+                    OptCover2=OptCover2+'With a user set dilution threshold of '+ x[:5]
+                    init=init+1
+                 else:
+                    OptCover2=OptCover2+'With another user set dilution threshold of '+ x[:5]
+                 figure_count=figure_count+1
+                 OptCover2=OptCover2+', Figure '+str(figure_count)+'. shows the best locations to place sensors (and the areas that they cover) to maximise the detection, using a minimum number of sensors: '+str(numberofsensors)+'. '
+      
+                 OptCover3=OptCover3+'<p style=\"text-align:center\"><img src=\''+y[6:-19]+'map2.png\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. The best locations to place sensors (and the areas that they cover) to maximise detection from a user set dilution threshold of '+x[:5]+', using a minimum number of sensors: '+str(numberofsensors)+'.</p>'
+
+  else:
+     init=0
+     if config.has_option('General', 'threshold'):
+        file1=glob.glob(filelocations+'OptCover/output/USER*.nc')
+        Thres=((config['General']['threshold']).split(","))
+        Thres=sorted(Thres, key=float, reverse=True)
+        Thres2=((config['General']['threshold-ph']).split(","))
+        Thres2=sorted(Thres2, key=float, reverse=True)
+       
+        for index1, x1 in enumerate(Thres):
+           x1=float(x1)
+           x=str(round(x1, 6))
+           for y in file1:
+              if x in y:
+                 ncfile = nc.Dataset(y)
+                 numberofsensors=ncfile.dimensions['sensor'].size
+                 if init == 0:
+                    OptCover2=OptCover2+'With a user set pH change threshold of '+ Thres2[index1][:5]
+                 else:
+                    OptCover2=OptCover2+'With another user set pH change threshold of '+ Thres2[index1][:5]
+                 figure_count=figure_count+1
+                 OptCover2=OptCover2+', Figure '+str(figure_count)+'. shows the best locations to place sensors (and the areas that they cover) to maximise the detection, using a minimum number of sensors: '+str(numberofsensors)+'. '
+      
+                 OptCover3=OptCover3+'<p style=\"text-align:center\"><img src=\''+y[6:-19]+'map2.png\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. The best locations to place sensors (and the areas that they cover) to maximise detection from a user set pH change threshold of '+Thres2[index1][:5]+', using a minimum number of sensors: '+str(numberofsensors)+'.</p>'
+
+     init=0
+     if config.has_option('CSEEP', 'threshold'):    
+        file1=glob.glob(filelocations+'OptCover/output/CSEEP*.nc')
+        Thres=((config['CSEEP']['threshold']).split(","))
+        Thres=sorted(Thres, key=float, reverse=True)
+        Thres2=((config['CSEEP']['threshold-ph']).split(","))
+        Thres2=sorted(Thres2, key=float, reverse=True)
+        
+        for index1, x1 in enumerate(Thres):
+           x1=float(x1)
+           x=str(round(x1, 6))
+           for y in file1:
+              if x in y:
+                 ncfile = nc.Dataset(y)
+                 numberofsensors=ncfile.dimensions['sensor'].size
+                 if init == 0:
+                    if OptCover2=='':       
+                       OptCover2=OptCover2+'With a pH change threshold from <i>C<sub>seep</sub></i> of '+ x[:5]
+                    else:
+                       OptCover2=OptCover2+'Then looking at a pH change threshold from <i>C<sub>seep</sub></i> of '+ Thres2[index1][:5]
+                 else:
+                    OptCover2=OptCover2+'With another pH change threshold from <i>C<sub>seep</sub></i> of '+ Thres2[index1][:5]
+                 figure_count=figure_count+1
+                 OptCover2=OptCover2+', Figure '+str(figure_count)+'. shows the best locations to place sensors (and the areas that they cover) to maximise the detection, using a minimum number of sensors: '+str(numberofsensors)+'. '
+      
+                 OptCover3=OptCover3+'<p style=\"text-align:center\"><img src=\''+y[6:-19]+'map2.png\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. The best locations to place sensors (and the areas that they cover) to maximise detection from a <i>C<sub>seep</sub></i> pH change threshold of '+Thres2[index1][:5]+', using a minimum number of sensors: '+str(numberofsensors)+'.</p>'
+
+     init=0      
+     if config.has_option('RateOfChange', 'threshold'):
+        file1=glob.glob(filelocations+'OptCover/output/ROC*.nc')
+        Thres=((config['RateOfChange']['threshold']).split(","))
+        Thres=sorted(Thres, key=float, reverse=True)     
+        Thres2=((config['RateOfChange']['threshold-ph']).split(","))
+        Thres2=sorted(Thres2, key=float, reverse=True)
+        
+        for index1, x1 in enumerate(Thres):
+           x1=float(x1)
+           x=str(round(x1, 6))
+           for y in file1:
+              if x in y:
+                 ncfile = nc.Dataset(y)
+                 numberofsensors=ncfile.dimensions['sensor'].size
+                 if init == 0:    
+                    if OptCover2=='':
+                       OptCover2=OptCover2+'With a pH change threshold from the Rate of Change Anomaly Criteria of '+ Thres2[index1][:5]
+                    else:
+                       OptCover2=OptCover2+'And looking at a pH change threshold from the Rate of Change Anomaly Criteria of '+ Thres2[index1][:5]
+                 else:
+                    OptCover2=OptCover2+'With another pH change threshold from the Rate of Change Anomaly Criteria of '+ Thres2[index1][:5]
+                 figure_count=figure_count+1
+                 OptCover2=OptCover2+', Figure '+str(figure_count)+'. shows the best locations to place sensors (and the areas that they cover) to maximise the detection, using a minimum number of sensors: '+str(numberofsensors)+'. '
+      
+                 OptCover3=OptCover3+'<p style=\"text-align:center\"><img src=\''+y[6:-19]+'map2.png\' height=\"400\"></p><p style=\"text-align:center\">Figure '+str(figure_count)+'. The best locations to place sensors (and the areas that they cover) to maximise detection from a Rate of Change Anomaly Criteria pH change threshold of '+Thres2[index1][:5]+', using a minimum number of sensors: '+str(numberofsensors)+'.</p>'
 
   OUTPUTS=OUTPUTS+OptCover+OptCover2+OptCover3
 
